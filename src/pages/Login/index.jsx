@@ -27,8 +27,17 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
 
+<<<<<<< HEAD
   const handleForm = (data) => {
     console.log(data);
+=======
+  const handleLogin = () => {
+    const loginData = {
+      email,
+      password: senha,
+    };
+    dispatch(loginUserThunk(loginData));
+>>>>>>> ca67098ebebde76e4eef35c988d8220506b50247
   };
 
   return (

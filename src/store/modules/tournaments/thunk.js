@@ -3,7 +3,7 @@ import { api } from "../../../services/api";
 
 export const registerTournamentThunk = (tournamentData) => {
   return (dispatch, getState) => {
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -17,9 +17,30 @@ export const registerTournamentThunk = (tournamentData) => {
   };
 };
 
+export const getTounamentInfoThunk = (tournamentId) => {
+  return (dispatch, getState) => {
+    let tournaments = getState().TournamentsReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
+
+    api
+      .get(`/tournaments/${tournamentId}`, authToken)
+      .then((res) => {
+        console.log(res);
+
+        tournaments = { ...tournaments, selectedTournament: res.data };
+
+        dispatch(updateTournaments(tournaments));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
+
 export const updateTournamentThunk = (idTournament, tournamentData) => {
   return (dispatch, getState) => {
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -36,7 +57,7 @@ export const updateTournamentThunk = (idTournament, tournamentData) => {
 export const updateTournamentsListThunk = () => {
   return (dispatch, getState) => {
     let tournaments = getState().TournamentsReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -54,7 +75,7 @@ export const updateTournamentsListThunk = () => {
 
 export const deleteTournamentThunk = (tournamentId) => {
   return (dispatch, getState) => {
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
