@@ -47,6 +47,8 @@ export const getUserInfoThunk = (userId) => {
 
         users = { ...users, selectedUser: res.data };
 
+        window.localStorage.setItem("users", JSON.stringify(users));
+
         dispatch(updateUsers(users));
       })
       .catch((err) => {

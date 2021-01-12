@@ -2,8 +2,8 @@ import { updateCategories } from "./actions";
 import { api } from "../../../services/api";
 
 export const registerCategoryThunk = (categoryData) => {
-  return (dispatch, getState) => {
-    const categories = getState().CategoriesReducer;
+  return (_dispatch, _getState) => {
+    //const categories = getState().CategoriesReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
@@ -19,8 +19,8 @@ export const registerCategoryThunk = (categoryData) => {
 };
 
 export const updateCategoriesThunk = (categoryId, categoryData) => {
-  return (dispatch, getState) => {
-    const categories = getState().CategoriesReducer;
+  return (_dispatch, _getState) => {
+    //const categories = getState().CategoriesReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
