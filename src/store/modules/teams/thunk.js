@@ -4,7 +4,7 @@ import { api } from "../../../services/api";
 export const registerTeamThunk = (teamData) => {
   return (dispatch, getState) => {
     const teams = getState().TeamsReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -18,10 +18,31 @@ export const registerTeamThunk = (teamData) => {
   };
 };
 
+export const getTeamInfoThunk = (teamId) => {
+  return (dispatch, getState) => {
+    let teams = getState().TeamsReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
+
+    api
+      .get(`/teams/${teamId}`, authToken)
+      .then((res) => {
+        console.log(res);
+
+        teams = { ...teams, selectedTeam: res.data };
+
+        dispatch(updateTeams(teams));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
+
 export const updateTeamThunk = (idTeam, teamData) => {
   return (dispatch, getState) => {
     const teams = getState().TeamsReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -38,7 +59,7 @@ export const updateTeamThunk = (idTeam, teamData) => {
 export const updateTeamListThunk = () => {
   return (dispatch, getState) => {
     const teams = getState().TeamsReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api

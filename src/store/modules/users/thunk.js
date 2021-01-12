@@ -34,6 +34,27 @@ export const loginUserThunk = (userData) => {
   };
 };
 
+export const getUserInfoThunk = (userId) => {
+  return (dispatch, getState) => {
+    let users = getState().UsersReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
+
+    api
+      .get(`/users/${userId}`, authToken)
+      .then((res) => {
+        console.log(res);
+
+        users = { ...users, selectedUser: res.data };
+
+        dispatch(updateUsers(users));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
+
 export const registerUserThunk = (userData) => {
   return (dispatch, getState) => {
     api

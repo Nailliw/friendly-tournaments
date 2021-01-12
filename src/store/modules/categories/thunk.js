@@ -4,8 +4,8 @@ import { api } from "../../../services/api";
 export const registerCategoryThunk = (categoryData) => {
   return (dispatch, getState) => {
     const categories = getState().CategoriesReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("categories"))
-      .loggedUser.authToken;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
 
     api
       .post("/categories", categoryData, authToken)
@@ -21,7 +21,7 @@ export const registerCategoryThunk = (categoryData) => {
 export const updateCategoriesThunk = (categoryId, categoryData) => {
   return (dispatch, getState) => {
     const categories = getState().CategoriesReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -38,7 +38,7 @@ export const updateCategoriesThunk = (categoryId, categoryData) => {
 export const updateCategoriesListThunk = () => {
   return (dispatch, getState) => {
     let categories = getState().CategoriesReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
