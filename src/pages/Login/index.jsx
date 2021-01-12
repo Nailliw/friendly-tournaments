@@ -25,7 +25,6 @@ export const Login = () => {
       password: senha,
     };
     dispatch(loginUserThunk(loginData));
-    dispatch(updateUsersListThunk());
   };
 
   useEffect(() => {
