@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTournamentsListThunk } from "../../store/modules/tournaments/thunk";
-import { IsValidState } from "../../components//global/IsValidState";
+import { IsValidState } from "../../components/global/IsValidState";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";

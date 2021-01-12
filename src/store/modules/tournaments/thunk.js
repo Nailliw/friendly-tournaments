@@ -36,7 +36,7 @@ export const updateTournamentThunk = (idTournament, tournamentData) => {
 export const updateTournamentsListThunk = () => {
   return (dispatch, getState) => {
     let tournaments = getState().TournamentsReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
