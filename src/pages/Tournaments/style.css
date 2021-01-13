@@ -1,0 +1,13 @@
+.tournamentsList {
+  width: 70vw;
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 1%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.tournamentsContainer {
+  display: flex;
+}
