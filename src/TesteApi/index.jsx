@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bracket, RoundProps } from "react-brackets";
+import { Bracket, RoundProps} from "react-brackets";
 
 export const TesteApi = () => {
   const rounds = [
