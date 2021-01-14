@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateUsersListThunk } from "../../store/modules/users/thunk";
-
+import PersonalInfo from "../../components/PersonalInfo"
 export const UserProfile = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.UsersReducer);
 
-  useEffect(() => {
-    dispatch(updateUsersListThunk());
-  }, []);
+  return (
+    <>
+<PersonalInfo/>
 
-  useEffect(() => {
-    console.log(users.usersList);
-  }, [users]);
-  return <></>;
+</>
+  );
 };
