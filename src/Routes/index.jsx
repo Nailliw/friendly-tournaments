@@ -13,7 +13,7 @@ import { TournamentProfile } from "../pages/TournamentProfile";
 import { Tournaments } from "../pages/Tournaments";
 import { UserProfile } from "../pages/UserProfile";
 import { EditUser } from "../pages/EditUser";
-import { TesteApi } from "../TesteApi";
+import { TesteApi } from "../TesteApi/index";
 
 export const Routes = () => {
   return (
