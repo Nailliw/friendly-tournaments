@@ -97,8 +97,8 @@ export const CardTournament = (props) => {
             >
               <Chip
                 label={`Vagas disponíveis: ${
-                  props.tournament.numberOfTeams -
-                  props.tournament.teamsId.length
+                  [props.tournament.numberOfTeams] -
+                  [props.tournament.teamsData.length]
                 }`}
                 clickable
                 color="primary"

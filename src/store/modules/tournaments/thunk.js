@@ -73,6 +73,19 @@ export const updateTournamentsListThunk = () => {
   };
 };
 
+export const setFilteredTournamentsListThunk = (filteredTournamentsList) => {
+  return (dispatch, getState) => {
+    let tournaments = getState().TournamentsReducer;
+
+    tournaments = {
+      ...tournaments,
+      filteredTournamentsList: filteredTournamentsList,
+    };
+
+    dispatch(updateTournaments(tournaments));
+  };
+};
+
 export const deleteTournamentThunk = (tournamentId) => {
   return (dispatch, getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
