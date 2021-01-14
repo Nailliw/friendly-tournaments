@@ -1,0 +1,15 @@
+.tournamentsContainer {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #15384f; */
+}
+
+.tournamentsList {
+  width: 70vw;
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 1%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
