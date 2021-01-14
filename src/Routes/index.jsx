@@ -18,7 +18,6 @@ import { EditTeam } from "../pages/EditTeam";
 import { Users } from "../pages/Users";
 import { UserProfile } from "../pages/UserProfile";
 import { EditUser } from "../pages/EditUser";
-
 import { TesteApi } from "../TesteApi";
 
 export const Routes = () => {
