@@ -5,38 +5,71 @@ import {
   updateUsersListThunk,
 } from "../../store/modules/users/thunk";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import { Box, Button, TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 export const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const users = useSelector((state) => state.UsersReducer);
-  const [email, setEmail] = useState();
-  const [senha, setSenha] = useState();
 
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
+  const schema = yup.object().shape({
+    email: yup.string().email().required("Campo obrigatório"),
+    password: yup.string().required("Campo obrigatório"),
+  });
+
+  const { register, handleSubmit, errors, setError } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleForm = (data) => {
+    console.log(data);
   };
-
-  const handleSenha = (event) => {
-    setSenha(event.target.value);
-  };
-
-  const handleLogin = () => {
-    const loginData = {
-      email,
-      password: senha,
-    };
-    dispatch(loginUserThunk(loginData));
-    dispatch(updateUsersListThunk());
-  };
-
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   return (
-    <>
-      <input type="text" placeholder="Email" onChange={handleEmail} />
-      <input type="text" placeholder="senha" onChange={handleSenha} />
-      <button onClick={handleLogin}>Logar</button>
-    </>
+    <Box>
+      <form onSubmit={handleSubmit(handleForm)}>
+        <Box>
+          {/*input area*/}
+          <Box>
+            {/*input field*/}
+            <TextField
+              variant="outlined"
+              label="Email"
+              name="email"
+              margin="dense"
+              type="string"
+              inputRef={register}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          </Box>
+          <Box>
+            {/*input field*/}
+            <TextField
+              variant="outlined"
+              label="Senha"
+              name="password"
+              margin="dense"
+              inputRef={register}
+              type="password"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+          </Box>
+        </Box>
+        <Box>
+          {/*button area*/}
+          <Button type="submit" variant="outlined">
+            Logar
+          </Button>
+        </Box>
+      </form>
+    </Box>
   );
 };
