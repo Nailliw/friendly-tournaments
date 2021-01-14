@@ -3,7 +3,6 @@
   flex-direction: column;
 }
 
-
 .BackgroundImage {
   position: absolute;
   z-index: -1;
@@ -23,14 +22,14 @@
 }
 
 .text {
-    color:white;
-    font-size: 25px;
+  color: white;
+  font-size: 25px;
 }
 
 #footer {
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: #2b2c31;
   position: absolute;
   bottom: 0px;
   width: 100%;
@@ -41,4 +40,5 @@
 
 .imgGames {
   margin: 7px;
+  background-color: #3d3e43;
 }
