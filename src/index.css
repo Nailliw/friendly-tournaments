@@ -7,7 +7,9 @@ body {
   height: 100vh;
   max-height: 100%;
 
-  background-color: #25294a !important;
+  /* background-color: #202342 !important; */
+  background-color: #272a33 !important;
+
   color: white !important;
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

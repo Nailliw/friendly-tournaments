@@ -7,11 +7,13 @@ export const useStyles = makeStyles(() => ({
     margin: "5rem auto",
     borderRadius: "1rem",
 
-    // backgroundColor: "#15384F",
-    // backgroundColor: "#225B81",
+    // backgroundColor: "#272A33",
+
     // backgroundColor: "#202442",
+    // backgroundColor: "#202342",
 
     backgroundColor: "#2A2F55",
+    // backgroundColor: "#3D4351",
 
     // backgroundColor: "#7033FF",
     // backgroundColor: "#FF7843",
