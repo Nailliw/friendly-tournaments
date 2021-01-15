@@ -1,4 +1,5 @@
 import { useStyles } from "./styles";
+// import { IsValidToken } from "../../components/global/IsValidToken";
 
 import { Box } from "@material-ui/core";
 
@@ -44,7 +45,7 @@ export const TournamentInfo = () => {
 
   const {
     title,
-    info,
+    // info,
     numberOfTeams,
     teamsSize,
     teamsData,

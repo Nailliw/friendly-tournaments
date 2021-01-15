@@ -9,7 +9,16 @@ export const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "space-between",
 
-    backgroundColor: "#15384F",
+    // backgroundColor: "#272A33",
+
+    // backgroundColor: "#202442",
+    backgroundColor: "#20244280",
+
+    // backgroundColor: "#2A2F55",
+    // backgroundColor: "#3D4351",
+
+    // backgroundColor: "#7033FF",
+    // backgroundColor: "#FF7843",
   },
   statusInfo: {
     display: "flex",
@@ -29,7 +38,8 @@ export const useStyles = makeStyles(() => ({
     margin: "0.5rem",
     borderRadius: "1.5rem",
 
-    backgroundColor: "#2D325A",
+    // backgroundColor: "#2D325A",
+    backgroundColor: "#7033FF",
   },
   statusTitle: {
     fontSize: "1rem",
