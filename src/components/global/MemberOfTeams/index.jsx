@@ -2,19 +2,27 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TeamCard from "../TeamCard";
 
-const URL_TEAM = "http://localhost:3001/teams?id=2&id=1";
+const URL_TEAM = "http://localhost:3001/";
 
-const MemberOfTeams = ({ firstName, lastName }) => {
+const MemberOfTeams = ({ data }) => {
   const [teamList, setTeamList] = useState([]);
 
   const getTeamsList = () => {
-    axios.get(URL_TEAM).then((body) => {
+    let stringTeam = `teams?`;
+    for (let index = 0; index < data.memberOfTeams.length; index++) {
+      stringTeam = stringTeam + `&id=${data.memberOfTeams[index]}`;
+    }
+    axios.get(`${URL_TEAM}${stringTeam}`).then((body) => {
       setTeamList(body.data);
     });
   };
   useEffect(getTeamsList, []);
 
-  return <TeamCard list={teamList} />;
+  return (
+    <div>
+      <TeamCard list={teamList} />
+    </div>
+  );
 };
 
 export default MemberOfTeams;

@@ -4,8 +4,6 @@ import axios from "axios";
 import EditUser from "../EditUser/index";
 import MemberOfTeams from "../../components/global/MemberOfTeams";
 
-import { useSelector, useDispatch } from "react-redux";
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -32,14 +30,11 @@ function TabPanel(props) {
   );
 }
 
-const URL_BASE = "http://localhost:3001/users/1";
+const URL_BASE = "http://localhost:3001/users/5";
 
 export const UserProfile = () => {
   const [personalinfo, setPersonalinfo] = useState([]);
   const [value, setValue] = useState(0);
-  const selectedUser = useSelector((state) => state.SelectedUserReducer);
-
-  console.log("loggedUser", selectedUser);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -51,6 +46,7 @@ export const UserProfile = () => {
   };
 
   useEffect(getPersonalInfo, []);
+
   return (
     <div>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
@@ -79,12 +75,7 @@ export const UserProfile = () => {
           />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {/* Aqui eu preciso de uma função que faça um map no personalInfo.memberOfTeams e pegue os IDs
-          dos times, com o ID eu posso dar um get nas infos dos times. */}
-          <MemberOfTeams
-            firstName={personalinfo.firstName}
-            lastName={personalinfo.lastName}
-          />
+          <MemberOfTeams data={personalinfo} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           {/* Aqui é o mesmo, uma função que faça um map no personalInfo.invites e pegue os Ids
