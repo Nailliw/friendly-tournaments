@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader } from "@material-ui/core";
 import React from "react";
+import UserTournament from "../UserTournament";
 
 const TeamCard = ({ list }) => {
   console.log(list);
@@ -10,8 +11,11 @@ const TeamCard = ({ list }) => {
           <Card key={id}>
             <CardHeader title={teamName} subheader={teamInfo} />
             <CardContent>
-              <div>campeonatos disputados:{tournamentsDisputed}</div>
-              <div>Ganhei os campeonatos: {tournamentsWon}</div>
+              <UserTournament
+                tournamentsDisputed={tournamentsDisputed}
+                tournamentsWon={tournamentsWon}
+              />
+              {/* USUÁRIO LOGADO COM BOTÃO PARA SAIR DO TIME */}
             </CardContent>
           </Card>
         )

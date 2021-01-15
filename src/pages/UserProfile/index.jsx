@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
 import axios from "axios";
 import EditUser from "../EditUser/index";
-import MemberOfTeams from "../../components/global/MemberOfTeams";
+import MemberOfTeams from "../../components/local/MemberOfTeams";
 
 function a11yProps(index) {
   return {
