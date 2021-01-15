@@ -15,26 +15,26 @@ export const StatusSection = ({
     <Box component="section" className={classes.statusContainer}>
       <Box component="div" className={classes.statusInfo}>
         <Paper elevation={4} className={classes.statusPaper}>
-          <Typography variant="p" component="p" className={classes.statusTitle}>
+          <Typography component="p" className={classes.statusTitle}>
             Status
           </Typography>
-          <Typography variant="p" component="p" className={classes.statusText}>
+          <Typography component="p" className={classes.statusText}>
             {status}
           </Typography>
         </Paper>
         <Paper elevation={4} className={classes.statusPaper}>
-          <Typography variant="p" component="p" className={classes.statusTitle}>
+          <Typography component="p" className={classes.statusTitle}>
             Vagas Disponíveis
           </Typography>
-          <Typography variant="p" component="p" className={classes.statusText}>
+          <Typography component="p" className={classes.statusText}>
             {numberOfTeams}
           </Typography>
         </Paper>
         <Paper elevation={4} className={classes.statusPaper}>
-          <Typography variant="p" component="p" className={classes.statusTitle}>
+          <Typography component="p" className={classes.statusTitle}>
             Prazo Limite de Inscrição
           </Typography>
-          <Typography variant="p" component="p" className={classes.statusText}>
+          <Typography component="p" className={classes.statusText}>
             {deadline}
           </Typography>
         </Paper>
