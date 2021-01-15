@@ -12,9 +12,12 @@ import * as yup from "yup";
 import { Box, Button, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
+import { useStyles } from "./styles/styles";
+
 export const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const classes = useStyles();
 
   const users = useSelector((state) => state.UsersReducer);
 
@@ -27,18 +30,18 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleForm = (data) => {
-    console.log(data);
+  const handleForm = (loginData) => {
+    console.log(loginData);
+    dispatch(loginUserThunk(loginData, setError));
   };
 
   return (
     <Box>
-      <form onSubmit={handleSubmit(handleForm)}>
-        <Box>
-          {/*input area*/}
-          <Box>
-            {/*input field*/}
+      <form className={classes.formLogin} onSubmit={handleSubmit(handleForm)}>
+        <Box className={classes.inputArea}>
+          <Box className={classes.inputField}>
             <TextField
+              className={classes.input}
               variant="outlined"
               label="Email"
               name="email"
@@ -49,9 +52,9 @@ export const Login = () => {
               helperText={errors.email?.message}
             />
           </Box>
-          <Box>
-            {/*input field*/}
+          <Box className={classes.inputField}>
             <TextField
+              className={classes.input}
               variant="outlined"
               label="Senha"
               name="password"
@@ -63,11 +66,20 @@ export const Login = () => {
             />
           </Box>
         </Box>
-        <Box>
+        <Box className={classes.formBottom}>
           {/*button area*/}
-          <Button type="submit" variant="outlined">
+          <Button
+            className={classes.loginButton}
+            type="submit"
+            variant="outlined"
+          >
             Logar
           </Button>
+          <div className={classes.feedbackMessage}>
+            <h2 style={{ color: "red", textAlign: "center" }}>
+              {errors.userLogin?.message}
+            </h2>
+          </div>
         </Box>
       </form>
     </Box>
