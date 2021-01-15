@@ -8,6 +8,7 @@ export const loginUserThunk = (userData) => {
     api
       .post("/login", userData)
       .then((res) => {
+        console.log(res.data.accessToken);
         const token = res.data.accessToken;
         const authToken = {
           headers: {
@@ -57,15 +58,21 @@ export const getUserInfoThunk = (userId) => {
   };
 };
 
-export const registerUserThunk = (userData) => {
+export const registerUserThunk = (userData, setError, setRegisterSucess) => {
   return (dispatch, getState) => {
     api
       .post("/users", userData)
       .then((res) => {
-        console.log(res);
+        setRegisterSucess(true);
+        setError("registerError", {
+          message: "Cadastro realizado com Sucesso!",
+        });
       })
       .catch((err) => {
-        console.log(err.response);
+        setRegisterSucess(false);
+        setError("registerError", {
+          message: "Email já Cadastrado",
+        });
       });
   };
 };
