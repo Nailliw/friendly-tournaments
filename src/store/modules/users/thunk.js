@@ -118,3 +118,21 @@ export const updateUsersListThunk = () => {
       });
   };
 };
+
+export const updateUsersThunk = () => {
+  return (dispatch, getState) => {
+    let users = getState().UsersReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+      .authToken;
+
+    api
+      .get("/users", authToken)
+      .then((res) => {
+        users = { ...users, usersList: res.data };
+        dispatch(updateUsers(users));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
