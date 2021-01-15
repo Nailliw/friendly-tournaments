@@ -1,8 +1,8 @@
-import { DeadlineClock } from "../../../global/DeadlineClock";
+import { DeadlineClock } from "../../global/DeadlineClock";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCategoriesListThunk } from "../../../../store/modules/categories/thunk";
-import { IsValidState } from "../../../global/IsValidState";
+import { updateCategoriesListThunk } from "../../../store/modules/categories/thunk";
+import { IsValidState } from "../../global/IsValidState";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import { useStyles } from "./styles";
+import { CardCategoryImg } from "../../global/CardCategoryImg";
 import "./style.css";
 
 export const CardTournament = (props) => {
@@ -19,6 +20,7 @@ export const CardTournament = (props) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.CategoriesReducer);
   const [imgUrl, setImgUrl] = useState("");
+  const [categoryId, setCategoryId] = useState();
 
   useEffect(() => {
     dispatch(updateCategoriesListThunk());
@@ -33,6 +35,7 @@ export const CardTournament = (props) => {
     if (IsValidState(filtro)) {
       console.log(filtro);
       setImgUrl(filtro[0].imgUrl);
+      setCategoryId(filtro[0].id);
     }
   }, [categories]);
 
@@ -40,13 +43,7 @@ export const CardTournament = (props) => {
     <>
       <Card className={classes.cardRootTournament}>
         <CardActionArea>
-          {IsValidState(imgUrl) && (
-            <CardMedia
-              className={classes.media}
-              image={imgUrl}
-              title="Contemplative Reptile"
-            />
-          )}
+          <CardCategoryImg idCategory={categoryId} />
           <CardContent className={classes.contents}>
             <Typography
               className={classes.title}

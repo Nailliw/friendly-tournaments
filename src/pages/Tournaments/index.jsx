@@ -6,7 +6,7 @@ import {
 } from "../../store/modules/tournaments/thunk";
 import { updateCategoriesListThunk } from "../../store/modules/categories/thunk";
 import { IsValidState } from "../../components/global/IsValidState";
-import { CardTournament } from "../../components/local/Tournaments/CardTournament";
+import { CardTournament } from "../../components/global/CardTournament";
 import { useParams } from "react-router-dom";
 import "./style.css";
 
