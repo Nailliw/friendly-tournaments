@@ -1,51 +1,35 @@
-import { useStyles } from "./styles";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 // import { IsValidToken } from "../../components/global/IsValidToken";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getTournamentInfoThunk } from "../../store/modules/tournaments/thunk";
+
 import { Box } from "@material-ui/core";
+import { useStyles } from "./styles";
 
 import { TitleHeader } from "../../components/local/TournamentInfo/TitleHeader";
 import { StatusSection } from "../../components/local/TournamentInfo/StatusSection";
+import { InfoSection } from "../../components/local/TournamentInfo/InfoSection";
 
 export const TournamentInfo = () => {
   const classes = useStyles();
 
-  const tournamentData = {
-    category: 10,
-    title: "The International", // .done
-    info: "The biggest esport event of the world!",
-    numberOfTeams: 30,
-    teamsSize: 5,
-    teamsData: [
-      {
-        teamName: "LA Eagles",
-        id: 2,
-      },
-      {
-        teamName: "Miami Aligators",
-        id: 3,
-      },
-    ],
-    remainingTeams: [
-      {
-        teamName: "LA Eagles",
-        id: 2,
-      },
-      {
-        teamName: "Miami Aligators",
-        id: 3,
-      },
-    ],
-    matches: [],
-    status: "Esperando Times",
-    tournamentWinner: {},
-    deadline: "2021-01-14T07:34",
-    userId: 2,
-    id: 2,
-  };
+  const { tournamentID } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTournamentInfoThunk(tournamentID));
+  }, []);
+
+  const tournamentData = useSelector(
+    ({ TournamentsReducer: { selectedTournament } }) => selectedTournament
+  );
 
   const {
     title,
-    // info,
+    info,
     numberOfTeams,
     teamsSize,
     teamsData,
@@ -54,15 +38,16 @@ export const TournamentInfo = () => {
   } = tournamentData;
 
   return (
-    <Box component="div" className={classes.root}>
+    <Box component="div" className={classes.tournamentInfoRoot}>
       <TitleHeader title={title} />
       <StatusSection
         numberOfTeams={numberOfTeams}
         teamsSize={teamsSize}
-        teamsData={teamsData}
+        teamsSignedin={teamsData?.length}
         status={status}
         deadline={deadline}
       />
+      <InfoSection info={info} />
     </Box>
   );
 };

@@ -4,6 +4,7 @@ export const useStyles = makeStyles(() => ({
   statusContainer: {
     width: "100%",
     height: "15%",
+    padding: "0 2rem",
 
     display: "flex",
     alignItems: "center",
@@ -48,7 +49,25 @@ export const useStyles = makeStyles(() => ({
 
   statusText: {},
 
-  teamsInfo: {},
+  teamsInfo: {
+    // backgroundColor: "#000",
+    // width: "40%",
+    display: "flex",
+    // justifyContent: "space-between",
+    "& > div": {
+      margin: "0.1rem 1rem",
+    },
+  },
+
+  teamsInfoTitle: {},
+
+  teamsInfoText: {
+    color: "#FF7843",
+    textAlign: "right",
+
+    padding: "0 2rem",
+    fontSize: "2rem",
+  },
 
   //   margin: "1rem",
   //   padding: "1rem",
