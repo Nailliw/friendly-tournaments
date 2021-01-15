@@ -15,19 +15,25 @@ export const loginUserThunk = (userData) => {
             Authorization: `Bearer ${token}`,
           },
         };
+        const userId = decode(token).sub;
+        api
+          .get(`/users/${userId}`, authToken)
+          .then((res) => {
+            users = {
+              ...users,
+              loggedUser: {
+                authToken,
+                token: token,
+                users: res.data,
+              },
+            };
+            window.localStorage.setItem("users", JSON.stringify(users));
 
-        users = {
-          ...users,
-          loggedUser: {
-            authToken,
-            token: token,
-            user: decode(token),
-          },
-        };
-
-        window.localStorage.setItem("users", JSON.stringify(users));
-
-        dispatch(updateUsers(users));
+            dispatch(updateUsers(users));
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
       })
       .catch((err) => {
         console.log(err.response);
