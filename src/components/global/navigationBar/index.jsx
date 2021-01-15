@@ -1,5 +1,6 @@
 import './navigationBar.css'
-import Buttons from '../Buttons/index'
+import ButtonPrimary from '../PrimaryButton/index'
+import ButtonSecondary from '../SecondaryButton/index'
 import CustonMenu from './Menu/index'
 
 export default function NavigationBar() {
@@ -8,9 +9,9 @@ export default function NavigationBar() {
     <div id="container">
       <div>Logo</div>
       <div id="buttons">
-      <Buttons name="Entrar" size="small"/>
-      <Buttons name="Registre-se"/>
-      </div>
+      <ButtonSecondary name="Entrar" size="small" Color="secondary"/>
+      <ButtonPrimary name="Registre-se" Color="primary"/>
+      </div> 
     <div id="menu">
       <CustonMenu name1="Ver Prefil" name2="Deslogar"/>
     </div>

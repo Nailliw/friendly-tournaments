@@ -1,14 +1,26 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { purple } from '@material-ui/core/colors';
 
 
+const useStyles = makeStyles((theme) => ({
+  naviBarMenuButon: {
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[500],   
+  },
+  text: {
+    color:" white",
+    border: "1px solid white"
+  }
+}));
+
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    backgroundColor: '#2B2C31', 
   },
 })((props) => (
   <Menu
@@ -37,18 +49,10 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const ColorButton = withStyles((theme) => ({
-    root: {
-      color: theme.palette.getContrastText(purple[500]),
-      backgroundColor: purple[500],
-      '&:hover': {
-        backgroundColor: purple[700],
-      },
-    },
-  }))(Button);
 
 export default function CustomizedMenus(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,7 +64,8 @@ export default function CustomizedMenus(props) {
 
   return (
     <div>
-      <ColorButton
+      <Button
+      className={classes.naviBarMenuButon}
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
@@ -68,7 +73,7 @@ export default function CustomizedMenus(props) {
         onClick={handleClick}
       >
         Menu
-      </ColorButton>
+      </Button>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -77,11 +82,15 @@ export default function CustomizedMenus(props) {
         onClose={handleClose}
       >
         <StyledMenuItem>
+        <Button variant="outlined" className={classes.text}>
           {props.name1}
+        </Button>
         </StyledMenuItem>
         <StyledMenuItem>
+        <Button variant="outlined" className={classes.text}>
           {props.name2}
-        </StyledMenuItem> 
+        </Button> 
+        </StyledMenuItem>
       </StyledMenu>
     </div>
   );

@@ -7,21 +7,21 @@ import { purple } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles((theme) => ({
-  Button: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
+  primary: {
+    color: theme.palette.getContrastText('#7033FF'),
+    backgroundColor: '#7033FF',
     margin: theme.spacing(1),
   },
 }));
 
 
-export default function Buttons(props) {
+export default function Buttons({variant,size,name,Color}) {
   const classes = useStyles();
 
   return (
     <div>
-      <Button variant="contained" color="primary" className={classes.Button} size={props.size}>
-        {props.name}
+      <Button variant={variant} color={"primary"} className={classes.primary} size={size}>
+        {name}
       </Button>
     </div>
   );

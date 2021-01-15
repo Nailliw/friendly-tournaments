@@ -1,7 +1,7 @@
 import { Link, Redirect, withRouter } from "react-router-dom";
 import './home.css'
 import NavgationBar from '../../components/global/navigationBar/index'
-import Buttons from '../../components/global/Buttons/index'
+import ButtonPrimary from '../../components/global/PrimaryButton/index'
 
 export const Home = (props) => {
   const { history } = props;
@@ -18,7 +18,7 @@ export const Home = (props) => {
         <h1>Find your game Tournament here!</h1>
         <h4>Over 100 tournament & event waiting you to join in</h4>
         </div>
-        <Buttons name="Join Tournaments"/>
+        <ButtonPrimary name="Join Tournaments"/>
       </div>
       </div>
 
