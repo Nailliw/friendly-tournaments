@@ -13,7 +13,7 @@ export const useStyles = makeStyles({
     height: 140,
   },
   contents: {
-    height: "200px",
+    height: "250px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -43,5 +43,6 @@ export const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
+    fontSize: "16px",
   },
 });

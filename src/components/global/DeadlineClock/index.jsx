@@ -99,5 +99,5 @@ export const DeadlineClock = (props) => {
     console.log(tempo);
   }, [tempo]);
 
-  return <>{tempo && <div className="clock">{tempo}</div>}</>;
+  return <>{tempo && tempo}</>;
 };
