@@ -1,5 +1,7 @@
 import { Link, Redirect, withRouter } from "react-router-dom";
 import './home.css'
+import NavgationBar from '../../components/global/navigationBar/index'
+import Buttons from '../../components/global/Buttons/index'
 
 export const Home = (props) => {
   const { history } = props;
@@ -8,7 +10,7 @@ export const Home = (props) => {
     <div id="home">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkzZVq_xElVlJ5mZOBesAccEd0Lvxna6w-Aw&usqp=CAU" alt="fundo da page"  className="BackgroundImage" id="imgPage"/>
       <div id="header">
-        <Link to="/tournaments">Tournament</Link>
+        <NavgationBar/>
       </div>
 
       <div id="body">
@@ -16,9 +18,7 @@ export const Home = (props) => {
         <h1>Find your game Tournament here!</h1>
         <h4>Over 100 tournament & event waiting you to join in</h4>
         </div>
-        <button onClick={() => history.push("/tournaments")}>
-          Join Tournaments
-        </button>
+        <Buttons name="Join Tournaments"/>
       </div>
       </div>
 
