@@ -3,6 +3,7 @@ import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
 import axios from "axios";
 import EditUser from "../EditUser/index";
 import MemberOfTeams from "../../components/local/MemberOfTeams";
+import { useDispatch, useSelector } from "react-redux";
 
 function a11yProps(index) {
   return {
@@ -34,6 +35,8 @@ const URL_BASE = "http://localhost:3001/users/5";
 
 export const UserProfile = () => {
   const [personalinfo, setPersonalinfo] = useState([]);
+  const users = useSelector((state) => state.UsersReducer);
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -67,6 +70,7 @@ export const UserProfile = () => {
 
         <TabPanel value={value} index={0}>
           <EditUser
+            id={personalinfo.id}
             firstName={personalinfo.firstName}
             lastName={personalinfo.lastName}
             bio={personalinfo.bio}
@@ -74,9 +78,11 @@ export const UserProfile = () => {
             invites={personalinfo.invites}
           />
         </TabPanel>
+
         <TabPanel value={value} index={1}>
           <MemberOfTeams data={personalinfo} />
         </TabPanel>
+
         <TabPanel value={value} index={2}>
           {/* Aqui é o mesmo, uma função que faça um map no personalInfo.invites e pegue os Ids
           dos invites, com os ids consigo dar get nas infos */}

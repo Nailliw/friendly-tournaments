@@ -3,7 +3,7 @@ const initialState = {
   loggedUser: {
     authToken: "",
     token: "",
-    user: { email: "william@gmail.com" },
+    user: {},
   },
   selectedUser: {},
   usersList: [],

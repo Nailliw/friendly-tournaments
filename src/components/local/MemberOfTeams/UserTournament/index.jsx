@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { List, ListItem } from "@material-ui/core";
+import { Card, CardHeader, CardContent } from "@material-ui/core";
 
 const URL_BASE = "http://localhost:3001/";
+
+const containerStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+};
+
+const tournamentCard = {
+  width: "40vh",
+  margin: "5px",
+  backgroundColor: "#3d4351",
+  color: "white",
+};
 
 const UserTournament = ({ tournamentsDisputed, tournamentsWon }) => {
   const [tournamentsDisputedList, setTournamentsDisputedList] = useState([]);
@@ -20,17 +32,17 @@ const UserTournament = ({ tournamentsDisputed, tournamentsWon }) => {
 
   return (
     <div>
-      <div>
-        <h2>Tournament Disputed:</h2>
-        <div>
-          {tournamentsDisputedList.map(({ title, status, info, id }) => (
-            <List key={id} subheader={title}>
-              <ListItem>{info}</ListItem>
-              <ListItem>Tournament status: {status}</ListItem>
-              <ListItem>Winner</ListItem>
-            </List>
-          ))}
-        </div>
+      <h2>Tournament Disputed</h2>
+      <div style={containerStyle}>
+        {tournamentsDisputedList.map(({ title, status, info, id }) => (
+          <Card style={tournamentCard} key={id}>
+            <CardHeader title={title} />
+            <CardContent>
+              <div>{info}</div>
+              <div>{status}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );

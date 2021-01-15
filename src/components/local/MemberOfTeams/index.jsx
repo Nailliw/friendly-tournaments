@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TeamCard from "../TeamCard";
+import TeamCard from "./TeamCard";
 
 const URL_BASE = "http://localhost:3001/";
 
