@@ -31,7 +31,7 @@ function TabPanel(props) {
   );
 }
 
-const URL_BASE = "http://localhost:3001/users/5";
+const URL_BASE = "https://tournament-json-server.herokuapp.com/users/1";
 
 export const UserProfile = () => {
   const [personalinfo, setPersonalinfo] = useState([]);
