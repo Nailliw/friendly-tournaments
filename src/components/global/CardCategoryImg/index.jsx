@@ -1,5 +1,11 @@
 import CardMedia from "@material-ui/core/CardMedia";
-import defaultImg from "../assets/img/categoryRetro.jpg";
+import categoryRetro from "../assets/img/category-images/categoryRetro.jpg";
+import categoryChessImg from "../assets/img/category-images/categoryChess.jpg";
+import categoryLoLImg from "../assets/img/category-images/categoryLoL.jpg";
+import categoryOthersImg from "../assets/img/category-images/categoryOthers.jpg";
+import categoryWoWImg from "../assets/img/category-images/categoryWoW.jpg";
+import categoryNoCategoryImg from "../assets/img/category-images/categoryNoCategory.jpg";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 export const CardCategoryImg = (props) => {
@@ -19,25 +25,22 @@ export const CardCategoryImg = (props) => {
 
   const imgUrl = () => {
     if (props.idCategory === 1) {
-      return "https://i.ytimg.com/vi/t-v6xe1X1zo/sddefault.jpg";
+      return categoryChessImg;
     }
     if (props.idCategory === 2) {
-      return "https://media.gazetadopovo.com.br/2020/09/02160514/xadrez-Steve-Buissinne-Pixabay-660x372.jpg";
+      return categoryLoLImg;
     }
     if (props.idCategory === 3) {
-      return "https://wallpaperaccess.com/full/2379009.jpg";
+      return categoryWoWImg;
     }
     if (props.idCategory === 4) {
-      return "https://www.maistecnologia.com/wp-content/uploads/2015/03/world-of-warcraft-logo.jpg";
+      return categoryRetro;
     }
     if (props.idCategory === 5) {
-      return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT99Elb9Xm6t6og77iVIOJqJc5QwfJVFvEMfA&usqp=CAU";
-    }
-    if (props.idCategory === 6) {
-      return "https://bombusenergy.com/wp-content/uploads/2018/07/others-e1531304364940-1.png";
+      return categoryOthersImg;
     }
 
-    return defaultImg;
+    return categoryNoCategoryImg;
   };
 
   return (
