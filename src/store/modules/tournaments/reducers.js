@@ -1,6 +1,7 @@
 import { UPDATE_TOURNAMENTS } from "./actionsType";
 const initialState = {
   selectedTournament: {},
+  filteredTournamentsList: [],
   tournamentsList: [],
 };
 
