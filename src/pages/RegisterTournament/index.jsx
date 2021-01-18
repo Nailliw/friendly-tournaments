@@ -131,7 +131,7 @@ export const RegisterTournament = () => {
               rowsMax={20}
               variant="outlined"
               label="
-        Informação"
+        Informações"
               name="info"
               margin="dense"
               type="string"
