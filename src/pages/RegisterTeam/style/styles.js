@@ -56,7 +56,16 @@ export const useStyles = makeStyles(() => ({
 
   inputField: {
     width: "80%",
-    height: "13%",
+    height: "10%",
+    // paddingBottom: "2rem",
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "center",
+  },
+
+  inputFieldRow: {
+    width: "80%",
+    height: "16%",
     // paddingBottom: "2rem",
     display: "flex",
     alignItems: "baseline",
@@ -78,6 +87,27 @@ export const useStyles = makeStyles(() => ({
       "&.Mui-focused fieldset": {
         borderColor: "rgb(8,53,108)",
       },
+    },
+  },
+
+  select: {
+    margin: "0.5rem",
+    minWidth: "80%",
+    maxWidth: "80%",
+
+    "& label.Mui-focused": {
+      color: "rgb(8,53,108)",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "rgb(8,53,108)",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "rgb(8,53,108)",
+      },
+    },
+    "& option": {
+      width: "10px",
     },
   },
 
