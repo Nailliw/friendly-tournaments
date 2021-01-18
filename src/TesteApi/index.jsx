@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Bracket, RoundProps} from "react-brackets";
+import { Bracket, RoundProps } from "react-brackets";
+import { CardTeam } from "../components/global/CardTeam";
 
 export const TesteApi = () => {
   const rounds = [
@@ -40,9 +41,20 @@ export const TesteApi = () => {
     },
   ];
 
+  const team = {
+    teamName: "LA Eagles",
+    teamInfo: "League of Legends Team based in Los Angeles",
+    playersId: [1, 2, 3],
+    tournamentsWon: [1, 3],
+    tournamentsDisputed: [1, 2, 3],
+    userId: 1,
+    id: 2,
+  };
+
   return (
     <>
-      <Bracket rounds={rounds} />
+      <CardTeam team={team} />
+      {/* <Bracket rounds={rounds} /> */}
     </>
   );
 };
