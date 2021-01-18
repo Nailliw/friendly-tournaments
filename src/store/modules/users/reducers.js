@@ -1,6 +1,10 @@
 import { UPDATE_USERS } from "./actionsType";
 const initialState = {
-  loggedUser: { authToken: "", token: "", user: {} },
+  loggedUser: {
+    authToken: "",
+    token: "",
+    user: {},
+  },
   selectedUser: {},
   usersList: [],
 };

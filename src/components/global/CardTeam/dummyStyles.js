@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   cardRootTournament: {
-    width: 250,
+    width: 300,
     margin: "2%",
     backgroundColor: "#3D4351",
     "&  *": {
@@ -13,22 +13,45 @@ export const useStyles = makeStyles({
     height: 140,
   },
   contents: {
-    height: "200px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     textAlign: "center",
+    marginTop: "5%",
     marginBottom: "5%",
+    fontSize: "32px",
   },
   info: {
     textAlign: "center",
     marginBottom: "5%",
   },
-  teamsSize: {
+  teamsPlayers: {
+    width: "80%",
+    display: "flex",
+    flexDirection: "column",
     textAlign: "center",
     marginBottom: "5%",
+  },
+  playerCard: {
+    marginTop: "5%",
+    marginBottom: "5%",
+  },
+  TournamentsWonCard: {
+    marginTop: "5%",
+    marginBottom: "15%",
+  },
+  TournamentsWDisputedCard: {
+    marginTop: "5%",
+    marginBottom: "15%",
+  },
+  subtitle: {
+    fontSize: "24px",
+    marginTop: "15%",
+    marginBottom: "10%",
+    fontWeight: "bold",
   },
   slots: {
     textAlign: "center",
@@ -38,10 +61,5 @@ export const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignContent: "center",
-  },
-  deadline: {
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "center",
   },
 });
