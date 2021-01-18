@@ -1,9 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
-  root: {
-    width: "80%",
-    height: "80vh",
+  tournamentInfoRoot: {
+    width: "90%",
+    height: "90vh",
+
     margin: "5rem auto",
     borderRadius: "1rem",
 

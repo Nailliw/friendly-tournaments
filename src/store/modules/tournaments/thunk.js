@@ -17,7 +17,7 @@ export const registerTournamentThunk = (tournamentData) => {
   };
 };
 
-export const getTounamentInfoThunk = (tournamentId) => {
+export const getTournamentInfoThunk = (tournamentId) => {
   return (dispatch, getState) => {
     let tournaments = getState().TournamentsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
