@@ -70,7 +70,6 @@ export const DeadlineClock = (props) => {
         setTempo((t) => {
           let hoje = new Date();
           let diaInscricao = new Date(dataTorneio);
-          console.log(t);
           return calcularTempoInscricao(
             (diaInscricao.getTime() - hoje.getTime()) / 1000
           );
@@ -95,9 +94,7 @@ export const DeadlineClock = (props) => {
     }
   }, [dataTorneio]);
 
-  useEffect(() => {
-    console.log(tempo);
-  }, [tempo]);
+  useEffect(() => {}, [tempo]);
 
   return <>{tempo && tempo}</>;
 };
