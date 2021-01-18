@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Bracket, RoundProps } from "react-brackets";
 import { CardTeam } from "../components/global/CardTeam";
+import { TeamIsEligible } from "../components/local/TournamentInfo/TeamIsEligible";
 
 export const TesteApi = () => {
   const rounds = [
@@ -50,6 +51,9 @@ export const TesteApi = () => {
     userId: 1,
     id: 2,
   };
+
+  useEffect(() => {}, []);
+  console.log(TeamIsEligible(1, 6));
 
   return (
     <>

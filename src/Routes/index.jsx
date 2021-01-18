@@ -17,8 +17,9 @@ import { EditTeam } from "../pages/EditTeam";
 
 import { Users } from "../pages/Users";
 import { UserProfile } from "../pages/UserProfile";
-
+import { EditUser } from "../components/local/EditUser";
 import { TesteApi } from "../TesteApi";
+import { Teams } from "../pages/Teams";
 
 export const Routes = () => {
   return (
@@ -29,7 +30,8 @@ export const Routes = () => {
       <Route exact path="/registerTeam" component={RegisterTeam} />
       <Route exact path="/registerTournament" component={RegisterTournament} />
 
-      <Route exact path="/teams/:teamID" component={TeamInfo} />
+      <Route exact path="/teams" component={Teams} />
+      <Route exact path="/team/:teamID" component={TeamInfo} />
       <Route exact path="/editTeam/:teamID" component={EditTeam} />
 
       <Route exact path="/tournaments" component={Tournaments} />
@@ -46,8 +48,7 @@ export const Routes = () => {
       />
 
       <Route exact path="/users" component={Users} />
-      <Route exact path="/userProfile" component={UserProfile} />
-      <Route exact path="/userProfile/:userID" component={UserProfile} />
+      <Route exact path="/users/:userID" component={UserProfile} />
 
       <Route exact path="/testeapi" component={TesteApi} />
 

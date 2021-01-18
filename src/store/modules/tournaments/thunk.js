@@ -30,6 +30,7 @@ export const getTournamentInfoThunk = (tournamentId) => {
 
         tournaments = { ...tournaments, selectedTournament: res.data };
 
+        console.log(tournaments);
         dispatch(updateTournaments(tournaments));
       })
       .catch((err) => {
