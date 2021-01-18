@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   cardRootTournament: {
-    width: 300,
+    width: 250,
     margin: "2%",
     backgroundColor: "#3D4351",
     "&  *": {
@@ -13,19 +13,18 @@ export const useStyles = makeStyles({
     height: 140,
   },
   contents: {
+    height: "300px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   title: {
     textAlign: "center",
-    marginTop: "2%",
-    marginBottom: "2%",
-    fontSize: "32px",
+    marginBottom: "5%",
   },
   info: {
     textAlign: "center",
-    marginBottom: "2%",
+    marginBottom: "5%",
   },
   teamsPlayers: {
     width: "80%",
