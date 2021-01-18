@@ -19,6 +19,7 @@ import { Users } from "../pages/Users";
 import { UserProfile } from "../pages/UserProfile";
 import { EditUser } from "../pages/EditUser";
 import { TesteApi } from "../TesteApi";
+import { Teams } from "../pages/Teams";
 
 export const Routes = () => {
   return (
@@ -29,6 +30,7 @@ export const Routes = () => {
       <Route exact path="/registerTeam" component={RegisterTeam} />
       <Route exact path="/registerTournament" component={RegisterTournament} />
 
+      <Route exact path="/teams" component={Teams} />
       <Route exact path="/team/:teamID" component={TeamInfo} />
       <Route exact path="/editTeam/:teamID" component={EditTeam} />
 

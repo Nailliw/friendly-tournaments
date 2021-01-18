@@ -7,11 +7,11 @@ import { updateTournamentsListThunk } from "../../../store/modules/tournaments/t
 import { IsValidState } from "../../global/IsValidState";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
+import Button from "@material-ui/core/Button";
 import { useStyles } from "./styles";
 import { CardCategoryImg } from "../../global/CardCategoryImg";
 
@@ -126,20 +126,15 @@ export const CardTeam = (props) => {
             color="textSecondary"
             component="p"
           >
-            <div className={classes.subtitle}>Players</div>
-            {IsValidState(filteredPlayers) &&
-              filteredPlayers.map((player, index) => {
-                return (
-                  <Chip
-                    className={classes.playerCard}
-                    key={index}
-                    label={`${player.firstName} ${player.lastName}`}
-                    clickable
-                    color="primary"
-                    variant="default"
-                  />
-                );
-              })}
+            {IsValidState(filteredPlayers) && (
+              <Chip
+                className={classes.playerCard}
+                label={`Membros: ${filteredPlayers.length}`}
+                clickable
+                color="primary"
+                variant="default"
+              />
+            )}
           </Typography>
           <hr style={{ width: "100%" }} />
           <Typography
@@ -176,6 +171,11 @@ export const CardTeam = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+      <CardActions className={classes.seeTournament}>
+        <Button size="small" color="primary">
+          Ver equipe
+        </Button>
+      </CardActions>
     </Card>
   );
 };
