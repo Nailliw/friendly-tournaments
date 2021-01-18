@@ -2,6 +2,7 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 import './home.css'
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import {Button,Box,Paper} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   imgGame: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Home = (props) => {
-  const { history } = props;
+  const history = useHistory();
   const classes = useStyles();
 
   return (
