@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
   tournamentInfoRoot: {
     width: "90%",
-    height: "90vh",
+    minHeight: "85vh",
 
     margin: "5rem auto",
     borderRadius: "1rem",
