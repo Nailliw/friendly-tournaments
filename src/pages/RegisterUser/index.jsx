@@ -98,7 +98,7 @@ export const RegisterUser = () => {
               type="string"
               inputRef={register}
               error={!!errors.email}
-              helperText={errors.name?.message}
+              helperText={errors.email?.message}
             />
           </Box>
           <Box className={classes.inputField}>
