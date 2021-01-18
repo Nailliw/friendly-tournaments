@@ -16,11 +16,17 @@ const MemberOfTeams = ({ data }) => {
       setTeamList(body.data);
     });
   };
+  console.log(data);
   useEffect(getTeamsList, []);
 
   return (
     <div>
-      <TeamCard list={teamList} />
+      <TeamCard
+        memberOfTeams={data.memberOfTeams}
+        userName={data.firstName}
+        userId={data.id}
+        list={teamList}
+      />
     </div>
   );
 };

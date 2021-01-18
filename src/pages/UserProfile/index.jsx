@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
 import axios from "axios";
-import EditUser from "../EditUser/index";
-import MemberOfTeams from "../../components/local/MemberOfTeams";
+import EditUser from "../../components/local/EditUser/index";
+import MemberOfTeams from "../../components/local/EditUser/MemberOfTeams";
 import { useDispatch, useSelector } from "react-redux";
 
 function a11yProps(index) {

@@ -17,7 +17,7 @@ import { EditTeam } from "../pages/EditTeam";
 
 import { Users } from "../pages/Users";
 import { UserProfile } from "../pages/UserProfile";
-import { EditUser } from "../pages/EditUser";
+import { EditUser } from "../components/local/EditUser";
 import { TesteApi } from "../TesteApi";
 
 export const Routes = () => {
@@ -46,8 +46,7 @@ export const Routes = () => {
       />
 
       <Route exact path="/users" component={Users} />
-      <Route exact path="/userProfile" component={UserProfile} />
-      <Route exact path="/userProfile/:userID" component={UserProfile} />
+      <Route exact path="/users/:userID" component={UserProfile} />
 
       <Route exact path="/testeapi" component={TesteApi} />
 
