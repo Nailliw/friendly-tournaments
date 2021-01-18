@@ -5,17 +5,23 @@ import { decode } from "jsonwebtoken";
 export const loginUserThunk = (userData) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
+
     api
       .post("/login", userData)
       .then((res) => {
-        console.log(res.data.accessToken);
         const token = res.data.accessToken;
+
         const authToken = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
-        const userId = decode(token).sub;
+
+        const decodedToken = decode(token);
+
+        const userId = decodedToken.sub;
+        const expirationTimestamp = decodedToken.exp;
+
         api
           .get(`/users/${userId}`, authToken)
           .then((res) => {
@@ -23,6 +29,7 @@ export const loginUserThunk = (userData) => {
               ...users,
               loggedUser: {
                 authToken,
+                expirationTimestamp,
                 token: token,
                 users: res.data,
               },
@@ -65,16 +72,18 @@ export const getUserInfoThunk = (userId) => {
 };
 
 export const registerUserThunk = (userData, setError, setRegisterSucess) => {
-  return (dispatch, getState) => {
+  return (_dispatch, _getState) => {
     api
       .post("/users", userData)
-      .then((res) => {
+      .then((_res) => {
         setRegisterSucess(true);
         setError("registerError", {
           message: "Cadastro realizado com Sucesso!",
         });
       })
       .catch((err) => {
+        console.log(err.response);
+
         setRegisterSucess(false);
         setError("registerError", {
           message: "Email já Cadastrado",
@@ -86,7 +95,7 @@ export const registerUserThunk = (userData, setError, setRegisterSucess) => {
 export const updateUserThunk = (userId, userData) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -104,7 +113,7 @@ export const updateUserThunk = (userId, userData) => {
 export const updateUsersListThunk = () => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
@@ -122,7 +131,7 @@ export const updateUsersListThunk = () => {
 export const updateUsersThunk = () => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users")).loggedUser
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
     api
