@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
 import axios from "axios";
-import EditUser from "../EditUser/index";
-import MemberOfTeams from "../../components/local/MemberOfTeams";
+import EditUser from "../../components/local/EditUser/index";
+import MemberOfTeams from "../../components/local/EditUser/MemberOfTeams";
 import { useDispatch, useSelector } from "react-redux";
-
+import { loginUserThunk } from "../../store/modules/users/thunk";
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -31,12 +31,12 @@ function TabPanel(props) {
   );
 }
 
-const URL_BASE = "https://tournament-json-server.herokuapp.com/users/1";
+const URL_BASE = JSON.parse(window.localStorage.getItem("users"));
 
 export const UserProfile = () => {
-  const [personalinfo, setPersonalinfo] = useState([]);
-  const users = useSelector((state) => state.UsersReducer);
-
+  const [personalinfo, setPersonalinfo] = useState(URL_BASE.loggedUser.users);
+  const userData = useSelector((state) => state.loginUserThunk);
+  console.log("userData", userData);
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {

@@ -12,7 +12,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { updateUserThunk } from "../../store/modules/users/thunk";
+import { updateUserThunk } from "../../../store/modules/users/thunk";
 import { useState, useEffect } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -46,7 +46,6 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
   });
 
   const handleForm = (register) => {
-    console.log(register);
     dispatch(updateUserThunk(register.id, register));
     setOpen(false);
   };
