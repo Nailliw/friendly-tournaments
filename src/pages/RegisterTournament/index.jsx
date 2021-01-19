@@ -36,7 +36,7 @@ export const RegisterTournament = () => {
     info: yup.string().required("Campo obrigatório"),
     numberOfTeams: yup
       .number("Deve conter um numero")
-      .min(4, "O Campeonato deve conter no minimo 4times")
+      .min(2, "O Campeonato deve conter no minimo 4times")
       .required("Campo obrigatório"),
     teamSize: yup
       .number()
@@ -83,15 +83,26 @@ export const RegisterTournament = () => {
   const handleForm = (formData) => {
     console.log(formData);
 
-    const newTournament = {
-      ...formData,
-      teamsData: [],
-    };
+    if (IsValidToken()) {
+      console.log(newTournament);
 
-    // if (IsValidToken()) {
-    console.log(newTournament);
-    dispatch(registerTournamentThunk(newTournament));
-    // }
+      const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
+        .users.id;
+
+      const newTournament = {
+        ...formData,
+        teamsData: [],
+        // gameName:
+        remainingTeams: [],
+        matches: [],
+        status: "Esperando Times",
+        tournamentWinner: [],
+        // deadline:
+        userId: Number(userId),
+      };
+
+      dispatch(registerTournamentThunk(newTournament));
+    }
   };
 
   return (
@@ -162,6 +173,7 @@ export const RegisterTournament = () => {
               variant="outlined"
             >
               <option value={0}></option>
+              <option value={2}>2</option>
               <option value={4}>4</option>
               <option value={8}>8</option>
               <option value={16}>16</option>

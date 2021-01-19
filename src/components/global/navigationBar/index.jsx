@@ -22,7 +22,7 @@ export default function NavigationBar() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const [openMenu,setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
