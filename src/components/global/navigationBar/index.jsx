@@ -84,6 +84,10 @@ export default function NavigationBar() {
     selectedValue: PropTypes.string.isRequired,
   };
 
+  const handleDeslog = () => {
+    localStorage.clear();
+  };
+
   return (
     <Box component="div" className={classes.navBarContainer}>
 
@@ -99,16 +103,15 @@ export default function NavigationBar() {
 
       <Box component="div" className={classes.navBarRight}>
       <Box component="div" className={classes.buttonsRight}>
-        {LoginPopup()}       
-        {RegisterUserPopup()}
-        <SimpleDialog
-          selectedValue={selectedValue}
-          open={open}
-          onClose={handleClose}
-        />
+      <Box component="div" className={classes.buttons}>{LoginPopup()}</Box>       
+      <Box component="div" className={classes.buttons}>{RegisterUserPopup()}</Box>          
       </Box>
       <Box component="div" className={classes.menu}>
-       {isLogged && <CustonMenu name1="Ver Prefil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" />}
+      <SimpleDialog
+          selectedValue={selectedValue}
+          open={open}
+          onClose={handleClose}/>
+       {isLogged && <CustonMenu name1="Ver Prefil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" onClick2={handleDeslog} />}
       </Box>
     </Box>
     
