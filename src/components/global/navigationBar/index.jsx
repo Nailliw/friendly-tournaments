@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { updateIsLoggedThunk } from '../../../store/modules/users/thunk'
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Paper ,Box } from "@material-ui/core";
@@ -27,8 +29,11 @@ export default function NavigationBar() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const [isLogged,setIsLogged] = useState(IsValidToken());
+  const state = useSelector((state) => state);
+  const isLogged = state.UsersReducer.isLogged;
+  const dispatch = useDispatch();
 
+  console.log(isLogged)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -84,8 +89,9 @@ export default function NavigationBar() {
     selectedValue: PropTypes.string.isRequired,
   };
 
-  const handleDeslog = () => {
+  const handleLoggout = () => {
     localStorage.clear();
+    dispatch(updateIsLoggedThunk());
   };
 
   return (
@@ -105,13 +111,9 @@ export default function NavigationBar() {
       <Box component="div" className={classes.buttonsRight}>
       <Box component="div" className={classes.buttons}>{LoginPopup()}</Box>       
       <Box component="div" className={classes.buttons}>{RegisterUserPopup()}</Box>          
-      </Box>
-      <Box component="div" className={classes.menu}>
-      <SimpleDialog
-          selectedValue={selectedValue}
-          open={open}
-          onClose={handleClose}/>
-       {isLogged && <CustonMenu name1="Ver Prefil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" onClick2={handleDeslog} />}
+      </Box>      
+      <Box component="div" className={classes.menu}>      
+       {isLogged && <CustonMenu name1="Ver Perfil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" onClick2={handleLoggout} />}
       </Box>
     </Box>
     
