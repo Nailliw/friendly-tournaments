@@ -17,6 +17,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { registerUserThunk } from "../../store/modules/users/thunk";
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 
 import { useStyles } from "./style/styles";
 
@@ -71,8 +72,11 @@ export const RegisterUser = () => {
   };
 
   useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+
     console.log(users);
-  }, [users]);
+  }, []);
+
   return (
     <Box>
       <RegisterUserPopup></RegisterUserPopup>
@@ -81,7 +85,7 @@ export const RegisterUser = () => {
         onSubmit={handleSubmit(handleForm)}
       >
         <Box className={classes.formInfo}>
-          
+
           <Typography
             className={classes.labelCadastro}
             component="h3"

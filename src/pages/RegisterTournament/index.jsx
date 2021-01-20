@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 import { registerTournamentThunk } from "../../store/modules/tournaments/thunk";
 import { RegisterTournamentPopup } from "../../components/global/Register/Tournament/index";
 
@@ -48,6 +50,10 @@ export const RegisterTournament = () => {
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+  }, []);
 
   // const [tournamentName, setTournamentName] = useState("");
   // const [teamsSize, setTeamsSize] = useState("");
