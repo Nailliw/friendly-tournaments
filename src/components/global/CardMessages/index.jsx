@@ -74,6 +74,10 @@ export const CardMessages = ({ tournamentId }) => {
     setTimeout(() => {
       dispatch(updateTournamentsListThunk());
     }, 100);
+
+    setTimeout(() => {
+      setNewMessage("");
+    }, 200);
   };
 
   return (
@@ -98,6 +102,7 @@ export const CardMessages = ({ tournamentId }) => {
               name="usuario"
               onKeyPress={handlePress}
               onChange={handleNewMessage}
+              value={newMessage}
             />
             <Button onClick={addMessage} size="small" color="primary">
               <SendIcon />
