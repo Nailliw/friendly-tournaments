@@ -1,11 +1,13 @@
-import { updateUsers } from "./actions";
 import { api } from "../../../services/api";
 import { decode } from "jsonwebtoken";
+
+import { updateUsers } from "./actions";
+import { IsValidToken } from "../../../components/global/IsValidToken";
 
 export const loginUserThunk = (userData) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-
+    console.log(users);
     api
       .post("/login", userData)
       .then((res) => {
@@ -27,6 +29,7 @@ export const loginUserThunk = (userData) => {
           .then((res) => {
             users = {
               ...users,
+              isLogged: true,
               loggedUser: {
                 authToken,
                 expirationTimestamp,
@@ -34,6 +37,8 @@ export const loginUserThunk = (userData) => {
                 users: res.data,
               },
             };
+            console.log(users);
+
             window.localStorage.setItem("users", JSON.stringify(users));
 
             dispatch(updateUsers(users));
@@ -95,13 +100,21 @@ export const registerUserThunk = (userData, setError, setRegisterSucess) => {
 export const updateUserThunk = (userId, userData) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+
+    let { loggedUser } =
+      JSON.parse(window.localStorage.getItem("users")) || null;
+
+    let authToken = loggedUser?.authToken;
 
     api
       .patch(`/users/${userId}`, userData, authToken)
       .then((res) => {
         console.log(res);
+
+        users = { ...users, loggedUser: { ...loggedUser, users: res.data } };
+
+        window.localStorage.setItem("users", JSON.stringify(users));
+
         dispatch(updateUsers(users));
       })
       .catch((err) => {
@@ -143,5 +156,21 @@ export const updateUsersThunk = () => {
       .catch((err) => {
         console.log(err.response);
       });
+  };
+};
+
+export const updateIsLoggedThunk = () => {
+  return (dispatch, getState) => {
+    let users =
+      JSON.parse(window.localStorage.getItem("users")) ||
+      getState().UsersReducer;
+    console.log(users);
+
+    users = { ...users, isLogged: IsValidToken() };
+    console.log(users);
+
+    window.localStorage.setItem("users", JSON.stringify(users));
+
+    dispatch(updateUsers(users));
   };
 };

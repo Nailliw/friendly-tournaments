@@ -2,9 +2,9 @@ import { updateTournaments } from "./actions";
 import { api } from "../../../services/api";
 
 export const registerTournamentThunk = (tournamentData) => {
-  return (dispatch, getState) => {
+  return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .post("/tournaments", tournamentData, authToken)
@@ -21,7 +21,7 @@ export const getTournamentInfoThunk = (tournamentId) => {
   return (dispatch, getState) => {
     let tournaments = getState().TournamentsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .get(`/tournaments/${tournamentId}`, authToken)
@@ -40,9 +40,9 @@ export const getTournamentInfoThunk = (tournamentId) => {
 };
 
 export const updateTournamentThunk = (idTournament, tournamentData) => {
-  return (dispatch, getState) => {
+  return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .patch(`/tournaments/${idTournament}`, tournamentData, authToken)
@@ -59,7 +59,7 @@ export const updateTournamentsListThunk = () => {
   return (dispatch, getState) => {
     let tournaments = getState().TournamentsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .get("/tournaments", authToken)
@@ -88,9 +88,9 @@ export const setFilteredTournamentsListThunk = (filteredTournamentsList) => {
 };
 
 export const deleteTournamentThunk = (tournamentId) => {
-  return (dispatch, getState) => {
+  return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .delete(`/tournaments/${tournamentId}`, authToken)

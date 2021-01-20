@@ -3,8 +3,9 @@ const initialState = {
   loggedUser: {
     authToken: "",
     token: "",
-    user: {},
+    users: {},
   },
+  isLogged: false,
   selectedUser: {},
   usersList: [],
 };
