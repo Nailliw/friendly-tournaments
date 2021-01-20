@@ -13,9 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import { useStyles } from "./styles";
 import { CardCategoryImg } from "../../global/CardCategoryImg";
+import { useHistory } from "react-router-dom";
 import "./style.css";
 
 export const CardTournament = (props) => {
+  let history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.CategoriesReducer);
@@ -105,7 +107,13 @@ export const CardTournament = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.seeTournament}>
-          <Button size="small" color="primary">
+          <Button
+            onClick={() => {
+              history.push(`/tournaments/${props.tournament.id}`);
+            }}
+            size="small"
+            color="primary"
+          >
             Ver o torneio
           </Button>
         </CardActions>

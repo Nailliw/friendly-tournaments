@@ -19,13 +19,15 @@ import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
 import { useHistory } from "react-router-dom";
 import { IsValidToken } from '../IsValidToken/index'
+import { LoginPopup } from '../Login/index'
+import { RegisterUserPopup } from '../Register/User/index'
 
 export default function NavigationBar() {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const [isLogged,setisLogged] = useState(IsValidToken());
+  const [isLogged,setIsLogged] = useState(IsValidToken());
 
 
   const handleClickOpen = () => {
@@ -97,18 +99,8 @@ export default function NavigationBar() {
 
       <Box component="div" className={classes.navBarRight}>
       <Box component="div" className={classes.buttonsRight}>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={handleClickOpen}
-          className={classes.buttons}
-        >
-          Entrar
-        </Button>
-        <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.buttons}>
-          Registre-se
-        </Button>
+        {LoginPopup()}       
+        {RegisterUserPopup()}
         <SimpleDialog
           selectedValue={selectedValue}
           open={open}

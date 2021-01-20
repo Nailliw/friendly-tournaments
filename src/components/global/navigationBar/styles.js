@@ -16,6 +16,7 @@ navBarRight: {
   position: "relative",
   left: "65%",
   display: "flex",
+  flexDirection: "row",
 },
 
 buttonsLeft: {
@@ -40,10 +41,10 @@ menu: {
   top: "15%",
 },
 
-buttons: {
-  marginRight: "3px",
-  marginLeft: "3px",
-},
+// buttons: {
+//   marginRight: "3px",
+//   marginLeft: "3px",
+// },
 
 avatar: {
   backgroundColor: "blue[100]",

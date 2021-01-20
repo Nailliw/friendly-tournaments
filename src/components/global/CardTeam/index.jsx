@@ -14,8 +14,10 @@ import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import { useStyles } from "./styles";
 import { CardCategoryImg } from "../../global/CardCategoryImg";
+import { useHistory } from "react-router-dom";
 
 export const CardTeam = (props) => {
+  let history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.UsersReducer);
@@ -172,7 +174,13 @@ export const CardTeam = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.seeTournament}>
-        <Button size="small" color="primary">
+        <Button
+          onClick={() => {
+            history.push(`/teams/${props.team.id}`);
+          }}
+          size="small"
+          color="primary"
+        >
           Ver equipe
         </Button>
       </CardActions>
