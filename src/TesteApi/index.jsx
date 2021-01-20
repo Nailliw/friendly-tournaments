@@ -52,11 +52,17 @@ export const TesteApi = () => {
     id: 2,
   };
 
-  useEffect(() => {}, []);
-  console.log(TeamIsEligible(1, 6));
+  // useEffect(() => {}, []);
+  // console.log(TeamIsEligible(1, 6));
+
+  const handleDate = (e) => {
+    let deadline = e.target.value;
+    console.log(deadline);
+  };
 
   return (
     <>
+      <input type="datetime-local" onChange={handleDate} />
       <CardTeam team={team} />
       {/* <Bracket rounds={rounds} /> */}
     </>

@@ -25,22 +25,20 @@ export const Tournaments = ({ token, setToken }) => {
   useEffect(() => {
     console.log(tournaments);
 
-    if (!IsValidState(tournaments.filteredTournamentsList)) {
-      if (IsValidState(tournaments.tournamentsList)) {
-        dispatch(
-          setFilteredTournamentsListThunk(
-            filterTournamentsByUrlParam(
-              (listItem, paramValue) => {
-                return listItem === paramValue;
-              },
-              tournaments.tournamentsList,
-              "category"
-            )
+    if (IsValidState(tournaments.tournamentsList)) {
+      dispatch(
+        setFilteredTournamentsListThunk(
+          filterTournamentsByUrlParam(
+            (listItem, paramValue) => {
+              return listItem === paramValue;
+            },
+            tournaments.tournamentsList,
+            "category"
           )
-        );
-      }
+        )
+      );
     }
-  }, [tournaments]);
+  }, [tournaments.tournamentsList]);
 
   function filterTournamentsByUrlParam(callback, listToBeFiltered, paramName) {
     let objParamValue = {};
