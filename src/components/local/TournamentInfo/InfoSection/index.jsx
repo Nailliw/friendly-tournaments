@@ -1,5 +1,6 @@
 import { useStyles } from "./styles";
 import { Box, Typography, Chip } from "@material-ui/core";
+
 import { CardMessages } from "../../../global/CardMessages/index";
 import { IsValidState } from "../../../global/IsValidState";
 

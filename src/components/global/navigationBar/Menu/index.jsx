@@ -62,6 +62,7 @@ export default function CustomizedMenus(props) {
     setAnchorEl(null);
   };
 
+
   return (
     <div>
       <Button
@@ -82,12 +83,12 @@ export default function CustomizedMenus(props) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-        <Button variant="outlined" className={classes.text}>
+        <Button variant="outlined" className={classes.text} onClick={props.onClick1}>
           {props.name1}
         </Button>
         </StyledMenuItem>
         <StyledMenuItem>
-        <Button variant="outlined" className={classes.text}>
+        <Button variant="outlined" className={classes.text} onClick={props.onClick2}>
           {props.name2}
         </Button> 
         </StyledMenuItem>

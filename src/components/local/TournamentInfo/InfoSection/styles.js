@@ -17,9 +17,10 @@ export const useStyles = makeStyles(() => ({
 
   tournamentInfoDetails: {
     width: "50%",
+    // height: "100% !important",
 
     display: "flex",
-    alignSelf: "start",
+    alignSelf: "center",
     flexDirection: "column",
   },
 
@@ -63,16 +64,21 @@ export const useStyles = makeStyles(() => ({
 
   tournamentInfoBox: {
     width: "50%",
+    height: "100% !important",
     padding: "2rem",
     // minHeight: "40vh",
-    // maxHeight: "30%",
+    // maxHeight: "30vh",
   },
 
   tournamentInfoContent: {
-    margin: "2rem",
-    width: "80%",
-    height: "80%",
+    height: "100% !important",
+    // margin: "2rem",
+    padding: "1rem",
+    width: "90%",
+    // height: "80%",
 
-    backgroundColor: "#272A33",
+    // backgroundColor: "#564787",
+    backgroundColor: "#ffffff0d",
+    borderRadius: "5%",
   },
 }));

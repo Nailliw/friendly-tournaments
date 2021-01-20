@@ -5,7 +5,7 @@ export const useStyles = makeStyles(() => ({
     width: "90%",
     minHeight: "85vh",
 
-    margin: "5rem auto",
+    margin: "4rem auto",
     borderRadius: "1rem",
 
     // backgroundColor: "#272A33",

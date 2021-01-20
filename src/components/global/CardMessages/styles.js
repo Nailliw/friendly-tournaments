@@ -1,6 +1,10 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
+  cardTitle: {
+    margin: "1rem",
+  },
+
   cardMessages: {
     width: "80%",
     margin: "1% auto",
