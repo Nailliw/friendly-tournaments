@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
   tournamentInfoContainer: {
     width: "90%",
+    minHeight: "50vh",
+    height: "80%",
     margin: "2rem",
 
     display: "flex",
@@ -21,7 +23,8 @@ export const useStyles = makeStyles(() => ({
 
   tournamentInfoBox: {
     width: "50%",
-    height: "500px",
+    minHeight: "40vh",
+    maxHeight: "30%",
     backgroundColor: "#272A33",
   },
 }));
