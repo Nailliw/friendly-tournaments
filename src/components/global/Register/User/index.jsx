@@ -95,103 +95,124 @@ export const RegisterUserPopup = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.dialogRoot,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.dialogConteiner,
+          },
+        }}
       >
+        <DialogTitle id="form-dialog-title">Cadastrar-se</DialogTitle>
+
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)}>
-            <FormControl>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Senha"
-                  name="password"
-                  margin="dense"
-                  type="password"
-                  inputRef={register}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Repita a senha"
-                  name="password_confirmation"
-                  margin="dense"
-                  type="password"
-                  inputRef={register}
-                  error={!!errors.password}
-                  helperText={errors.password_confirmation?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Nome"
-                  name="firstName"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.firstName}
-                  helperText={errors.firstName?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Sobrenome"
-                  name="lastName"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.lastName}
-                  helperText={errors.lastName?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Apelido"
-                  name="nickName"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.nickName}
-                  helperText={errors.nickName?.message}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  multiline
-                  rowsMax={4}
-                  variant="outlined"
-                  label="
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Email"
+                name="email"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Senha"
+                name="password"
+                margin="dense"
+                type="password"
+                inputRef={register}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Repita a senha"
+                name="password_confirmation"
+                margin="dense"
+                type="password"
+                inputRef={register}
+                error={!!errors.password}
+                helperText={errors.password_confirmation?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Nome"
+                name="firstName"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Sobrenome"
+                name="lastName"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Apelido"
+                name="nickName"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.nickName}
+                helperText={errors.nickName?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                multiline
+                rowsMax={4}
+                variant="outlined"
+                label="
         Biografia"
-                  name="bio"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.bio}
-                  helperText={errors.bio?.message}
-                />
-              </Box>
-            </FormControl>
+                name="bio"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.bio}
+                helperText={errors.bio?.message}
+              />
+            </Box>
+
             <Box className={classes.formBottom}>
+              <Button
+                // className={classes.loginButton}
+                variant="outlined"
+                color="secondary"
+                size="small"
+                onClick={handleClose}
+              >
+                Fechar
+              </Button>
               <Button
                 className={classes.registerButton}
                 type="submit"
-                variant="outlined"
+                color="primary"
+                variant="contained"
               >
                 Cadastrar
               </Button>
@@ -209,7 +230,6 @@ export const RegisterUserPopup = () => {
             </Box>
           </form>
         </DialogContent>
-        <DialogActions></DialogActions>
       </Dialog>
     </Box>
   );

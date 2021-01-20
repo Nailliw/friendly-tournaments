@@ -68,54 +68,66 @@ export const LoginPopup = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.dialogRoot,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.dialogConteiner,
+          },
+        }}
       >
+        <DialogTitle id="form-dialog-title">Entrar</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)}>
-            <FormControl>
-              <Box>
-                <TextField
-                  autoFocus
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  fullWidth
-                />
-              </Box>
-              <Box>
-                <TextField
-                  autoFocus
-                  variant="outlined"
-                  label="Senha"
-                  name="password"
-                  margin="dense"
-                  inputRef={register}
-                  type="password"
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                  fullWidth
-                />
-              </Box>
-            </FormControl>
+            <Box>
+              <TextField
+                autoFocus
+                variant="outlined"
+                label="Email"
+                name="email"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                fullWidth
+              />
+            </Box>
+            <Box>
+              <TextField
+                autoFocus
+                variant="outlined"
+                label="Senha"
+                name="password"
+                margin="dense"
+                inputRef={register}
+                type="password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                fullWidth
+              />
+            </Box>
 
             <DialogActions>
               <Button
-                className={classes.loginButton}
-                type="submit"
+                // className={classes.loginButton}
                 variant="outlined"
-              >
-                Logar
-              </Button>
-              <Button
-                className={classes.loginButton}
-                variant="outlined"
+                color="secondary"
+                size="small"
                 onClick={handleClose}
               >
                 Fechar
+              </Button>
+              <Button
+                // className={classes.loginButton}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Logar
               </Button>
               <div className={classes.feedbackMessage}>
                 <h2 style={{ color: "red", textAlign: "center" }}>

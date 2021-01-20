@@ -4,6 +4,7 @@ import {
   InputLabel,
   FormControl,
   Dialog,
+  DialogTitle,
   DialogActions,
   DialogContent,
   FormHelperText,
@@ -64,8 +65,6 @@ export const RegisterTournamentPopup = () => {
     console.log(formData);
 
     if (IsValidToken()) {
-      console.log(newTournament);
-
       const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
         .users.id;
 
@@ -94,10 +93,21 @@ export const RegisterTournamentPopup = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
-      ></Dialog>
-      <DialogContent>
-        <form>
-          <FormControl>
+        BackdropProps={{
+          classes: {
+            root: classes.dialogRoot,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.dialogConteiner,
+          },
+        }}
+      >
+        <DialogTitle id="form-dialog-title">Registrar Torneio</DialogTitle>
+
+        <DialogContent>
+          <form onSubmit={handleSubmit(handleForm)}>
             <Box>
               <TextField
                 variant="outlined"
@@ -108,7 +118,7 @@ export const RegisterTournamentPopup = () => {
                 inputRef={register}
                 error={!!errors.title}
                 helperText={errors.title?.message}
-              ></TextField>
+              />
             </Box>
             <Box>
               <TextField
@@ -116,8 +126,7 @@ export const RegisterTournamentPopup = () => {
                 rows={2}
                 rowsMax={20}
                 variant="outlined"
-                label="
-        Informações"
+                label="Informações"
                 name="info"
                 margin="dense"
                 type="string"
@@ -166,7 +175,7 @@ export const RegisterTournamentPopup = () => {
               error={!!errors.teamSize}
               id="teamSize"
             >
-              Jogadores por Equipe(max)
+              Jogadores por Equipe (max)
             </InputLabel>
             <Select
               error={!!errors.teamSize}
@@ -222,36 +231,40 @@ export const RegisterTournamentPopup = () => {
               {errors.category?.message}
             </FormHelperText>
             {/* </FormControl> */}
-          </FormControl>
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          className={classes.loginButton}
-          type="submit"
-          variant="outlined"
-        >
-          Criar Torneio
-        </Button>
-        <Button
-          className={classes.loginButton}
-          variant="outlined"
-          onClick={handleClose}
-        >
-          Fechar
-        </Button>
-        <div className={classes.feedbackMessage}>
-          {registerSuccess ? (
-            <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
-              Registro Concluído
-            </h2>
-          ) : (
-            <h2 style={{ color: "red", textAlign: "center" }}>
-              {errors.registerError?.message}
-            </h2>
-          )}
-        </div>
-      </DialogActions>
+          </form>
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+            // className={classes.loginButton}
+            variant="outlined"
+            color="secondary"
+            size="small"
+            onClick={handleClose}
+          >
+            Fechar
+          </Button>
+          <Button
+            // className={classes.loginButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          >
+            Criar
+          </Button>
+          <div className={classes.feedbackMessage}>
+            {registerSuccess ? (
+              <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
+                Registro Concluído
+              </h2>
+            ) : (
+              <h2 style={{ color: "red", textAlign: "center" }}>
+                {errors.registerError?.message}
+              </h2>
+            )}
+          </div>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

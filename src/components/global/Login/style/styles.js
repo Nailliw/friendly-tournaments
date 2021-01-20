@@ -1,6 +1,17 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(() => ({
+  dialogRoot: {
+    // backgroundColor: "#000",
+  },
+
+  dialogConteiner: {
+    // backgroundColor: "#000",
+    width: "20%",
+    padding: "1rem",
+    borderRadius: "10%",
+  },
+
   dialogStyle: {
     backgroundColor: "red",
     borderRadius: "2rem",

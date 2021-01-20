@@ -4,6 +4,7 @@ import {
   InputLabel,
   FormControl,
   Dialog,
+  DialogTitle,
   DialogActions,
   DialogContent,
   FormHelperText,
@@ -77,53 +78,65 @@ export const RegisterTeamPopup = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.dialogRoot,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.dialogConteiner,
+          },
+        }}
       >
+        <DialogTitle id="form-dialog-title">Registrar Equipe</DialogTitle>
+
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)}>
-            <FormControl>
-              <Box>
-                <TextField
-                  variant="outlined"
-                  label="Nome da Equipe"
-                  name="teamName"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.teamName}
-                  helperText={errors.teamName?.message}
-                ></TextField>
-              </Box>
-              <Box>
-                <TextField
-                  multiline
-                  rows={3}
-                  rowsMax={20}
-                  variant="outlined"
-                  label="
-        Informações"
-                  name="teamInfo"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.teamInfo}
-                  helperText={errors.teamInfo?.message}
-                />
-              </Box>
-            </FormControl>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Nome da Equipe"
+                name="teamName"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.teamName}
+                helperText={errors.teamName?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                multiline
+                rows={3}
+                rowsMax={20}
+                variant="outlined"
+                label="Informações"
+                name="teamInfo"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.teamInfo}
+                helperText={errors.teamInfo?.message}
+              />
+            </Box>
             <DialogActions>
               <Button
-                className={classes.loginButton}
-                type="submit"
+                // className={classes.loginButton}
                 variant="outlined"
-              >
-                Criar Equipe
-              </Button>
-              <Button
-                className={classes.loginButton}
-                variant="outlined"
+                color="secondary"
+                size="small"
                 onClick={handleClose}
               >
                 Fechar
+              </Button>
+              <Button
+                // className={classes.loginButton}
+                type="submit"
+                color="primary"
+                variant="contained"
+              >
+                Criar
               </Button>
               <div className={classes.feedbackMessage}>
                 {registerSuccess ? (
