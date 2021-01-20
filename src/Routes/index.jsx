@@ -31,14 +31,14 @@ export const Routes = () => {
       <Route exact path="/registerTournament" component={RegisterTournament} />
 
       <Route exact path="/teams" component={Teams} />
-      <Route exact path="/team/:teamID" component={TeamInfo} />
+      <Route exact path="/teams/:teamID" component={TeamInfo} />
       <Route exact path="/editTeam/:teamID" component={EditTeam} />
 
       <Route exact path="/tournaments" component={Tournaments} />
 
       <Route
         exact
-        path="/tournament/:tournamentID"
+        path="/tournaments/:tournamentID"
         component={TournamentInfo}
       />
       <Route

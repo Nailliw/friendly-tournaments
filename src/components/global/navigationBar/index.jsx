@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { updateIsLoggedThunk } from '../../../store/modules/users/thunk'
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Box, Paper } from "@material-ui/core";
+import { Button, Paper ,Box } from "@material-ui/core";
+import 'fontsource-roboto';
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -14,15 +17,23 @@ import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
-import "./navigationBar.css";
+import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
 import { useHistory } from "react-router-dom";
+import { IsValidToken } from '../IsValidToken/index'
+import { LoginPopup } from '../Login/index'
+import { RegisterUserPopup } from '../Register/User/index'
 
 export default function NavigationBar() {
+  const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const [openMenu,setOpenMenu] = useState(false);
+  const state = useSelector((state) => state);
+  const isLogged = state.UsersReducer.isLogged;
+  const dispatch = useDispatch();
+
+  console.log(isLogged)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,12 +44,7 @@ export default function NavigationBar() {
     setSelectedValue(value);
   };
 
-  const useStyles = makeStyles((theme) => ({
-    avatar: {
-      backgroundColor: blue[100],
-      color: blue[600],
-    },
-  }));
+  
 
   function SimpleDialog(props) {
     const classes = useStyles();
@@ -83,30 +89,34 @@ export default function NavigationBar() {
     selectedValue: PropTypes.string.isRequired,
   };
 
+  const handleLoggout = () => {
+    localStorage.clear();
+    dispatch(updateIsLoggedThunk());
+  };
+
   return (
-    <div id="container">
-      <div>Logo</div>
-      <div id="buttons">
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={handleClickOpen}
-        >
-          Entrar
-        </Button>
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-          Registre-se
-        </Button>
-        <SimpleDialog
-          selectedValue={selectedValue}
-          open={open}
-          onClose={handleClose}
-        />
-      </div>
-      <div id="menu">
-        <CustonMenu name1="Ver Prefil" name2="Deslogar" />
-      </div>
-    </div>
+    <Box component="div" className={classes.navBarContainer}>
+
+      <Box component="div" className={classes.navBarLeft}>
+      <Box component="div" className={classes.logo}>
+      <div onClick={() => history.push("/")}>Logo</div>
+      </Box>
+      <Box component="div" className={classes.buttonsLeft}>
+      <Typography variant="button" onClick={() => history.push("/tournaments")} className={classes.buttons}>Tournaments</Typography>
+      <Typography variant="button" onClick={() => history.push("/teams")} className={classes.buttons}>Times</Typography>
+      </Box>
+      </Box>
+
+      <Box component="div" className={classes.navBarRight}>
+      <Box component="div" className={classes.buttonsRight}>
+      <Box component="div" className={classes.buttons}>{LoginPopup()}</Box>       
+      <Box component="div" className={classes.buttons}>{RegisterUserPopup()}</Box>          
+      </Box>      
+      <Box component="div" className={classes.menu}>      
+       {isLogged && <CustonMenu name1="Ver Perfil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" onClick2={handleLoggout} />}
+      </Box>
+    </Box>
+    
+    </Box>
   );
 }

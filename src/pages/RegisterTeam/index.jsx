@@ -15,9 +15,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { registerTeamThunk } from "../../store/modules/teams/thunk";
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 import { updateUsersListThunk } from "../../store/modules/users/thunk";
-
+import { IsValidToken } from "../../components/global/IsValidToken";
 import { useStyles } from "./style/styles";
+
+import { RegisterTeamPopup } from "../../components/global/Register/Team/index";
 
 export const RegisterTeam = () => {
   const dispatch = useDispatch();
@@ -34,34 +37,31 @@ export const RegisterTeam = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleCreateTeam = () => {
-    const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
-      .user.sub;
-    const teamData = {
-      playersId: [Number(userId)],
-      userId: Number(userId),
-    };
-    dispatch(registerTeamThunk(teamData));
-  };
-
   const handleForm = (formData) => {
-    const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
-      .users.id;
-    const teamData = {
-      ...formData,
-      playersId: [Number(userId)],
-      userId: Number(userId),
-    };
+    if (IsValidToken()) {
+      const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
+        .users.id;
 
-    console.log(teamData);
+      const teamData = {
+        playersId: [],
+        tournamentsWon: [],
+        tournamentsDisputed: [],
+        userId: Number(userId),
+      };
+
+      dispatch(registerTeamThunk(teamData));
+    }
   };
 
   useEffect(() => {
+    dispatch(updateIsLoggedThunk());
     dispatch(updateUsersListThunk());
   }, []);
+
   return (
     <Box>
-      <form
+      <RegisterTeamPopup></RegisterTeamPopup>
+      {/* <form
         className={classes.formRegister}
         onSubmit={handleSubmit(handleForm)}
       >
@@ -124,7 +124,7 @@ export const RegisterTeam = () => {
             )}
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };

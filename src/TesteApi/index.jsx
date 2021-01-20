@@ -1,47 +1,9 @@
 import { useState, useEffect } from "react";
-import { Bracket, RoundProps } from "react-brackets";
 import { CardTeam } from "../components/global/CardTeam";
 import { TeamIsEligible } from "../components/local/TournamentInfo/TeamIsEligible";
-
+import { CardMessages } from "../components/global/CardMessages";
+import { Message } from "../components/global/CardMessages/Message";
 export const TesteApi = () => {
-  const rounds = [
-    {
-      title: "Round 1",
-      seeds: [
-        {
-          id: 1,
-          date: new Date().toDateString(),
-          teams: [{ name: "Team A" }, { name: "Team B" }],
-        },
-        {
-          id: 2,
-          date: new Date().toDateString(),
-          teams: [{ name: "Team C" }, { name: "Team D" }],
-        },
-      ],
-    },
-    {
-      title: "Round 2",
-      seeds: [
-        {
-          id: 3,
-          date: new Date().toDateString(),
-          teams: [{ name: "Team A" }, { name: "Team C" }],
-        },
-      ],
-    },
-    {
-      title: "Final",
-      seeds: [
-        {
-          id: 3,
-          date: new Date().toDateString(),
-          teams: [{ name: "Team C" }],
-        },
-      ],
-    },
-  ];
-
   const team = {
     teamName: "LA Eagles",
     teamInfo: "League of Legends Team based in Los Angeles",
@@ -52,13 +14,18 @@ export const TesteApi = () => {
     id: 2,
   };
 
-  useEffect(() => {}, []);
-  console.log(TeamIsEligible(1, 6));
+  // useEffect(() => {}, []);
+  // console.log(TeamIsEligible(1, 6));
+
+  const message = {
+    name: "Felipe",
+    message:
+      "Aliquam non justo in neque suscipit sodales. Curabitur ipsum sem, semper eget ligula vitae, tempus pretium sem. Aliquam at metus nunc. Duis congue lacus sed facilisis condimentum. Integer maximus nibh a sapien gravida, nec gravida nisl bibendum. Mauris leo risus, bibendum in ultricies a, pharetra quis felis. Duis sit amet tempus tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  };
 
   return (
     <>
-      <CardTeam team={team} />
-      {/* <Bracket rounds={rounds} /> */}
+      <CardMessages tournamentId={2} />
     </>
   );
 };
