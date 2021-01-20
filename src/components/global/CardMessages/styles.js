@@ -2,8 +2,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles((theme) => ({
   cardMessages: {
-    width: "300px",
-    margin: "1%",
+    width: "80%",
+    margin: "1% auto",
     padding: ".5%",
     border: "1px solid black",
   },
@@ -16,7 +16,12 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   sendMessageContainer: {
+    marginLeft: "1%",
+    width: "98%",
     display: "flex",
     flexDirection: "row",
+  },
+  sendMessageTextField: {
+    width: "98%",
   },
 }));

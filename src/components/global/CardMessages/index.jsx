@@ -94,6 +94,7 @@ export const CardMessages = ({ tournamentId }) => {
         {IsValidState(personName) && IsValidState(tournament.messagesList) && (
           <div className={classes.sendMessageContainer}>
             <TextField
+              className={classes.sendMessageTextField}
               required
               id="outlined-search"
               label="Mensagem"
@@ -103,6 +104,7 @@ export const CardMessages = ({ tournamentId }) => {
               onKeyPress={handlePress}
               onChange={handleNewMessage}
               value={newMessage}
+              autoComplete={"off"}
             />
             <Button onClick={addMessage} size="small" color="primary">
               <SendIcon />
