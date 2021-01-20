@@ -32,9 +32,9 @@ export const CardMessages = ({ tournamentId }) => {
   }, []);
 
   useEffect(() => {
-    if (IsValidState(tournaments.tournamentsList)) {
+    if (IsValidState(tournaments?.tournamentsList)) {
       setTournament(
-        tournaments.tournamentsList.filter((tournament) => {
+        tournaments?.tournamentsList.filter((tournament) => {
           return tournament.id === tournamentId;
         })[0]
       );
@@ -83,7 +83,7 @@ export const CardMessages = ({ tournamentId }) => {
   return (
     <>
       <div className={classes.cardMessages}>
-        {IsValidState(tournament.messagesList) && (
+        {IsValidState(tournament?.messagesList) && (
           <div className={classes.messagesContainer}>
             {tournament.messagesList.map((personMessage, i) => {
               return <Message personMessage={personMessage} />;
@@ -91,7 +91,7 @@ export const CardMessages = ({ tournamentId }) => {
           </div>
         )}
 
-        {IsValidState(personName) && IsValidState(tournament.messagesList) && (
+        {IsValidState(personName) && IsValidState(tournament?.messagesList) && (
           <div className={classes.sendMessageContainer}>
             <TextField
               className={classes.sendMessageTextField}

@@ -32,17 +32,21 @@ export const TournamentInfo = () => {
 
   const {
     title,
+    gameName,
     info,
     numberOfTeams,
     teamsSize,
     teamsData,
     status,
     deadline,
+    id,
   } = tournamentData;
+
+  const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (
     <Box component="div" className={classes.tournamentInfoRoot}>
-      <TitleHeader title={title} />
+      <TitleHeader title={title} isLogged={isLogged} />
       <StatusSection
         numberOfTeams={numberOfTeams}
         teamsSize={teamsSize}
@@ -50,7 +54,12 @@ export const TournamentInfo = () => {
         status={status}
         deadline={deadline}
       />
-      <InfoSection info={info} />
+      <InfoSection
+        info={info}
+        teamsSize={teamsSize}
+        gameName={gameName}
+        tournamentId={id}
+      />
     </Box>
   );
 };

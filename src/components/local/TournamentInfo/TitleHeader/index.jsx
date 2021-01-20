@@ -2,7 +2,7 @@ import { useStyles } from "./styles";
 
 import { Box, Button, Typography } from "@material-ui/core";
 
-export const TitleHeader = ({ title }) => {
+export const TitleHeader = ({ title, isLogged }) => {
   const classes = useStyles();
 
   return (
@@ -18,7 +18,7 @@ export const TitleHeader = ({ title }) => {
         </Typography>
       </Box>
       <Box component="div" className={classes.signinButtonContainer}>
-        <Button color="primary" variant="contained" disabled={false}>
+        <Button color="primary" variant="contained" disabled={isLogged}>
           Inscrever-se
         </Button>
       </Box>
