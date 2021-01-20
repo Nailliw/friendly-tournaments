@@ -3,6 +3,10 @@ import {
   Typography,
   InputLabel,
   FormControl,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
   FormHelperText,
   TextField,
   Select,
@@ -10,25 +14,23 @@ import {
 } from "@material-ui/core/";
 
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
-import { registerTournamentThunk } from "../../store/modules/tournaments/thunk";
-import { RegisterTournamentPopup } from "../../components/global/Register/Tournament/index";
-
+import { registerTournamentThunk } from "../../../../store/modules/tournaments/thunk";
 import { useStyles } from "./style/styles";
 
-import { IsValidToken } from "../../components/global/IsValidToken";
+import { IsValidToken } from "../../../global/IsValidToken";
 
-export const RegisterTournament = () => {
+export const RegisterTournamentPopup = () => {
   const dispatch = useDispatch();
   const tournaments = useSelector((state) => state.TournamentsReducer);
   const classes = useStyles();
   const users = useSelector((state) => state.UsersReducer);
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const schema = yup.object().shape({
     category: yup.string().required("Campo obrigatório"),
@@ -51,48 +53,18 @@ export const RegisterTournament = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    dispatch(updateIsLoggedThunk());
-  }, []);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  // const [tournamentName, setTournamentName] = useState("");
-  // const [teamsSize, setTeamsSize] = useState("");
-  // const [dataTorneio, setDataTorneio] = useState("");
-
-  // const handleDate = (event) => {
-  //   setDataTorneio(event.target.value);
-  // };
-
-  // const handleTournamentName = (event) => {
-  //   setTournamentName(event.target.value);
-  // };
-
-  // const handleTeamsSize = (event) => {
-  //   setTeamsSize(event.target.value);
-  // };
-
-  // const handleRegisterTournament = (event) => {
-  //   const tournamentData = {
-  //     game: tournamentName,
-  //     teamsSize: Number(teamsSize),
-  //     teamsId: [],
-  //     inGame: [],
-  //     matches: [],
-  //     status: "",
-  //     deadline: dataTorneio,
-  //     userId: Number(
-  //       JSON.parse(window.localStorage.getItem("users")).loggedUser.user.sub
-  //     ),
-  //   };
-  //   dispatch(registerTournamentThunk(tournamentData));
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleForm = (formData) => {
     console.log(formData);
 
     if (IsValidToken()) {
-      console.log(newTournament);
-
       const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
         .users.id;
 
@@ -114,52 +86,56 @@ export const RegisterTournament = () => {
 
   return (
     <Box>
-      <RegisterTournamentPopup></RegisterTournamentPopup>
-      {/* <form
-        className={classes.formRegister}
-        onSubmit={handleSubmit(handleForm)}
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Criar Torneio
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.dialogRoot,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.dialogConteiner,
+          },
+        }}
       >
-        <Box className={classes.formInfo}>
-          <Typography
-            className={classes.labelCadastro}
-            component="h3"
-            variant="h3"
-          >
-            Cadastro de Campeonato
-          </Typography>
-        </Box>
-        <Box className={classes.inputArea}>
-          <Box className={classes.inputField}>
-            <TextField
-              className={classes.input}
-              variant="outlined"
-              label="Titulo"
-              name="title"
-              margin="dense"
-              type="string"
-              inputRef={register}
-              error={!!errors.title}
-              helperText={errors.title?.message}
-            ></TextField>
-          </Box>
-          <Box className={classes.inputFieldRow}>
-            <TextField
-              className={classes.input}
-              multiline
-              rows={2}
-              rowsMax={20}
-              variant="outlined"
-              label="
-        Informações"
-              name="info"
-              margin="dense"
-              type="string"
-              inputRef={register}
-              error={!!errors.info}
-              helperText={errors.info?.message}
-            />
-          </Box>
-          <FormControl className={classes.select}>
+        <DialogTitle id="form-dialog-title">Registrar Torneio</DialogTitle>
+
+        <DialogContent>
+          <form onSubmit={handleSubmit(handleForm)}>
+            <Box>
+              <TextField
+                variant="outlined"
+                label="Titulo"
+                name="title"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.title}
+                helperText={errors.title?.message}
+              />
+            </Box>
+            <Box>
+              <TextField
+                multiline
+                rows={2}
+                rowsMax={20}
+                variant="outlined"
+                label="Informações"
+                name="info"
+                margin="dense"
+                type="string"
+                inputRef={register}
+                error={!!errors.info}
+                helperText={errors.info?.message}
+              />
+            </Box>
+            {/* <FormControl> */}
             <InputLabel
               variant="outlined"
               margin="dense"
@@ -190,8 +166,8 @@ export const RegisterTournament = () => {
             <FormHelperText style={{ color: "red" }}>
               {errors.numberOfTeams?.message}
             </FormHelperText>
-          </FormControl>
-          <FormControl className={classes.select}>
+            {/* </FormControl> */}
+            {/* <FormControl> */}
             <InputLabel
               variant="outlined"
               margin="dense"
@@ -199,7 +175,7 @@ export const RegisterTournament = () => {
               error={!!errors.teamSize}
               id="teamSize"
             >
-              Jogadores por Equipe(max)
+              Jogadores por Equipe (max)
             </InputLabel>
             <Select
               error={!!errors.teamSize}
@@ -223,8 +199,8 @@ export const RegisterTournament = () => {
             <FormHelperText style={{ color: "red" }}>
               {errors.teamSize?.message}
             </FormHelperText>
-          </FormControl>
-          <FormControl className={classes.select}>
+            {/* </FormControl> */}
+            {/* <FormControl> */}
             <InputLabel
               variant="outlined"
               margin="dense"
@@ -254,15 +230,27 @@ export const RegisterTournament = () => {
             <FormHelperText style={{ color: "red" }}>
               {errors.category?.message}
             </FormHelperText>
-          </FormControl>
-        </Box>
-        <Box className={classes.formBottom}>
+            {/* </FormControl> */}
+          </form>
+        </DialogContent>
+
+        <DialogActions>
           <Button
-            type="submit"
-            className={classes.registerButton}
+            // className={classes.loginButton}
             variant="outlined"
+            color="secondary"
+            size="small"
+            onClick={handleClose}
           >
-            Cadastrar Torneio
+            Fechar
+          </Button>
+          <Button
+            // className={classes.loginButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          >
+            Criar
           </Button>
           <div className={classes.feedbackMessage}>
             {registerSuccess ? (
@@ -275,8 +263,8 @@ export const RegisterTournament = () => {
               </h2>
             )}
           </div>
-        </Box>
-      </form> */}
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
