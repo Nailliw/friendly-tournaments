@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Box, Paper } from "@material-ui/core";
+import { Button, Paper ,Box } from "@material-ui/core";
+import 'fontsource-roboto';
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -14,15 +15,18 @@ import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
-import "./navigationBar.css";
+import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
 import { useHistory } from "react-router-dom";
+import { IsValidToken } from '../IsValidToken/index'
 
 export default function NavigationBar() {
+  const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const [openMenu,setOpenMenu] = useState(false);
+  const [isLogged,setisLogged] = useState(IsValidToken());
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,12 +37,7 @@ export default function NavigationBar() {
     setSelectedValue(value);
   };
 
-  const useStyles = makeStyles((theme) => ({
-    avatar: {
-      backgroundColor: blue[100],
-      color: blue[600],
-    },
-  }));
+  
 
   function SimpleDialog(props) {
     const classes = useStyles();
@@ -84,18 +83,30 @@ export default function NavigationBar() {
   };
 
   return (
-    <div id="container">
-      <div>Logo</div>
-      <div id="buttons">
+    <Box component="div" className={classes.navBarContainer}>
+
+      <Box component="div" className={classes.navBarLeft}>
+      <Box component="div" className={classes.logo}>
+      <div onClick={() => history.push("/")}>Logo</div>
+      </Box>
+      <Box component="div" className={classes.buttonsLeft}>
+      <Typography variant="button" onClick={() => history.push("/tournaments")} className={classes.buttons}>Tournaments</Typography>
+      <Typography variant="button" onClick={() => history.push("/teams")} className={classes.buttons}>Times</Typography>
+      </Box>
+      </Box>
+
+      <Box component="div" className={classes.navBarRight}>
+      <Box component="div" className={classes.buttonsRight}>
         <Button
           variant="contained"
           color="secondary"
           size="small"
           onClick={handleClickOpen}
+          className={classes.buttons}
         >
           Entrar
         </Button>
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.buttons}>
           Registre-se
         </Button>
         <SimpleDialog
@@ -103,10 +114,12 @@ export default function NavigationBar() {
           open={open}
           onClose={handleClose}
         />
-      </div>
-      <div id="menu">
-        <CustonMenu name1="Ver Prefil" name2="Deslogar" />
-      </div>
-    </div>
+      </Box>
+      <Box component="div" className={classes.menu}>
+       {isLogged && <CustonMenu name1="Ver Prefil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" />}
+      </Box>
+    </Box>
+    
+    </Box>
   );
 }
