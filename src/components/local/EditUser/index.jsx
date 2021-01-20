@@ -1,29 +1,37 @@
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import {
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Card,
   Typography,
   CardContent,
   CardHeader,
   FormControl,
 } from "@material-ui/core";
-import { useStyles } from "./styles";
-import { updateUserThunk } from "../../../store/modules/users/thunk";
+import TeamInvite from "./MemberOfTeams/TeamInvite";
 import { useState, useEffect } from "react";
-
+import { useStyles } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { updateUserThunk } from "../../../store/modules/users/thunk";
+import { IsValidToken } from "../../global/IsValidToken";
 
 const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
   const [open, setOpen] = useState(false);
+  const [validOwner, setValidOwner] = useState(false);
+  const loggedUser = JSON.parse(window.localStorage.getItem("users"));
+  let { userID } = useParams();
+
   const dispatch = useDispatch();
   const classes = useStyles();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -50,6 +58,14 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    if (IsValidToken(loggedUser?.loggedUser.token)) {
+      if (loggedUser?.loggedUser.users.id === Number(userID)) {
+        setValidOwner(true);
+      }
+    }
+  }, []);
+
   return (
     <>
       <Card className={classes.userRoot}>
@@ -57,10 +73,14 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
         <CardContent>
           <Typography variant="body2">Email: {email}</Typography>
         </CardContent>
+        {validOwner === true ? (
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <EditIcon />
+          </Button>
+        ) : (
+          <div></div>
+        )}
 
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          <EditIcon />
-        </Button>
         <Dialog
           open={open}
           onClose={handleClose}
@@ -72,6 +92,7 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
               <FormControl>
                 <div>
                   <TextField
+                    className={classes.formUserID}
                     autoFocus
                     name="id"
                     margin="dense"
@@ -143,16 +164,19 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
           </DialogContent>
         </Dialog>
       </Card>
-
-      <Card>
-        <CardContent>
-          <Typography variant="body2">
-            Fazer um Card pros times que estão invitando e dar a opção que
-            entrar pro time
-            <div>Id dos times que deram invite = {invites}</div>
-          </Typography>
-        </CardContent>
-      </Card>
+      {validOwner === true ? (
+        <Card className={classes.userRoot}>
+          <CardContent>
+            <div className={classes.cardInviteContainer}>
+              {invites?.map((id) => (
+                <TeamInvite key={id} teamId={id} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <span></span>
+      )}
     </>
   );
 };

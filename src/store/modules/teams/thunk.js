@@ -75,3 +75,22 @@ export const updateTeamListThunk = () => {
       });
   };
 };
+
+export const getFilteredTeamListThunk = (idTeam) => {
+  return (dispatch, getState) => {
+    let teams = getState().TeamsReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
+
+    api
+      .get(`/teams?${idTeam}`, authToken)
+      .then((res) => {
+        teams = { ...teams, teamsList: res.data };
+        console.log(teams);
+        dispatch(updateTeams(teams));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};

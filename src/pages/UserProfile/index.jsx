@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
-import axios from "axios";
 import EditUser from "../../components/local/EditUser/index";
 import MemberOfTeams from "../../components/local/EditUser/MemberOfTeams";
+import { useParams } from "react-router-dom";
+import { IsValidToken } from "../../components/global/IsValidToken";
+import { IsValidState } from "../../components/global/IsValidState";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserThunk } from "../../store/modules/users/thunk";
+
+import { updateUsersListThunk } from "../../store/modules/users/thunk";
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -31,25 +35,29 @@ function TabPanel(props) {
   );
 }
 
-const URL_BASE = JSON.parse(window.localStorage.getItem("users"));
-
 export const UserProfile = () => {
-  const [personalinfo, setPersonalinfo] = useState(URL_BASE.loggedUser.users);
-  const userData = useSelector((state) => state.loginUserThunk);
-  console.log("userData", userData);
+  const [personalinfo, setPersonalinfo] = useState([]);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.UsersReducer);
+  const { userID } = useParams();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const getPersonalInfo = () => {
-    axios.get(URL_BASE).then((body) => {
-      setPersonalinfo(body.data);
-    });
-  };
 
-  useEffect(getPersonalInfo, []);
-
+  useEffect(() => {
+    dispatch(updateUsersListThunk());
+  }, []);
+  useEffect(() => {
+    if (IsValidState(users.usersList)) {
+      setPersonalinfo(
+        users.usersList.filter((item) => {
+          return item.id === Number(userID);
+        })[0]
+      );
+    }
+  }, [users]);
   return (
     <div>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>

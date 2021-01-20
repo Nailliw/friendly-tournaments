@@ -1,32 +1,27 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TeamCard from "./TeamCard";
 
-const URL_BASE = "http://localhost:3001/";
+import { useDispatch, useSelector } from "react-redux";
+import { getFilteredTeamListThunk } from "../../../../store/modules/teams/thunk";
+import { useParams } from "react-router-dom";
 
 const MemberOfTeams = ({ data }) => {
-  const [teamList, setTeamList] = useState([]);
+  const dispatch = useDispatch();
 
-  const getTeamsList = () => {
-    let stringTeam = `teams?`;
-    for (let index = 0; index < data.memberOfTeams.length; index++) {
-      stringTeam = stringTeam + `&id=${data.memberOfTeams[index]}`;
+  useEffect(() => {
+    let teamList = "";
+    function getQuery(item) {
+      teamList = teamList + `&id=${item}`;
     }
-    axios.get(`${URL_BASE}${stringTeam}`).then((body) => {
-      setTeamList(body.data);
-    });
-  };
-  console.log(data);
-  useEffect(getTeamsList, []);
+    data.memberOfTeams.forEach(getQuery);
+
+    dispatch(getFilteredTeamListThunk(teamList));
+  }, []);
 
   return (
     <div>
-      <TeamCard
-        memberOfTeams={data.memberOfTeams}
-        userName={data.firstName}
-        userId={data.id}
-        list={teamList}
-      />
+      {" "}
+      <TeamCard userId={data.id} memberOfTeams={data.memberOfTeams} />
     </div>
   );
 };

@@ -95,13 +95,20 @@ export const registerUserThunk = (userData, setError, setRegisterSucess) => {
 export const updateUserThunk = (userId, userData) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+
+    let { loggedUser } =
+      JSON.parse(window.localStorage.getItem("users")) || null;
+    let authToken = loggedUser?.authToken;
 
     api
       .patch(`/users/${userId}`, userData, authToken)
       .then((res) => {
         console.log(res);
+
+        users = { ...users, loggedUser: { ...loggedUser, users: res.data } };
+
+        window.localStorage.setItem("users", JSON.stringify(users));
+
         dispatch(updateUsers(users));
       })
       .catch((err) => {
