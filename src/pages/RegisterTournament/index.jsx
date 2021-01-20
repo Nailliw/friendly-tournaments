@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { registerTournamentThunk } from "../../store/modules/tournaments/thunk";
+import { RegisterTournamentPopup } from "../../components/global/Register/Tournament/index";
 
 import { useStyles } from "./style/styles";
 
@@ -107,7 +108,8 @@ export const RegisterTournament = () => {
 
   return (
     <Box>
-      <form
+      <RegisterTournamentPopup></RegisterTournamentPopup>
+      {/* <form
         className={classes.formRegister}
         onSubmit={handleSubmit(handleForm)}
       >
@@ -268,7 +270,7 @@ export const RegisterTournament = () => {
             )}
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };

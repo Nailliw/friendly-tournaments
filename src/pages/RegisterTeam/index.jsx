@@ -19,6 +19,8 @@ import { updateUsersListThunk } from "../../store/modules/users/thunk";
 import { IsValidToken } from "../../components/global/IsValidToken";
 import { useStyles } from "./style/styles";
 
+import { RegisterTeamPopup } from "../../components/global/Register/Team/index";
+
 export const RegisterTeam = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.UsersReducer);
@@ -55,7 +57,8 @@ export const RegisterTeam = () => {
   }, []);
   return (
     <Box>
-      <form
+      <RegisterTeamPopup></RegisterTeamPopup>
+      {/* <form
         className={classes.formRegister}
         onSubmit={handleSubmit(handleForm)}
       >
@@ -118,7 +121,7 @@ export const RegisterTeam = () => {
             )}
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };

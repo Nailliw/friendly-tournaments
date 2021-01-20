@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   TextField,
+  FormControl,
   Dialog,
   DialogActions,
   DialogContent,
@@ -67,62 +68,63 @@ export const LoginPopup = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
-        className={classes.dialogStyle}
-        // className={classes.formLogin}
-        // onSubmit={handleSubmit(handleForm)}
       >
-        <form className={classes.formLogin} onSubmit={handleSubmit(handleForm)}>
-          <Box className={classes.inputArea}>
-            <Box className={classes.inputField}>
-              <TextField
-                className={classes.input}
+        <DialogContent>
+          <form onSubmit={handleSubmit(handleForm)}>
+            <FormControl>
+              <Box>
+                <TextField
+                  autoFocus
+                  variant="outlined"
+                  label="Email"
+                  name="email"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  fullWidth
+                />
+              </Box>
+              <Box>
+                <TextField
+                  autoFocus
+                  variant="outlined"
+                  label="Senha"
+                  name="password"
+                  margin="dense"
+                  inputRef={register}
+                  type="password"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  fullWidth
+                />
+              </Box>
+            </FormControl>
+
+            <DialogActions>
+              <Button
+                className={classes.loginButton}
+                type="submit"
                 variant="outlined"
-                label="Email"
-                name="email"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            </Box>
-            <Box className={classes.inputField}>
-              <TextField
-                className={classes.input}
+              >
+                Logar
+              </Button>
+              <Button
+                className={classes.loginButton}
                 variant="outlined"
-                label="Senha"
-                name="password"
-                margin="dense"
-                inputRef={register}
-                type="password"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-            </Box>
-          </Box>
-          {/* <DialogActions className={classes.formBottom}>
-            
-            <Button
-              className={classes.loginButton}
-              type="submit"
-              variant="outlined"
-            >
-              Logar
-            </Button>
-            <Button
-              className={classes.loginButton}
-              variant="outlined"
-              onClick={handleClose}
-            >
-              Fechar
-            </Button>
-            <div className={classes.feedbackMessage}>
-              <h2 style={{ color: "red", textAlign: "center" }}>
-                {errors.userLogin?.message}
-              </h2>
-            </div>
-          </DialogActions> */}
-        </form>
+                onClick={handleClose}
+              >
+                Fechar
+              </Button>
+              <div className={classes.feedbackMessage}>
+                <h2 style={{ color: "red", textAlign: "center" }}>
+                  {errors.userLogin?.message}
+                </h2>
+              </div>
+            </DialogActions>
+          </form>
+        </DialogContent>
       </Dialog>
     </Box>
   );
