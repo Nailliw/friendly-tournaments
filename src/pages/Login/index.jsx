@@ -14,30 +14,33 @@ import { useHistory } from "react-router-dom";
 
 import { useStyles } from "./styles/styles";
 
+import { LoginPopup } from "../../components/global/Login/index";
+
 export const Login = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const classes = useStyles();
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  // const classes = useStyles();
 
-  const users = useSelector((state) => state.UsersReducer);
+  // const users = useSelector((state) => state.UsersReducer);
 
-  const schema = yup.object().shape({
-    email: yup.string().email().required("Campo obrigatório"),
-    password: yup.string().required("Campo obrigatório"),
-  });
+  // const schema = yup.object().shape({
+  //   email: yup.string().email().required("Campo obrigatório"),
+  //   password: yup.string().required("Campo obrigatório"),
+  // });
 
-  const { register, handleSubmit, errors, setError } = useForm({
-    resolver: yupResolver(schema),
-  });
+  // const { register, handleSubmit, errors, setError } = useForm({
+  //   resolver: yupResolver(schema),
+  // });
 
-  const handleForm = (loginData) => {
-    console.log(loginData);
-    dispatch(loginUserThunk(loginData, setError));
-  };
+  // const handleForm = (loginData) => {
+  //   console.log(loginData);
+  //   dispatch(loginUserThunk(loginData, setError));
+  // };
 
   return (
     <Box>
-      <form className={classes.formLogin} onSubmit={handleSubmit(handleForm)}>
+      <LoginPopup />
+      {/* <form className={classes.formLogin} onSubmit={handleSubmit(handleForm)}>
         <Box className={classes.inputArea}>
           <Box className={classes.inputField}>
             <TextField
@@ -68,7 +71,7 @@ export const Login = () => {
         </Box>
         <Box className={classes.formBottom}>
           {/*button area*/}
-          <Button
+      {/* <Button
             className={classes.loginButton}
             type="submit"
             variant="outlined"
@@ -81,7 +84,7 @@ export const Login = () => {
             </h2>
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };
