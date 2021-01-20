@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { registerTeamThunk } from "../../store/modules/teams/thunk";
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 import { updateUsersListThunk } from "../../store/modules/users/thunk";
 import { IsValidToken } from "../../components/global/IsValidToken";
 import { useStyles } from "./style/styles";
@@ -53,8 +54,10 @@ export const RegisterTeam = () => {
   };
 
   useEffect(() => {
+    dispatch(updateIsLoggedThunk());
     dispatch(updateUsersListThunk());
   }, []);
+
   return (
     <Box>
       <RegisterTeamPopup></RegisterTeamPopup>

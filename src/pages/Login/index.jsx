@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   loginUserThunk,
   updateUsersListThunk,
+  updateIsLoggedThunk,
 } from "../../store/modules/users/thunk";
 
 import { useForm } from "react-hook-form";
@@ -17,6 +18,12 @@ import { useStyles } from "./styles/styles";
 import { LoginPopup } from "../../components/global/Login/index";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+  }, []);
+
   // const dispatch = useDispatch();
   // const history = useHistory();
   // const classes = useStyles();
