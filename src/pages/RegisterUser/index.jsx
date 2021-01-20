@@ -20,6 +20,8 @@ import { registerUserThunk } from "../../store/modules/users/thunk";
 
 import { useStyles } from "./style/styles";
 
+import { RegisterUserPopup } from "../../components/global/Register/User/index";
+
 export const RegisterUser = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -73,12 +75,13 @@ export const RegisterUser = () => {
   }, [users]);
   return (
     <Box>
-      <form
+      <RegisterUserPopup></RegisterUserPopup>
+      {/* <form
         className={classes.formRegister}
         onSubmit={handleSubmit(handleForm)}
       >
         <Box className={classes.formInfo}>
-          {/* form info */}
+          
           <Typography
             className={classes.labelCadastro}
             component="h3"
@@ -203,7 +206,7 @@ export const RegisterUser = () => {
             )}
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };
