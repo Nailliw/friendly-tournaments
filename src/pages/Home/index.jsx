@@ -45,6 +45,7 @@ export const Home = (props) => {
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=3")} className={classes.imgGame}><img src={category3} alt="Stret Fiter" width="100px" height="50px"/></Paper>
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=4")} className={classes.imgGame}><img src={category4} alt="CS.GO" width="100px" height="50px"/></Paper>
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=5")} className={classes.imgGame}><img src={category5} alt="LOL" width="100px" height="50px"/></Paper>
+          
         </Box>
 
       </Box>
