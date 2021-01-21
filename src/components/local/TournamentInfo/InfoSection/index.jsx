@@ -27,16 +27,16 @@ export const InfoSection = ({ info, gameName, teamsSize, tournamentId }) => {
             <Chip
               label={gameName}
               clickable
-              color="secondary"
-              variant="outlined"
+              color="default"
+              variant="default"
               // size="small"
             />
             <Chip
               label={`${teamsSize} v ${teamsSize}`}
               clickable
-              color="secondary"
-              variant="outlined"
-              // size="small"
+              color="default"
+              variant="default"
+              size="small"
             />
           </Box>
         </Box>

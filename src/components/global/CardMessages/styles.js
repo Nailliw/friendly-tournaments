@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   cardMessages: {
-    width: "80%",
+    width: "95%",
     margin: "1% auto",
     padding: ".5%",
     border: "1px solid black",

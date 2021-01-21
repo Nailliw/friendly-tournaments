@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { updateIsLoggedThunk } from '../../../store/modules/users/thunk'
+import { useSelector, useDispatch } from "react-redux";
+import { updateIsLoggedThunk, logoutThunk } from "../../../store/modules/users/thunk";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Paper ,Box } from "@material-ui/core";
-import 'fontsource-roboto';
+import { Button, Paper, Box } from "@material-ui/core";
+import "fontsource-roboto";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,9 +20,11 @@ import { blue } from "@material-ui/core/colors";
 import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
 import { useHistory } from "react-router-dom";
-import { IsValidToken } from '../IsValidToken/index'
-import { LoginPopup } from '../Login/index'
-import { RegisterUserPopup } from '../Register/User/index'
+import { IsValidToken } from "../IsValidToken/index";
+import { LoginPopup } from "../Login/index";
+import { RegisterUserPopup } from "../Register/User/index";
+import { RegisterTeamPopup } from "../Register/Team/index";
+import { RegisterTournamentPopup } from "../Register/Tournament/index";
 
 export default function NavigationBar() {
   const classes = useStyles();
@@ -32,8 +34,7 @@ export default function NavigationBar() {
   const state = useSelector((state) => state);
   const isLogged = state.UsersReducer.isLogged;
   const dispatch = useDispatch();
-
-  console.log(isLogged)
+  const loggedUserId = JSON.parse(window.localStorage.getItem("users"))
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,8 +44,6 @@ export default function NavigationBar() {
     setOpen(false);
     setSelectedValue(value);
   };
-
-  
 
   function SimpleDialog(props) {
     const classes = useStyles();
@@ -92,31 +91,66 @@ export default function NavigationBar() {
   const handleLoggout = () => {
     localStorage.clear();
     dispatch(updateIsLoggedThunk());
+    dispatch(logoutThunk());
   };
 
   return (
     <Box component="div" className={classes.navBarContainer}>
-
       <Box component="div" className={classes.navBarLeft}>
-      <Box component="div" className={classes.logo}>
-      <div onClick={() => history.push("/")}>Logo</div>
-      </Box>
-      <Box component="div" className={classes.buttonsLeft}>
-      <Typography variant="button" onClick={() => history.push("/tournaments")} className={classes.buttons}>Tournaments</Typography>
-      <Typography variant="button" onClick={() => history.push("/teams")} className={classes.buttons}>Times</Typography>
-      </Box>
+        <Box component="div" className={classes.logo}>
+          <div onClick={() => history.push("/")}>Logo</div>
+        </Box>
+        <Box component="div" className={classes.buttonsLeft}>
+          <Typography
+            variant="button"
+            onClick={() => history.push("/tournaments")}
+            className={classes.buttons}
+          >
+            Tournaments
+          </Typography>
+          <Typography
+            variant="button"
+            onClick={() => history.push("/teams")}
+            className={classes.buttons}
+          >
+            Times
+          </Typography>
+        </Box>
       </Box>
 
       <Box component="div" className={classes.navBarRight}>
-      <Box component="div" className={classes.buttonsRight}>
-      <Box component="div" className={classes.buttons}>{LoginPopup()}</Box>       
-      <Box component="div" className={classes.buttons}>{RegisterUserPopup()}</Box>          
-      </Box>      
-      <Box component="div" className={classes.menu}>      
-       {isLogged && <CustonMenu name1="Ver Perfil" onClick1={() => history.push("/users/:userID")} name2="Deslogar" onClick2={handleLoggout} />}
+        <Box component="div" className={classes.buttonsRight}>
+          {!isLogged ? (
+            <Box component="div" className={classes.buttons}>
+              {LoginPopup()}
+            </Box>
+          ) : (
+            <Box component="div" className={classes.buttons}>
+              {RegisterTeamPopup()}
+            </Box>
+          )}
+          {!isLogged ? (
+            <Box component="div" className={classes.buttons}>
+              {RegisterUserPopup()}
+            </Box>
+          ) : (
+            <Box component="div" className={classes.buttons}>
+              {RegisterTournamentPopup()}
+            </Box>
+          )}
+        </Box>
+        <Box component="div" className={classes.menu}>
+          {isLogged && (
+            <CustonMenu
+              name1="Perfil"
+              onClick1={() => history.push(`/users/:${loggedUserId}`)}
+              name2="Deslogar"
+              onClick2={handleLoggout}
+            />
+          )}
+        </Box>
       </Box>
-    </Box>
-    
     </Box>
   );
 }
+

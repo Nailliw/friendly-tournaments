@@ -80,11 +80,13 @@ export const CardMessages = ({ tournamentId }) => {
     }, 200);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className={classes.cardMessages}>
-        {IsValidState(tournament?.messagesList) && (
-          <div className={classes.messagesContainer}>
+        {IsValidState(tournament.messagesList) && (
+          <div id={"messagesContainer"} className={classes.messagesContainer}>
             {tournament.messagesList.map((personMessage, i) => {
               return <Message personMessage={personMessage} />;
             })}
