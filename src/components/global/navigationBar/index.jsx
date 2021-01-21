@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateIsLoggedThunk, logoutThunk } from "../../../store/modules/users/thunk";
+import {
+  updateIsLoggedThunk,
+  logoutThunk,
+} from "../../../store/modules/users/thunk";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Paper, Box } from "@material-ui/core";
@@ -25,16 +28,29 @@ import { LoginPopup } from "../Login/index";
 import { RegisterUserPopup } from "../Register/User/index";
 import { RegisterTeamPopup } from "../Register/Team/index";
 import { RegisterTournamentPopup } from "../Register/Tournament/index";
+import { IsValidState } from "../IsValidState";
 
 export default function NavigationBar() {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  const state = useSelector((state) => state);
-  const isLogged = state.UsersReducer.isLogged;
+  const isLogged = useSelector((state) => state.UsersReducer.isLogged);
   const dispatch = useDispatch();
-  const loggedUserId = JSON.parse(window.localStorage.getItem("users"))
+  const [loggedUserId, setLoggedUserId] = useState("");
+
+  useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+    console.log(loggedUserId);
+  }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      setLoggedUserId(
+        JSON.parse(window.localStorage.getItem("users")).loggedUser.users.id
+      );
+    }
+  }, [isLogged]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,6 +108,7 @@ export default function NavigationBar() {
     localStorage.clear();
     dispatch(updateIsLoggedThunk());
     dispatch(logoutThunk());
+    history.push("/");
   };
 
   return (
@@ -122,20 +139,20 @@ export default function NavigationBar() {
         <Box component="div" className={classes.buttonsRight}>
           {!isLogged ? (
             <Box component="div" className={classes.buttons}>
-              {LoginPopup()}
+              <LoginPopup />
             </Box>
           ) : (
             <Box component="div" className={classes.buttons}>
-              {RegisterTeamPopup()}
+              <RegisterTeamPopup />
             </Box>
           )}
           {!isLogged ? (
             <Box component="div" className={classes.buttons}>
-              {RegisterUserPopup()}
+              <RegisterUserPopup />
             </Box>
           ) : (
             <Box component="div" className={classes.buttons}>
-              {RegisterTournamentPopup()}
+              <RegisterTournamentPopup />
             </Box>
           )}
         </Box>
@@ -143,7 +160,7 @@ export default function NavigationBar() {
           {isLogged && (
             <CustonMenu
               name1="Perfil"
-              onClick1={() => history.push(`/users/:${loggedUserId}`)}
+              onClick1={() => history.push(`/users/${loggedUserId}`)}
               name2="Deslogar"
               onClick2={handleLoggout}
             />
@@ -153,4 +170,3 @@ export default function NavigationBar() {
     </Box>
   );
 }
-

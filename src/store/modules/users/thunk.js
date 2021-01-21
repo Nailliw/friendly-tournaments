@@ -37,10 +37,10 @@ export const loginUserThunk = (userData) => {
                 users: res.data,
               },
             };
-            console.log(users);
 
             window.localStorage.setItem("users", JSON.stringify(users));
 
+            console.log(users);
             dispatch(updateUsers(users));
           })
           .catch((err) => {
