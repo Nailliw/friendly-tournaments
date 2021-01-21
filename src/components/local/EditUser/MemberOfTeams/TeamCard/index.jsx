@@ -13,22 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import UserTournament from "../UserTournament";
 import { IsValidToken } from "../../../../global/IsValidToken";
 
-import { getTeamInfoThunk } from "../../../../../store/modules/teams/thunk";
-import { updateTeamThunk } from "../../../../../store/modules/teams/thunk";
-import { updateUsersListThunk } from "../../../../../store/modules/users/thunk";
-const containerStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  width: 300,
-};
+import { useStyles } from "../../styles";
 
-const useStyles = makeStyles(() => ({
-  noClick: {
-    "& > span": {
-      pointerEvents: "none",
-    },
-  },
-}));
+import {
+  getTeamInfoThunk,
+  updateTeamListThunk,
+  updateTeamThunk,
+} from "../../../../../store/modules/teams/thunk";
+
+import { updateUserThunk } from "../../../../../store/modules/users/thunk";
 
 const TeamCard = ({ userId, memberOfTeams }) => {
   const [anchorEl, setAnchorEl] = useState(false);
@@ -36,51 +29,61 @@ const TeamCard = ({ userId, memberOfTeams }) => {
   const { selectedTeam, teamsList } = useSelector(
     ({ TeamsReducer }) => TeamsReducer
   );
-  const dataUser = useSelector((state) => state.UsersReducer);
-  const dispatch = useDispatch();
+
   const loggedUser = JSON.parse(window.localStorage.getItem("users"));
+
   let { userID } = useParams();
-
-  console.log(memberOfTeams);
-
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  let reduced = teamsList.filter((el) => {
+    return el.playersId.includes(userId);
+  });
+
   const open = Boolean(anchorEl);
 
-  const handleToggle = () => {
+  const handleToggle = (evt) => {
+    let aux = [];
+    aux.push(Number(evt.target.dataset.teamidaux));
+    dispatch(getTeamInfoThunk(aux[0]));
     setAnchorEl(!anchorEl);
   };
 
   const handleSubmit = (evt) => {
-    //   let aux = [];
-    //   aux.push(Number(evt.target.dataset.teamid));
-    //   // let array = aux.split(",").map((el) => parseInt(el, 10));
-    //   const playersId = aux.filter((item) => item !== userId);
-    //   memberOfTeams = memberOfTeams.filter((el) => el !== parseInt(aux));
-    //   console.log(playersId);
-    //   //dispatch(updateTeamThunk(aux, { playersId }));
-    //   // dispatch(updateUserThunk(userId, { memberOfTeams }));
-    //   setAnchorEl(!anchorEl);
+    let aux = [];
+    aux.push(Number(evt.target.dataset.teamid));
+
+    const playersId = selectedTeam.playersId.filter((item) => item !== userId);
+    dispatch(updateTeamThunk(aux, { playersId }));
+
+    memberOfTeams = memberOfTeams.filter((item) => item !== aux[0]);
+
+    dispatch(updateUserThunk(userId, { memberOfTeams }));
+
+    setAnchorEl(!anchorEl);
+    dispatch(getTeamInfoThunk(aux[0]));
+    dispatch(updateTeamListThunk());
   };
 
   useEffect(() => {
-    console.log("teamsList", teamsList);
     if (IsValidToken(loggedUser?.loggedUser.token)) {
       if (loggedUser?.loggedUser.users.id === Number(userID)) {
         setValidOwner(true);
       }
     }
   }, []);
+  useEffect(() => {
+    dispatch(updateTeamListThunk());
+  }, []);
 
   return (
     <div>
-      {teamsList.map(
-        (
-          { id, teamName, playersId, tournamentsWon, tournamentsDisputed },
-          index
-        ) => {
+      <div>Times que participo</div>
+      {reduced.map(
+        ({ id, teamName, tournamentsWon, tournamentsDisputed }, index) => {
           return (
-            <div key={index} style={containerStyle}>
-              <Accordion>
+            <div key={index} className={classes.containerAccordion}>
+              <Accordion className={classes.accordionStyle}>
                 <AccordionSummary>
                   <h1>{teamName}</h1>
                 </AccordionSummary>
@@ -93,7 +96,6 @@ const TeamCard = ({ userId, memberOfTeams }) => {
                           action={
                             <Button
                               data-teamid={id}
-                              data-playersid={playersId}
                               className={classes.noClick}
                               onClick={handleSubmit}
                               color="inherit"
@@ -107,6 +109,8 @@ const TeamCard = ({ userId, memberOfTeams }) => {
                         </Alert>
                       ) : (
                         <Button
+                          data-teamidaux={id}
+                          className={classes.noClick}
                           size="large"
                           color="secondary"
                           onClick={handleToggle}
@@ -119,11 +123,13 @@ const TeamCard = ({ userId, memberOfTeams }) => {
                     <div></div>
                   )}
                 </AccordionActions>
-                <AccordionDetails>
-                  <UserTournament
-                    tournamentsDisputed={tournamentsDisputed}
-                    tournamentsWon={tournamentsWon}
-                  />
+                <AccordionDetails className={classes.accordionDetails}>
+                  <div className={classes.containerTournament}>
+                    <UserTournament
+                      tournamentsDisputed={tournamentsDisputed}
+                      tournamentsWon={tournamentsWon}
+                    />
+                  </div>
                 </AccordionDetails>
               </Accordion>
             </div>

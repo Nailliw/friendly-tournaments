@@ -49,7 +49,9 @@ export const updateTeamThunk = (idTeam, teamData) => {
     api
       .patch(`/teams/${idTeam}`, teamData, authToken)
       .then((res) => {
-        console.log(res);
+        teams = { ...teams, teamsList: res.data };
+        console.log(teams);
+        dispatch(updateTeams(teams));
       })
       .catch((err) => {
         console.log(err.response);

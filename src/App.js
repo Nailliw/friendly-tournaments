@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Routes />
     </>
   );

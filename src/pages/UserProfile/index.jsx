@@ -6,8 +6,9 @@ import { useParams } from "react-router-dom";
 import { IsValidToken } from "../../components/global/IsValidToken";
 import { IsValidState } from "../../components/global/IsValidState";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useStyles } from "./styles";
 import { updateUsersListThunk } from "../../store/modules/users/thunk";
+import TeamsOwner from "../../components/local/EditUser/TeamsOwner";
 
 function a11yProps(index) {
   return {
@@ -42,6 +43,7 @@ export const UserProfile = () => {
   const { userID } = useParams();
   const [value, setValue] = useState(0);
 
+  const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -59,20 +61,21 @@ export const UserProfile = () => {
     }
   }, [users]);
   return (
-    <div>
+    <Box>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
         Welcome, {personalinfo.nickName}
       </div>
       <div>
-        <AppBar position="static">
+        <AppBar color="transparent" position="static">
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
           >
             <Tab label="Perfil" {...a11yProps(0)} />
-            <Tab label="Teams" {...a11yProps(1)} />
-            <Tab label="Tournaments" {...a11yProps(2)} />
+            <Tab label="Times" {...a11yProps(1)} />
+            <Tab label="Gerenciar Times" {...a11yProps(2)} />
+            {/* <Tab label="Tournaments" {...a11yProps(2)} /> */}
           </Tabs>
         </AppBar>
 
@@ -92,11 +95,9 @@ export const UserProfile = () => {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          {/* Aqui é o mesmo, uma função que faça um map no personalInfo.invites e pegue os Ids
-          dos invites, com os ids consigo dar get nas infos */}
-          Aqui são os campeonatos que ele participa
+          <TeamsOwner data={personalinfo} />
         </TabPanel>
       </div>
-    </div>
+    </Box>
   );
 };
