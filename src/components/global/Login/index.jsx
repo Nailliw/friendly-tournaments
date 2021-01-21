@@ -27,6 +27,7 @@ import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 
 import { useStyles } from "./style/styles";
+import { IsValidState } from "../../global/IsValidState";
 
 export const LoginPopup = () => {
   const dispatch = useDispatch();
