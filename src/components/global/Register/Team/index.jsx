@@ -69,8 +69,14 @@ export const RegisterTeamPopup = () => {
   }, []);
 
   return (
-    <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Box style={{ height: "100%" }}>
+      <Button
+        className={classes.createTeam}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Criar Time
       </Button>
       <Dialog

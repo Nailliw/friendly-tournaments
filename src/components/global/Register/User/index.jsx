@@ -88,7 +88,13 @@ export const RegisterUserPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.createUserPop}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Cadastro de Usuario
       </Button>
       <Dialog

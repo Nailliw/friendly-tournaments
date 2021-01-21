@@ -72,18 +72,18 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
         <CardHeader title={firstName + " " + lastName} subheader={bio} />
         <CardContent>
           <Typography variant="body2">Email: {email}</Typography>
+          {validOwner === true ? (
+            <Button
+              variant="contained"
+              style={{ color: "#fff", backgroundColor: "#E99F0C" }}
+              onClick={handleClickOpen}
+            >
+              <EditIcon />
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </CardContent>
-        {validOwner === true ? (
-          <Button
-            variant="outlined"
-            style={{ backgroundColor: "#E99F0C" }}
-            onClick={handleClickOpen}
-          >
-            <EditIcon />
-          </Button>
-        ) : (
-          <div></div>
-        )}
 
         <Dialog
           open={open}

@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core/";
 
 import { useState, useEffect } from "react";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -84,7 +84,13 @@ export const RegisterTournamentPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.createtournament}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Criar Torneio
       </Button>
       <Dialog

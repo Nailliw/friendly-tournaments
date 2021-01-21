@@ -61,7 +61,7 @@ export const UserProfile = () => {
     }
   }, [users]);
   return (
-    <Box>
+    <Box style={{ width: "100%" }}>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
         Welcome, {personalinfo.nickName}
       </div>
@@ -71,6 +71,12 @@ export const UserProfile = () => {
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
+            className={classes.indicator}
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "#F3A712",
+              },
+            }}
           >
             <Tab label="Perfil" {...a11yProps(0)} />
             <Tab label="Times" {...a11yProps(1)} />
