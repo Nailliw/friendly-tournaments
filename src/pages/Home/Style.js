@@ -12,7 +12,7 @@ BackgroundImage: {
   position: "absolute",
   zIndex: "-1",
   width: "100%",
-  height: "70%",
+  height: "73%",
 },
 
 body: {
@@ -21,20 +21,18 @@ body: {
   position: "absolute",
   justifyContent: "center",
   alignItems: "center",
-  left: "50%",
-  top: "50%",
-  transform: "translate(-50%, -70%)",
   width: "100%",
-  height: "60%",
+  height: "70%",
 },
 
 text: {
   position: "relative",
+  textAlign: "center",
 },
 
 buttonBody: {
   position:"relative",
-  top: "30%"
+  top: "10%"
 },
 
 footer: {
@@ -44,7 +42,9 @@ footer: {
   position: "absolute",
   bottom: "0px",
   width: "100%",
-  height: "30%",
+  height: "20%",
+  justifyContent: "center",
+  alignItems: "center",
 },
 
 imgGame: {
@@ -52,6 +52,9 @@ imgGame: {
   backgroundColor: "#3d3e43",
   display: 'flex',
   flexWrap: 'wrap',
+  "&:hover": {
+    cursor:"pointer",
+  },
 },
 
 containerImg: {
