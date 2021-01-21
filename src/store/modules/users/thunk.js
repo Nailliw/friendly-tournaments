@@ -103,7 +103,6 @@ export const updateUserThunk = (userId, userData) => {
 
     let { loggedUser } =
       JSON.parse(window.localStorage.getItem("users")) || null;
-
     let authToken = loggedUser?.authToken;
 
     api
