@@ -14,14 +14,14 @@ navBarLeft: {
 
 navBarRight: {
   position: "relative",
-  left: "55%",
+  left: "60%",
   display: "flex",
   flexDirection: "row",
 },
 
 buttonsLeft: {
   position: "relative",
-  top: "20%",
+  top: "19%",
   margin: "3%",
 },
 
@@ -34,18 +34,28 @@ buttonsRight: {
 
 logo: {
   position: "relative",
-  top: "35%",
+  top: "34%",
+  "&:hover": {
+    cursor:"pointer",
+  },
 },
 
 menu: {
   position: "relative",
-  top: "15%",
+  "&:hover": {
+    cursor:"pointer",
+  },
 },
 
 buttons: {
-  marginRight: "3px",
-  marginLeft: "3px",
+  marginRight: "8px",
+  marginLeft: "8px", 
+  "&:hover": {
+    cursor:"pointer",
+  },
 },
+
+
 
 avatar: {
   backgroundColor: "blue[100]",

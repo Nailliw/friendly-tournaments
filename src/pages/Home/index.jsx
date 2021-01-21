@@ -24,8 +24,8 @@ export const Home = (props) => {
 
       <Box component="div" className={classes.body}>       
         <Box component="div" className={classes.text}>
-        <Typography variant="h2">Find your game Tournament here!</Typography>
-        <Typography variant="h5">Over 100 tournament & event waiting you to join in</Typography> 
+        <Typography variant="h1">Find your game Tournament here!</Typography>
+        <Typography variant="h4">Over 100 tournament & event waiting you to join in</Typography> 
         </Box> 
         <Box component="div" className={classes.buttonBody}> 
         <Button
