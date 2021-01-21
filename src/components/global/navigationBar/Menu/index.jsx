@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { purple } from '@material-ui/core/colors';
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,13 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     color:" white",
-    border: "1px solid white"
   }
 }));
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
     backgroundColor: '#2B2C31', 
   },
 })((props) => (
@@ -41,7 +42,6 @@ const StyledMenu = withStyles({
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
         color: theme.palette.common.white,
       },
@@ -65,16 +65,17 @@ export default function CustomizedMenus(props) {
 
   return (
     <div>
-      <Button
-      className={classes.naviBarMenuButon}
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Menu
-      </Button>
+      <IconButton
+	aria-controls="fade-menu"
+	aria-haspopup="true"
+	onClick={handleClick}
+	edge="start"
+	className={classes.menuButton}
+	color="primary"
+	aria-label="menu"
+>
+	<MenuIcon color="primary" />
+</IconButton>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -83,14 +84,14 @@ export default function CustomizedMenus(props) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-        <Button variant="outlined" className={classes.text} onClick={props.onClick1}>
+        <Typography variant="button" className={classes.text} onClick={props.onClick1}>
           {props.name1}
-        </Button>
+        </Typography>
         </StyledMenuItem>
         <StyledMenuItem>
-        <Button variant="outlined" className={classes.text} onClick={props.onClick2}>
+        <Typography variant="button" className={classes.text} onClick={props.onClick2}>
           {props.name2}
-        </Button> 
+        </Typography> 
         </StyledMenuItem>
       </StyledMenu>
     </div>

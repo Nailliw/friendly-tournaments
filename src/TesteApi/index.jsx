@@ -4,8 +4,12 @@ import { TeamIsEligible } from "../components/local/TournamentInfo/TeamIsEligibl
 import { CardMessages } from "../components/global/CardMessages";
 import { Message } from "../components/global/CardMessages/Message";
 import { EditTournament } from "../components/local/EditTournament";
+import { logoutThunk, loginUserThunk } from "../store/modules/users/thunk";
+import { useDispatch, useSelector } from "react-redux";
 
 export const TesteApi = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.UsersReducer);
   const team = {
     teamName: "LA Eagles",
     teamInfo: "League of Legends Team based in Los Angeles",
@@ -120,10 +124,21 @@ export const TesteApi = () => {
     id: 1,
   };
 
+  useEffect(() => {
+    dispatch(loginUserThunk({ email: "felipe@gmail.com", password: "123456" }));
+    setTimeout(() => {
+      dispatch(logoutThunk());
+    }, 5000);
+  }, []);
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
   return (
     <>
-      <EditTournament {...tournament} />
-      {/* <CardMessages tournamentId={2} /> */}
+      {/* <EditTournament {...tournament} /> */}
+      <CardMessages tournamentId={2} />
     </>
   );
 };

@@ -37,10 +37,10 @@ export const loginUserThunk = (userData) => {
                 users: res.data,
               },
             };
-            console.log(users);
 
             window.localStorage.setItem("users", JSON.stringify(users));
 
+            console.log(users);
             dispatch(updateUsers(users));
           })
           .catch((err) => {
@@ -171,5 +171,17 @@ export const updateIsLoggedThunk = () => {
     window.localStorage.setItem("users", JSON.stringify(users));
 
     dispatch(updateUsers(users));
+  };
+};
+
+export const logoutThunk = () => {
+  return (dispatch, getState) => {
+    let users = getState().UsersReducer;
+
+    let newUsers = { ...users, loggedUser: {} };
+    console.log(newUsers);
+
+    window.localStorage.setItem("users", JSON.stringify(newUsers));
+    dispatch(updateUsers(newUsers));
   };
 };
