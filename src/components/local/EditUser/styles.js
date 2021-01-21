@@ -24,6 +24,7 @@ export const useStyles = makeStyles(() => ({
     visibility: "hidden",
   },
   noClick: {
+    backgroundColor: "#F3A712",
     "& > span": {
       pointerEvents: "none",
     },
@@ -36,13 +37,20 @@ export const useStyles = makeStyles(() => ({
   },
   accordionStyle: {
     backgroundColor: "#353a46",
-    width: "80%",
+    width: "100%",
     color: "#fff",
     margin: "0.5rem",
+    height: "100%",
 
     "@media (max-width: 768px)": {
       fontSize: "0.5rem",
     },
+  },
+  heading: {
+    margin: "0",
+    padding: "0",
+    fontSize: "1rem",
+    fontWeight: "bold",
   },
 
   // estilos do tournament
