@@ -78,7 +78,6 @@ const TeamCard = ({ userId, memberOfTeams }) => {
 
   return (
     <div>
-      <div>Times que participo</div>
       {reduced.map(
         ({ id, teamName, tournamentsWon, tournamentsDisputed }, index) => {
           return (

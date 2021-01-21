@@ -74,7 +74,11 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
           <Typography variant="body2">Email: {email}</Typography>
         </CardContent>
         {validOwner === true ? (
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button
+            variant="outlined"
+            style={{ backgroundColor: "#E99F0C" }}
+            onClick={handleClickOpen}
+          >
             <EditIcon />
           </Button>
         ) : (
@@ -154,28 +158,45 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
                 />
               </FormControl>
               <p style={{ color: "red" }}>{errors.firstName?.message}</p>
-              <Button onClick={handleClose} color="primary">
+              <Button
+                style={{ marginRight: "2rem", backgroundColor: "#C15FFF" }}
+                onClick={handleClose}
+                variant="contained"
+                color="secondary"
+              >
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
+              <Button type="submit" variant="contained" color="primary">
                 Edit
               </Button>
             </form>
           </DialogContent>
         </Dialog>
       </Card>
-      {validOwner === true ? (
+      {invites?.length !== 0 ? (
+        <>
+          {validOwner === true ? (
+            <Card className={classes.userRoot}>
+              <CardContent>
+                <div className={classes.cardInviteContainer}>
+                  {invites?.map((id) => (
+                    <TeamInvite key={id} teamId={id} />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <div></div>
+          )}
+        </>
+      ) : (
         <Card className={classes.userRoot}>
           <CardContent>
             <div className={classes.cardInviteContainer}>
-              {invites?.map((id) => (
-                <TeamInvite key={id} teamId={id} />
-              ))}
+              Não há convites no momento
             </div>
           </CardContent>
         </Card>
-      ) : (
-        <span></span>
       )}
     </>
   );

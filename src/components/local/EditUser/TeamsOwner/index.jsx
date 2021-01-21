@@ -28,7 +28,7 @@ const TeamsOwner = ({ data }) => {
   const open = Boolean(anchorEl);
 
   let reduced = teamsList.filter((el) => {
-    return el.userId === 1;
+    return el.userId === loggedUser?.loggedUser.users.id;
   });
 
   const handleSubmit = () => {
@@ -37,7 +37,7 @@ const TeamsOwner = ({ data }) => {
   const handleToggle = () => {
     setAnchorEl(!anchorEl);
   };
-  console.log(loggedUser.isLogged);
+
   useEffect(() => {
     if (IsValidToken()) {
       if (loggedUser?.loggedUser.users.id === Number(userID)) {
@@ -52,7 +52,7 @@ const TeamsOwner = ({ data }) => {
 
   return (
     <div>
-      {loggedUser.isLogged ? (
+      {loggedUser?.isLogged !== true ? (
         <div>
           {reduced.map(
             ({ id, teamName, tournamentsWon, tournamentsDisputed }, index) => {
@@ -95,7 +95,9 @@ const TeamsOwner = ({ data }) => {
                       </Button>
                     </AccordionActions>
                     <AccordionDetails className={classes.accordionDetails}>
-                      <div className={classes.containerTournament}></div>
+                      <div className={classes.containerTournament}>
+                        DESEJA EXCLUIR O ANIMALZINHO NOOB?
+                      </div>
                     </AccordionDetails>
                   </Accordion>
                 </div>

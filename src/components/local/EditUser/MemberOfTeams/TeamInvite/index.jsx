@@ -69,28 +69,33 @@ const TeamInvite = ({ teamId, memberOfTeams }) => {
 
   return (
     <>
-      {IsValidState(team) && (
-        <Card className={classes.inviteCard}>
-          <CardHeader title={team.teamName} subheader="Convites" />
-          <CardActions>
-            <Button
-              onClick={handleRefuse}
-              variant="contained"
-              color="secondary"
-              size="small"
-            >
-              Recusar
-            </Button>
-            <Button
-              onClick={handleAcept}
-              variant="contained"
-              color="primary"
-              size="large"
-            >
-              Aceitar
-            </Button>
-          </CardActions>
-        </Card>
+      {loggedUser.users.invites.length !== 0 ? (
+        <>
+          {IsValidState(team) && (
+            <Card className={classes.inviteCard}>
+              <CardHeader title={team.teamName} subheader="Convites" />
+              <CardActions>
+                <Button
+                  onClick={handleRefuse}
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                >
+                  Recusar
+                </Button>
+                <Button
+                  onClick={handleAcept}
+                  variant="contained"
+                  color="primary"
+                >
+                  Aceitar
+                </Button>
+              </CardActions>
+            </Card>
+          )}
+        </>
+      ) : (
+        <></>
       )}
     </>
   );

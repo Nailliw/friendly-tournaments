@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     height: "33%",
     margin: "0.1rem",
     padding: "0.5rem",
-    backgroundColor: "#3D4351",
+    backgroundColor: "#4F5669",
     color: "#fff",
   },
 }));
+// 3d4351
