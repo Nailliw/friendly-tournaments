@@ -49,7 +49,9 @@ export const updateTeamThunk = (idTeam, teamData) => {
     api
       .patch(`/teams/${idTeam}`, teamData, authToken)
       .then((res) => {
-        console.log(res);
+        teams = { ...teams, teamsList: res.data };
+        console.log(teams);
+        dispatch(updateTeams(teams));
       })
       .catch((err) => {
         console.log(err.response);
@@ -65,6 +67,25 @@ export const updateTeamListThunk = () => {
 
     api
       .get(`/teams`, authToken)
+      .then((res) => {
+        teams = { ...teams, teamsList: res.data };
+        console.log(teams);
+        dispatch(updateTeams(teams));
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
+
+export const getFilteredTeamListThunk = (idTeam) => {
+  return (dispatch, getState) => {
+    let teams = getState().TeamsReducer;
+    let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+      .authToken;
+
+    api
+      .get(`/teams?${idTeam}`, authToken)
       .then((res) => {
         teams = { ...teams, teamsList: res.data };
         console.log(teams);
