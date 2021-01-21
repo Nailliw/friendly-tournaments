@@ -26,6 +26,7 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
+    marginRight: "5%",
   },
 
   logo: {
@@ -33,13 +34,18 @@ export const useStyles = makeStyles(() => ({
   },
 
   menu: {
-    position: "relative",
-    top: "15%",
+    marginLeft: "5%",
   },
 
   buttons: {
-    marginRight: "3px",
-    marginLeft: "3px",
+    height: "80%",
+    marginRight: "3%",
+  },
+  toolbar: {
+    paddingTop: "4%",
+    "&:hover": {
+      borderBottom: "1px solid #AF5735",
+    },
   },
 
   avatar: {

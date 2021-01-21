@@ -152,4 +152,15 @@ export const useStyles = makeStyles(() => ({
       boxShadow: "0.1em 0.1em 0.2em black",
     },
   },
+  createtournament: {
+    backgroundColor: "#FF7843",
+    height: "100%",
+
+    "&:hover": {
+      backgroundColor: "#AF5735",
+    },
+    "@media(minWidth: 780px)": {
+      height: "80%",
+    },
+  },
 }));
