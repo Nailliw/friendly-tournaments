@@ -39,14 +39,20 @@ export const TournamentInfo = () => {
     teamsData,
     status,
     deadline,
+    userId,
     id,
   } = tournamentData;
-
+  console.log(tournamentData);
   const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (
     <Box component="div" className={classes.tournamentInfoRoot}>
-      <TitleHeader title={title} isLogged={isLogged} />
+      <TitleHeader
+        title={title}
+        userId={userId}
+        isLogged={isLogged}
+        tournamentOwnerId={userId}
+      />
       <StatusSection
         numberOfTeams={numberOfTeams}
         teamsSize={teamsSize}

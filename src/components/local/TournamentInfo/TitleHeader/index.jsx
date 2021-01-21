@@ -1,10 +1,23 @@
 import { useStyles } from "./styles";
-
 import { Box, Button, Typography } from "@material-ui/core";
 
-export const TitleHeader = ({ title, isLogged }) => {
+// import { IsValidToken } from "../../../global/IsValidToken";
+
+export const TitleHeader = ({ title, tournamentOwnerId, isLogged }) => {
   const classes = useStyles();
-  console.log(isLogged);
+
+  let isTournamentOwner = false;
+
+  const loggedUserId = JSON.parse(window.localStorage.getItem("users"))
+    ?.loggedUser.users.id;
+
+  // Verificação se o usuario logado é o dono do Torneio
+  if (isLogged) {
+    if (tournamentOwnerId === loggedUserId) {
+      isTournamentOwner = true;
+    }
+  }
+
   return (
     <Box component="div" className={classes.titleHeader}>
       <Box component="div" className={classes.titleContainer}>
@@ -19,19 +32,23 @@ export const TitleHeader = ({ title, isLogged }) => {
       </Box>
       <Box component="div" className={classes.editButtonContainer}>
         <Box>
-          <Button
-            color="primary"
-            variant="contained"
-            disabled={!isLogged}
-            className={classes.editButtonContainer}
-          >
-            Editar
-          </Button>
+          {isTournamentOwner && (
+            <Button
+              onClick={(e) => e}
+              color="primary"
+              variant="contained"
+              className={classes.editButtonContainer}
+            >
+              Editar
+            </Button>
+          )}
         </Box>
         <Box className={classes.signinButtonContainer}>
-          <Button color="primary" variant="contained" disabled={!isLogged}>
-            Inscrever-se
-          </Button>
+          {isLogged && (
+            <Button onClick={(e) => e} color="primary" variant="contained">
+              Inscrever-se
+            </Button>
+          )}
         </Box>
       </Box>
     </Box>

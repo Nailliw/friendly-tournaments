@@ -23,7 +23,7 @@ export const CardMessages = ({ tournamentId }) => {
   useEffect(() => {
     dispatch(updateTournamentsListThunk());
     if (IsValidToken()) {
-      console.log(JSON.parse(window.localStorage.getItem("users")));
+      // console.log(JSON.parse(window.localStorage.getItem("users")));
       setPersonName(
         JSON.parse(window.localStorage.getItem("users")).loggedUser.users
           .firstName
@@ -42,11 +42,11 @@ export const CardMessages = ({ tournamentId }) => {
   }, [tournaments]);
 
   useEffect(() => {
-    console.log(personName);
+    // console.log(personName);
   }, [personName]);
 
   useEffect(() => {
-    console.log(tournament);
+    // console.log(tournament);
   }, [tournament]);
 
   const handleNewMessage = (e) => {
@@ -67,7 +67,7 @@ export const CardMessages = ({ tournamentId }) => {
         { name: personName, message: newMessage },
       ],
     };
-    console.log(tournamentData);
+    // console.log(tournamentData);
 
     dispatch(updateTournamentThunk(tournamentId, tournamentData));
 
