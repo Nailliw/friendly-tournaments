@@ -173,3 +173,15 @@ export const updateIsLoggedThunk = () => {
     dispatch(updateUsers(users));
   };
 };
+
+export const logoutThunk = () => {
+  return (dispatch, getState) => {
+    let users = getState().UsersReducer;
+
+    let newUsers = { ...users, loggedUser: {} };
+    console.log(newUsers);
+
+    window.localStorage.setItem("users", JSON.stringify(newUsers));
+    dispatch(updateUsers(newUsers));
+  };
+};
