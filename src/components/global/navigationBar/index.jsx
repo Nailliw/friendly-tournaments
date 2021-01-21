@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateIsLoggedThunk } from "../../../store/modules/users/thunk";
+import { updateIsLoggedThunk, logoutThunk } from "../../../store/modules/users/thunk";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Paper, Box } from "@material-ui/core";
@@ -91,6 +91,7 @@ export default function NavigationBar() {
   const handleLoggout = () => {
     localStorage.clear();
     dispatch(updateIsLoggedThunk());
+    dispatch(logoutThunk());
   };
 
   return (
