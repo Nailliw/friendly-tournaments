@@ -22,6 +22,7 @@ import { Typography, AppBar } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
+import MenuMobile from "./MenuMobile/index";
 import { useHistory } from "react-router-dom";
 import { IsValidToken } from "../IsValidToken/index";
 import { LoginPopup } from "../Login/index";
@@ -29,6 +30,8 @@ import { RegisterUserPopup } from "../Register/User/index";
 import { RegisterTeamPopup } from "../Register/Team/index";
 import { RegisterTournamentPopup } from "../Register/Tournament/index";
 import { IsValidState } from "../IsValidState";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import logoImage from "../../global/assets/img/home-images/logo-design-05.jpg";
 
 export default function NavigationBar() {
   const classes = useStyles();
@@ -38,6 +41,7 @@ export default function NavigationBar() {
   const isLogged = useSelector((state) => state.UsersReducer.isLogged);
   const dispatch = useDispatch();
   const [loggedUserId, setLoggedUserId] = useState("");
+  const mobile = useMediaQuery("(min-width:768px)");
 
   useEffect(() => {
     dispatch(updateIsLoggedThunk());
@@ -114,9 +118,15 @@ export default function NavigationBar() {
   return (
     <AppBar style={{ height: "6vh", width: "100%" }}>
       <Box component="div" className={classes.navBarContainer}>
-        <div className={classes.navBarLeftSide}>
+        <Box componet="div" className={classes.navBarLeftSide}>
           <Box component="div" className={classes.logo}>
-            <div onClick={() => history.push("/")}>Logo</div>
+            <Box
+              component="img"
+              src={logoImage}
+              onClick={() => history.push("/")}
+              width="60px"
+              height="35px"
+            />
           </Box>
           <Box
             style={{ height: "100%" }}
@@ -139,39 +149,52 @@ export default function NavigationBar() {
               Times
             </Typography>
           </Box>
-        </div>
+        </Box>
 
-        <div className={classes.navBarRightSide}>
-          {!isLogged ? (
-            <Box component="div" className={classes.buttons}>
-              <LoginPopup />
+        <Box component="div" className={classes.navBarRightSide}>
+          {mobile ? (
+            <Box className={classes.desktop} component="div">
+              {!isLogged ? (
+                <Box component="div" className={classes.buttons}>
+                  <LoginPopup />
+                </Box>
+              ) : (
+                <Box component="div" className={classes.buttons}>
+                  <RegisterTeamPopup />
+                </Box>
+              )}
+              {!isLogged ? (
+                <Box component="div" className={classes.buttons}>
+                  <RegisterUserPopup />
+                </Box>
+              ) : (
+                <Box component="div" className={classes.buttons}>
+                  <RegisterTournamentPopup />
+                </Box>
+              )}
+
+              <Box component="div" className={classes.menu}>
+                {isLogged && (
+                  <CustonMenu
+                    name1="Perfil"
+                    onClick1={() => history.push(`/users/${loggedUserId}`)}
+                    name2="Deslogar"
+                    onClick2={handleLoggout}
+                  />
+                )}
+              </Box>
             </Box>
           ) : (
-            <Box component="div" className={classes.buttons}>
-              <RegisterTeamPopup />
-            </Box>
-          )}
-          {!isLogged ? (
-            <Box component="div" className={classes.buttons}>
-              <RegisterUserPopup />
-            </Box>
-          ) : (
-            <Box component="div" className={classes.buttons}>
-              <RegisterTournamentPopup />
-            </Box>
-          )}
-
-          <Box component="div" className={classes.menu}>
-            {isLogged && (
-              <CustonMenu
+            <Box component="div" className={classes.menuMobile}>
+              <MenuMobile
                 name1="Perfil"
                 onClick1={() => history.push(`/users/${loggedUserId}`)}
                 name2="Deslogar"
                 onClick2={handleLoggout}
               />
-            )}
-          </Box>
-        </div>
+            </Box>
+          )}
+        </Box>
       </Box>
     </AppBar>
   );

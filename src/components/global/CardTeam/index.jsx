@@ -1,10 +1,13 @@
-import { DeadlineClock } from "../../global/DeadlineClock";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { updateUsersListThunk } from "../../../store/modules/users/thunk";
 import { updateCategoriesListThunk } from "../../../store/modules/categories/thunk";
 import { updateTournamentsListThunk } from "../../../store/modules/tournaments/thunk";
+
 import { IsValidState } from "../../global/IsValidState";
+
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,19 +15,19 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import { useStyles } from "./styles";
-import { CardCategoryImg } from "../../global/CardCategoryImg";
-import { useHistory } from "react-router-dom";
 
 export const CardTeam = (props) => {
-  let history = useHistory();
   const classes = useStyles();
+
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const users = useSelector((state) => state.UsersReducer);
   const categories = useSelector((state) => state.CategoriesReducer);
   const tournaments = useSelector((state) => state.TournamentsReducer);
-  const [imgUrl, setImgUrl] = useState("");
-  const [categoryId, setCategoryId] = useState();
+
   const [filteredPlayers, setFilteredPlayers] = useState([]);
   const [filteredTournamentsWon, setFilteredTournamentsWon] = useState([]);
   const [
@@ -33,28 +36,24 @@ export const CardTeam = (props) => {
   ] = useState([]);
 
   useEffect(() => {
-    console.log(props.team);
     dispatch(updateCategoriesListThunk());
+
     setTimeout(() => {
       dispatch(updateTournamentsListThunk());
     }, 100);
+
     setTimeout(() => {
       dispatch(updateUsersListThunk());
     }, 200);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {}, [categories]);
-  useEffect(() => {
-    console.log(filteredPlayers);
-  }, [filteredPlayers]);
 
-  useEffect(() => {
-    console.log(filteredTournamentsWon);
-  }, [filteredTournamentsWon]);
+  useEffect(() => {}, [filteredPlayers]);
 
-  useEffect(() => {
-    console.log(filteredTournamentsDisputed);
-  }, [filteredTournamentsDisputed]);
+  useEffect(() => {}, [filteredTournamentsWon]);
+
+  useEffect(() => {}, [filteredTournamentsDisputed]);
 
   useEffect(() => {
     if (IsValidState(users.usersList)) {
@@ -67,7 +66,7 @@ export const CardTeam = (props) => {
       });
       setFilteredPlayers(newplayers);
     }
-  }, [users]);
+  }, [users, props.team.playersId]);
 
   useEffect(() => {
     if (IsValidState(tournaments.tournamentsList)) {
@@ -100,10 +99,10 @@ export const CardTeam = (props) => {
 
       setFilteredTournamentsDisputed(tournamentsDisputed);
     }
-  }, [tournaments]);
+  }, [tournaments, props.team.tournamentsDisputed, props.team.tournamentsWon]);
 
   return (
-    <Card className={classes.cardRootTournament}>
+    <Card className={classes.cardRootTournament} variant="outlined">
       <CardActionArea className={classes.cardArea}>
         <CardContent className={classes.contents}>
           <Typography
@@ -122,12 +121,8 @@ export const CardTeam = (props) => {
           >
             {props.team.teamInfo}
           </Typography>
-          <Typography
-            className={classes.teamsPlayers}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
+
+          <Box className={classes.teamsPlayers}>
             {IsValidState(filteredPlayers) && (
               <Chip
                 className={classes.playerCard}
@@ -137,14 +132,9 @@ export const CardTeam = (props) => {
                 variant="default"
               />
             )}
-          </Typography>
+          </Box>
           <hr style={{ width: "100%" }} />
-          <Typography
-            className={classes.teamsPlayers}
-            variant="body2"
-            color="textSecondary"
-            component="div"
-          >
+          <Box className={classes.teamsPlayers}>
             {IsValidState(filteredTournamentsWon) && (
               <Chip
                 className={classes.TournamentsWonCard}
@@ -154,13 +144,8 @@ export const CardTeam = (props) => {
                 variant="default"
               />
             )}
-          </Typography>
-          <Typography
-            className={classes.teamsPlayers}
-            variant="body2"
-            color="textSecondary"
-            component="div"
-          >
+          </Box>
+          <Box className={classes.teamsPlayers}>
             {IsValidState(filteredTournamentsDisputed) && (
               <Chip
                 className={classes.TournamentsDisputedCard}
@@ -170,7 +155,7 @@ export const CardTeam = (props) => {
                 variant="default"
               />
             )}
-          </Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.seeTournament}>

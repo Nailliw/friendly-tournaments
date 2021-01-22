@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-// import { IsValidToken } from "../../components/global/IsValidToken";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
