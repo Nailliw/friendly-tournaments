@@ -115,14 +115,14 @@ export const SubscribeTeam = ({ tournamentId }) => {
   }, [userTeams]);
 
   return (
-    <>
+    <Box>
       <Button
         color="primary"
         variant="contained"
         onClick={handleClickOpen}
-        startIcon={<EditIcon />}
+        endIcon={<EditIcon />}
       >
-        Inscrever
+        Inscrever Time
       </Button>
 
       {IsValidState(tournamentToSubscribe) && (
@@ -182,6 +182,6 @@ export const SubscribeTeam = ({ tournamentId }) => {
           </DialogContent>
         </Dialog>
       )}
-    </>
+    </Box>
   );
 };
