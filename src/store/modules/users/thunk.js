@@ -4,7 +4,7 @@ import { decode } from "jsonwebtoken";
 import { updateUsers } from "./actions";
 import { IsValidToken } from "../../../components/global/IsValidToken";
 
-export const loginUserThunk = (userData) => {
+export const loginUserThunk = (userData, setErrorMessage) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
     console.log(users);
@@ -12,6 +12,7 @@ export const loginUserThunk = (userData) => {
       .post("/login", userData)
       .then((res) => {
         const token = res.data.accessToken;
+        setErrorMessage("");
 
         const authToken = {
           headers: {
@@ -125,6 +126,9 @@ export const updateUserThunk = (userId, userData) => {
 export const updateUsersListThunk = () => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
+
+    users = JSON.parse(window.localStorage.getItem("users"));
+
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 

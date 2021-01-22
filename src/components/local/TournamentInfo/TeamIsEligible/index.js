@@ -25,5 +25,13 @@ export const TeamIsEligible = (teamData, tournamentData) => {
     return false;
   }
 
+  if (
+    tournamentData.teamsData.some((team) => {
+      return team.id === teamData.id;
+    })
+  ) {
+    return false;
+  }
+
   return true;
 };
