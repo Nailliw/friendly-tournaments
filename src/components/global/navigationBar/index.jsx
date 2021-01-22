@@ -31,6 +31,7 @@ import { RegisterTeamPopup } from "../Register/Team/index";
 import { RegisterTournamentPopup } from "../Register/Tournament/index";
 import { IsValidState } from "../IsValidState";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import logoImage from '../../global/assets/img/home-images/logo-design-05.jpg'
 
 export default function NavigationBar() {
   const classes = useStyles();
@@ -42,6 +43,7 @@ export default function NavigationBar() {
   const [loggedUserId, setLoggedUserId] = useState("");
   const mobile = useMediaQuery('(min-width:768px)');
 
+  
   useEffect(() => {
     dispatch(updateIsLoggedThunk());
     console.log(loggedUserId);
@@ -119,7 +121,7 @@ export default function NavigationBar() {
       <Box component="div" className={classes.navBarContainer}>
         <Box componet="div" className={classes.navBarLeftSide}>
           <Box component="div" className={classes.logo}>
-            <Box component="div" onClick={() => history.push("/")}>Logo</Box>
+            <Box component="img" src={logoImage} onClick={() => history.push("/")} width="60px" height="35px"/>
           </Box>
           <Box
             style={{ height: "100%" }}

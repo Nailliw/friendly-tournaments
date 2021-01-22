@@ -70,6 +70,10 @@ containerImg: {
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "#2b2c31",
+  "@media (max-width: 768px)": { 
+    flexDirection: "row",
+    marginRight: "7px",
+  },
 },
 
 }));
