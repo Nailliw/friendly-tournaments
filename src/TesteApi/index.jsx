@@ -140,7 +140,7 @@ export const TesteApi = () => {
     <>
       {/* <EditTournament {...tournament} /> */}
       {/* <CardMessages tournamentId={2} /> */}
-      <SubscribeTeam openDialog={true} tournamentId={6} />
+      <SubscribeTeam tournamentId={6} />
     </>
   );
 };

@@ -12,6 +12,7 @@ import {
   FormControl,
   Select,
   InputLabel,
+  Box,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 import {
@@ -30,7 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IsValidState } from "../../../global/IsValidState";
 import { TeamIsEligible } from "../../../local/TournamentInfo/TeamIsEligible";
 
-export const SubscribeTeam = ({ openDialog, tournamentId }) => {
+export const SubscribeTeam = ({ tournamentId }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.UsersReducer);
   const tournaments = useSelector((state) => state.TournamentsReducer);
@@ -64,15 +65,10 @@ export const SubscribeTeam = ({ openDialog, tournamentId }) => {
     };
     console.log(newTournament);
     dispatch(updateTournamentThunk(tournamentId, newTournament));
-    setOpen(false);
+    setOpen(true);
   };
 
   useEffect(() => {
-    if (IsValidState(openDialog)) {
-      setOpen(openDialog);
-    } else {
-      setOpen(false);
-    }
     dispatch(updateUsersListThunk());
     dispatch(updateTeamListThunk());
     dispatch(updateTournamentsListThunk());
@@ -120,6 +116,15 @@ export const SubscribeTeam = ({ openDialog, tournamentId }) => {
 
   return (
     <>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={handleClickOpen}
+        startIcon={<EditIcon />}
+      >
+        Inscrever
+      </Button>
+
       {IsValidState(tournamentToSubscribe) && (
         <Dialog
           open={open}
@@ -129,34 +134,22 @@ export const SubscribeTeam = ({ openDialog, tournamentId }) => {
           <DialogTitle id="form-dialog-title">Inscrever no Torneio</DialogTitle>
           <DialogContent>
             <form onSubmit={handleSubmit(handleForm)}>
+              {IsValidState(tournamentToSubscribe.title) && (
+                <Box className={classes.title}>
+                  {tournamentToSubscribe.title}
+                </Box>
+              )}
+              {IsValidState(tournamentToSubscribe.info) && (
+                <Box className={classes.info}>{tournamentToSubscribe.info}</Box>
+              )}
               <FormControl>
-                {IsValidState(tournamentToSubscribe.title) && (
-                  <Typography
-                    className={classes.title}
-                    gutterBottom
-                    variant="h5"
-                    component="h4"
-                  >
-                    {tournamentToSubscribe.title}
-                  </Typography>
-                )}
-                {IsValidState(tournamentToSubscribe.info) && (
-                  <Typography
-                    className={classes.title}
-                    gutterBottom
-                    variant="h5"
-                    component="h5"
-                  >
-                    {tournamentToSubscribe.info}
-                  </Typography>
-                )}
                 <InputLabel
                   variant="outlined"
                   margin="dense"
                   size="small"
                   id="userTeams"
                 >
-                  Teams
+                  Select team
                 </InputLabel>
                 <Select
                   error={!!errors.category}
@@ -172,8 +165,7 @@ export const SubscribeTeam = ({ openDialog, tournamentId }) => {
                   {userTeams.map((team) => {
                     return (
                       <option value={JSON.stringify(team)}>
-                        {team.teamName} {team.playersId.length} vs{" "}
-                        {team.playersId.length}
+                        {team.teamName}
                       </option>
                     );
                   })}
