@@ -86,20 +86,18 @@ export default function CustomizedMenus(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem className={classes.StyledMenuitem}>
+        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick1}>
           <Typography
             variant="button"
-            className={classes.text}
-            onClick={props.onClick1}
+            className={classes.text} 
           >
             {props.name1}
           </Typography>
         </StyledMenuItem>
-        <StyledMenuItem className={classes.StyledMenuitem}>
+        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick2}>
           <Typography
             variant="button"
-            className={classes.text}
-            onClick={props.onClick2}
+            className={classes.text}            
           >
             {props.name2}
           </Typography>
