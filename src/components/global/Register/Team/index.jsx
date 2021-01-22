@@ -60,7 +60,7 @@ export const RegisterTeamPopup = () => {
         userId: Number(userId),
       };
 
-      dispatch(registerTeamThunk(teamData));
+      dispatch(registerTeamThunk(teamData, setOpen));
     }
   };
 
@@ -126,8 +126,8 @@ export const RegisterTeamPopup = () => {
                   className={classes.input}
                   autoFocus
                   multiline
-                  rows={3}
-                  rowsMax={20}
+                  rows={20}
+                  rowsMax={3}
                   variant="outlined"
                   label="Informações"
                   name="teamInfo"
