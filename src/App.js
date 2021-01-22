@@ -6,6 +6,7 @@ import NavigationBar from "./components/global/navigationBar";
 const App = () => {
   return (
     <>
+      OI
       <CssBaseline />
       <NavigationBar />
       <Routes />
