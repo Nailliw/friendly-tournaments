@@ -62,7 +62,13 @@ export const LoginPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.loginbuttonstyle}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Login
       </Button>
       <Dialog
