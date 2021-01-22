@@ -4,8 +4,9 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Alert } from "@material-ui/lab";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -83,8 +84,12 @@ const TeamCard = ({ userId, memberOfTeams }) => {
           return (
             <div key={index} className={classes.containerAccordion}>
               <Accordion className={classes.accordionStyle}>
-                <AccordionSummary>
-                  <h1>{teamName}</h1>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
+                >
+                  <Typography className={classes.heading}>
+                    {teamName}
+                  </Typography>
                 </AccordionSummary>
                 <AccordionActions>
                   {validOwner === true ? (
@@ -110,7 +115,8 @@ const TeamCard = ({ userId, memberOfTeams }) => {
                         <Button
                           data-teamidaux={id}
                           className={classes.noClick}
-                          size="large"
+                          variant="contained"
+                          size="small"
                           color="secondary"
                           onClick={handleToggle}
                         >
