@@ -125,6 +125,9 @@ export const updateUserThunk = (userId, userData) => {
 export const updateUsersListThunk = () => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
+
+    users = JSON.parse(window.localStorage.getItem("users"));
+
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
