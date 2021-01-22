@@ -75,6 +75,7 @@ export const RegisterUserPopup = () => {
     delete formData.password_confirmation;
     const newUser = {
       ...formData,
+      invites: [],
       memberOfTeams: [],
       tournamentsWon: [],
     };

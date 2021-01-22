@@ -41,7 +41,7 @@ export const LoginPopup = () => {
   const users = useSelector((state) => state.UsersReducer);
 
   const schema = yup.object().shape({
-    email: yup.string().email().required("Campo obrigatório"),
+    email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
   });
 
@@ -63,7 +63,7 @@ export const LoginPopup = () => {
 
     setTimeout(() => {
       if (!IsValidToken()) {
-        setErrorMessage("Email/Senha invalidos");
+        setErrorMessage("Email / Senha inválidos");
       }
     }, 1000);
   };

@@ -50,10 +50,11 @@ export const RegisterTeamPopup = () => {
 
   const handleForm = (formData) => {
     if (IsValidToken()) {
-      const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
-        .users.id;
+      const userId = JSON.parse(window.localStorage.getItem("users"))
+        ?.loggedUser?.users?.id;
 
       const teamData = {
+        ...formData,
         playersId: [],
         tournamentsWon: [],
         tournamentsDisputed: [],
