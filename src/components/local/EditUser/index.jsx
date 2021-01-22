@@ -20,17 +20,22 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { updateUserThunk } from "../../../store/modules/users/thunk";
+import {
+  updateUserThunk,
+  getUserInfoThunk,
+} from "../../../store/modules/users/thunk";
 import { IsValidToken } from "../../global/IsValidToken";
 
-const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
+const EditUser = ({ id, firstName, lastName, bio, email }) => {
   const [open, setOpen] = useState(false);
   const [validOwner, setValidOwner] = useState(false);
   const loggedUser = JSON.parse(window.localStorage.getItem("users"));
+  const users = useSelector((state) => state.UsersReducer);
   let { userID } = useParams();
 
   const dispatch = useDispatch();
   const classes = useStyles();
+  const invites = users.loggedUser.users.invites;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,6 +69,10 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
         setValidOwner(true);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(getUserInfoThunk(id));
   }, []);
 
   return (
