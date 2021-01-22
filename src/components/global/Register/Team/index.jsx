@@ -94,69 +94,86 @@ export const RegisterTeamPopup = () => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">Registrar Equipe</DialogTitle>
+        <Box className={classes.imgLogin}></Box>
+        <Box className={classes.form}>
+          <Box className={classes.formInfo}>
+            <DialogTitle id="form-dialog-title">Registrar Equipe</DialogTitle>
+          </Box>
 
-        <DialogContent>
-          <form onSubmit={handleSubmit(handleForm)}>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Nome da Equipe"
-                name="teamName"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.teamName}
-                helperText={errors.teamName?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                multiline
-                rows={3}
-                rowsMax={20}
-                variant="outlined"
-                label="Informações"
-                name="teamInfo"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.teamInfo}
-                helperText={errors.teamInfo?.message}
-              />
-            </Box>
-            <DialogActions>
-              <Button
-                // className={classes.loginButton}
-                variant="outlined"
-                color="secondary"
-                size="small"
-                onClick={handleClose}
-              >
-                Fechar
-              </Button>
-              <Button
-                // className={classes.loginButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-              >
-                Criar
-              </Button>
-              <div className={classes.feedbackMessage}>
-                {registerSuccess ? (
-                  <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
-                    Equipe Criada
-                  </h2>
-                ) : (
-                  <h2 style={{ color: "red", textAlign: "center" }}>
-                    {errors.registerError?.message}
-                  </h2>
-                )}
-              </div>
-            </DialogActions>
-          </form>
-        </DialogContent>
+          <DialogContent className={classes.FormInput}>
+            <form
+              className={classes.formRegister}
+              onSubmit={handleSubmit(handleForm)}
+            >
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  variant="outlined"
+                  label="Nome da Equipe"
+                  name="teamName"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.teamName}
+                  helperText={errors.teamName?.message}
+                />
+              </Box>
+              <Box className={classes.inputFieldRow}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  multiline
+                  rows={3}
+                  rowsMax={20}
+                  variant="outlined"
+                  label="Informações"
+                  name="teamInfo"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.teamInfo}
+                  helperText={errors.teamInfo?.message}
+                />
+              </Box>
+
+              <DialogActions className={classes.formBottom}>
+                <Box className={classes.boxButton}>
+                  <Button
+                    // className={classes.loginButton}
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                    onClick={handleClose}
+                  >
+                    Fechar
+                  </Button>
+                  <Button
+                    // className={classes.loginButton}
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Criar
+                  </Button>
+                </Box>
+                <div className={classes.feedbackMessage}>
+                  {registerSuccess ? (
+                    <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
+                      Equipe Criada
+                    </h2>
+                  ) : (
+                    <h2 style={{ color: "red", textAlign: "center" }}>
+                      {errors.registerError?.message}
+                    </h2>
+                  )}
+                </div>
+              </DialogActions>
+            </form>
+          </DialogContent>
+        </Box>
       </Dialog>
     </Box>
   );

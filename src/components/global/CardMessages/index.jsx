@@ -23,7 +23,7 @@ export const CardMessages = ({ tournamentId }) => {
   useEffect(() => {
     dispatch(updateTournamentsListThunk());
     if (IsValidToken()) {
-      console.log(JSON.parse(window.localStorage.getItem("users")));
+      // console.log(JSON.parse(window.localStorage.getItem("users")));
       setPersonName(
         JSON.parse(window.localStorage.getItem("users")).loggedUser.users
           .firstName
@@ -32,9 +32,9 @@ export const CardMessages = ({ tournamentId }) => {
   }, []);
 
   useEffect(() => {
-    if (IsValidState(tournaments.tournamentsList)) {
+    if (IsValidState(tournaments?.tournamentsList)) {
       setTournament(
-        tournaments.tournamentsList.filter((tournament) => {
+        tournaments?.tournamentsList.filter((tournament) => {
           return tournament.id === tournamentId;
         })[0]
       );
@@ -42,11 +42,11 @@ export const CardMessages = ({ tournamentId }) => {
   }, [tournaments]);
 
   useEffect(() => {
-    console.log(personName);
+    // console.log(personName);
   }, [personName]);
 
   useEffect(() => {
-    console.log(tournament);
+    // console.log(tournament);
   }, [tournament]);
 
   const handleNewMessage = (e) => {
@@ -67,7 +67,7 @@ export const CardMessages = ({ tournamentId }) => {
         { name: personName, message: newMessage },
       ],
     };
-    console.log(tournamentData);
+    // console.log(tournamentData);
 
     dispatch(updateTournamentThunk(tournamentId, tournamentData));
 
@@ -93,7 +93,7 @@ export const CardMessages = ({ tournamentId }) => {
           </div>
         )}
 
-        {IsValidState(personName) && IsValidState(tournament.messagesList) && (
+        {IsValidState(personName) && IsValidState(tournament?.messagesList) && (
           <div className={classes.sendMessageContainer}>
             <TextField
               className={classes.sendMessageTextField}

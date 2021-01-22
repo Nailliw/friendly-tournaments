@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import imgLogin from "./img/logo-design-04.png";
 
 export const useStyles = makeStyles(() => ({
   dialogRoot: {
@@ -6,10 +7,16 @@ export const useStyles = makeStyles(() => ({
   },
 
   dialogConteiner: {
-    // backgroundColor: "#000",
-    width: "20%",
+    // backgroundColor: "rgb(25,26,28)",
+    backgroundColor: "#ccc",
+    height: "40%",
+    width: "1000px",
     padding: "1rem",
-    borderRadius: "10%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #ccc",
   },
 
   dialogStyle: {
@@ -18,20 +25,32 @@ export const useStyles = makeStyles(() => ({
     boxShadow: "0.1em 0.1em 0.2em black",
   },
 
-  formLogin: {
-    backgroundColor: "#225B81",
-    maxWidth: "400px",
-    maxHeight: "650px",
-    width: "50vw",
-    height: "50vh",
+  imgLogin: {
+    backgroundImage: `url(${imgLogin})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    overflow: "hidden",
+    width: "50%",
+    height: "100%",
+  },
 
+  form: {
+    width: "50%",
+    height: "100%",
+  },
+
+  FormInput: {
+    height: "70%",
+    width: "100%",
     display: "flex",
+    alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
 
-    borderRadius: "2rem",
-    boxShadow: "0.1em 0.1em 0.2em black",
+    // "@media (min-width: 500px)": {
+    //   height: "40%",
+    // },
   },
 
   formInfo: {
@@ -44,8 +63,21 @@ export const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
 
+  formLogin: {
+    width: "100%",
+    height: "90%",
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "baseline",
+    alignItems: "center",
+
+    // borderRadius: "2rem",
+    // boxShadow: "0.1em 0.1em 0.2em black",
+  },
+
   inputArea: {
-    height: "100vh",
+    height: "70%",
     width: "15vw",
     display: "flex",
     alignItems: "center",
@@ -59,8 +91,7 @@ export const useStyles = makeStyles(() => ({
 
   inputField: {
     width: "80%",
-    height: "25%",
-    // paddingBottom: "2rem",
+    height: "30%",
     display: "flex",
     alignItems: "baseline",
     justifyContent: "center",
@@ -86,7 +117,7 @@ export const useStyles = makeStyles(() => ({
 
   feedbackMessage: {
     width: "100%",
-    height: "5vh",
+    height: "40%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -94,11 +125,20 @@ export const useStyles = makeStyles(() => ({
 
   formBottom: {
     width: "100%",
-    height: "14%",
+    height: "40%",
     color: "red",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+
+  boxButton: {
+    width: "100%",
+    height: "55%",
+    color: "red",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 
   loginButton: {
