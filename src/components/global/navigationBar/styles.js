@@ -44,7 +44,7 @@ export const useStyles = makeStyles(() => ({
   },
 
   menuMobile: {
-    marginRight: "30%",
+    marginRight: "20%",
     "&:hover": {
       cursor:"pointer",
 },

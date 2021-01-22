@@ -15,7 +15,7 @@ import category5 from '../../components/global/assets/img/category-images/catego
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
-export const Home = (props) => {
+export const Home = () => {
   const history = useHistory();
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:768px)');
@@ -26,11 +26,11 @@ export const Home = (props) => {
 
       <Box component="div" className={classes.body}>       
       {!mobile ? <Box component="div" className={classes.text}>
-        <Typography variant="h1">Find your game Tournament here!</Typography>
-        <Typography variant="h4">Over 100 tournament & event waiting you to join in</Typography> 
+        <Typography variant="h1">Encontre seu torneio de jogo aqui!</Typography>
+        <Typography variant="h4">Mais de 100 torneios e eventos esperando por você para participar</Typography> 
         </Box> : <Box component="div" className={classes.text}>
-        <Typography variant="h4">Find your game Tournament here!</Typography>
-        <Typography variant="h6">Over 100 tournament & event waiting you to join in</Typography> 
+        <Typography variant="h4">Encontre seu torneio de jogo aqui!</Typography>
+        <Typography variant="h6">Mais de 100 torneios e eventos esperando por você para participar</Typography> 
         </Box> }
         <Box component="div" className={classes.buttonBody}> 
         <Button
@@ -38,7 +38,7 @@ export const Home = (props) => {
           color="primary"
           onClick={() => history.push("/tournaments")}
         >
-          Join Tournaments
+          Junte-se a torneios!
         </Button>
         </Box>  
         </Box> 
