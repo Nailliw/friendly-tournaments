@@ -2,12 +2,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
   tournamentInfoRoot: {
-    width: "90%",
+    width: "93%",
     minHeight: "85vh",
 
-    margin: "4rem auto",
-    borderRadius: "1rem",
+    // margin: "0.1rem auto",
+    borderRadius: "1%",
 
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
     // backgroundColor: "#272A33",
 
     // backgroundColor: "#202442",

@@ -12,7 +12,7 @@ export const InfoSection = ({ info, gameName, teamsSize, tournamentId }) => {
       <Box component="div" className={classes.tournamentInfoDetails}>
         <Box component="div" className={classes.tournamentDetails}>
           <Typography
-            variant="h5"
+            variant="h4"
             className={classes.tournamentInfoDetailsTitle}
           >
             Informações do Torneio
@@ -36,7 +36,6 @@ export const InfoSection = ({ info, gameName, teamsSize, tournamentId }) => {
               clickable
               color="default"
               variant="default"
-              size="small"
             />
           </Box>
         </Box>

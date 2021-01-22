@@ -1,5 +1,5 @@
 import { Routes } from "./Routes";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, Box } from "@material-ui/core";
 
 import NavigationBar from "./components/global/navigationBar";
 
@@ -8,7 +8,9 @@ const App = () => {
     <>
       <CssBaseline />
       <NavigationBar />
-      <Routes />
+      <Box className="app-content">
+        <Routes />
+      </Box>
     </>
   );
 };

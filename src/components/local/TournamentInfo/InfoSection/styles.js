@@ -4,20 +4,22 @@ export const useStyles = makeStyles(() => ({
   tournamentInfoContainer: {
     width: "100%",
     // minHeight: "50vh",
-    height: "80%",
-    margin: "2rem",
+    // height: "80%",
+    padding: "2rem",
 
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
 
     "& > div:first-child": {
       borderRight: "2px rgb(255 255 255 / 20%) dotted",
+      padding: "5rem",
+      height: "100%",
     },
   },
 
   tournamentInfoDetails: {
-    width: "50%",
-    // height: "100% !important",
+    width: "40%",
+    height: "100% !important",
 
     display: "flex",
     alignSelf: "center",
@@ -33,45 +35,52 @@ export const useStyles = makeStyles(() => ({
   },
 
   tournamentGameDetails: {
-    width: "50%",
-    margin: "1rem",
-    padding: " 1rem",
+    width: "100%",
+    // margin: "1rem",
+    // padding: " 1rem",
 
     display: "flex",
     flexDirection: "column",
+    alignItems: "start",
+
     // justifyContent: "space-evenly",
 
-    "& > div:first-child": {
-      borderTop: "2px rgb(255 255 255 / 20%) dotted",
-      borderBottom: "2px rgb(255 255 255 / 20%) dotted",
+    "&  div": {
+      margin: "1rem",
     },
 
-    "& > div:last-child": {
-      // borderTop: "2px rgb(255 255 255 / 20%) dotted",
-      borderBottom: "2px rgb(255 255 255 / 20%) dotted",
-    },
+    // "& > div:first-child": {
+    //   borderTop: "2px rgb(255 255 255 / 20%) dotted",
+    //   borderBottom: "2px rgb(255 255 255 / 20%) dotted",
+    // },
+
+    // "& > div:last-child": {
+    //   // borderTop: "2px rgb(255 255 255 / 20%) dotted",
+    //   borderBottom: "2px rgb(255 255 255 / 20%) dotted",
+    // },
   },
 
   tournamentGameInfo: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
 
     // margin: "0.4rem",
-    padding: "0.5rem 1rem",
+    // padding: "0.5rem 1rem",
   },
 
   tournamentInfoBox: {
-    width: "50%",
-    height: "100% !important",
+    width: "60%",
+    height: "100%",
     padding: "2rem",
     // minHeight: "40vh",
     // maxHeight: "30vh",
   },
 
   tournamentInfoContent: {
-    height: "100% !important",
+    margin: "0 auto",
+    height: "100%",
     // margin: "2rem",
     padding: "1rem",
     width: "90%",
@@ -79,6 +88,6 @@ export const useStyles = makeStyles(() => ({
 
     // backgroundColor: "#564787",
     backgroundColor: "#ffffff0d",
-    borderRadius: "5%",
+    borderRadius: "1%",
   },
 }));

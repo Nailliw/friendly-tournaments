@@ -31,7 +31,6 @@ export const TournamentInfo = () => {
   );
 
   const {
-    title,
     gameName,
     info,
     numberOfTeams,
@@ -39,7 +38,6 @@ export const TournamentInfo = () => {
     teamsData,
     status,
     deadline,
-    userId,
     id,
   } = tournamentData;
   console.log(tournamentData);
@@ -47,12 +45,7 @@ export const TournamentInfo = () => {
 
   return (
     <Box component="div" className={classes.tournamentInfoRoot}>
-      <TitleHeader
-        title={title}
-        userId={userId}
-        isLogged={isLogged}
-        tournamentOwnerId={userId}
-      />
+      <TitleHeader isLogged={isLogged} tournamentData={tournamentData} />
       <StatusSection
         numberOfTeams={numberOfTeams}
         teamsSize={teamsSize}
