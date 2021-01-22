@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardHeader, CardContent } from "@material-ui/core";
+import { Card, CardHeader, CardContent, Typography } from "@material-ui/core";
+import { useStyles } from "../../styles";
 
 const URL_BASE = "http://localhost:3001/";
 
-const containerStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-};
-
-const tournamentCard = {
-  width: "40vh",
-  margin: "5px",
-  backgroundColor: "#3d4351",
-  color: "white",
-};
-
 const UserTournament = ({ tournamentsDisputed, tournamentsWon }) => {
   const [tournamentsDisputedList, setTournamentsDisputedList] = useState([]);
+  const classes = useStyles();
 
   const getTournamentsDisputed = () => {
     let stringTournament = `tournaments?`;
@@ -31,12 +21,19 @@ const UserTournament = ({ tournamentsDisputed, tournamentsWon }) => {
   useEffect(getTournamentsDisputed, []);
 
   return (
-    <div>
+    <>
       <h2>Tournament Disputed</h2>
-      <div style={containerStyle}>
+      <div className={classes.containerTournamentCard}>
         {tournamentsDisputedList.map(({ title, status, info, id }) => (
-          <Card style={tournamentCard} key={id}>
-            <CardHeader title={title} />
+          <Card className={classes.tournamentCard} key={id}>
+            <Typography
+              style={{ backgroundColor: "#353a46" }}
+              align={"center"}
+              color="#fff"
+            >
+              {title}
+            </Typography>
+
             <CardContent>
               <div>{info}</div>
               <div>{status}</div>
@@ -44,7 +41,7 @@ const UserTournament = ({ tournamentsDisputed, tournamentsWon }) => {
           </Card>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

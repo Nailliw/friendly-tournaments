@@ -1,28 +1,27 @@
 import React from 'react';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { purple } from '@material-ui/core/colors';
+
 
 
 
 
 const useStyles = makeStyles((theme) => ({
   primary: {
-    color: theme.palette.getContrastText('#7033FF'),
+    color: '#ffff',
     backgroundColor: '#7033FF',
     margin: theme.spacing(1),
   },
 }));
 
 
-export default function Buttons({variant,size,name,Color}) {
+export default function Buttons(props) {
   const classes = useStyles();
 
+
   return (
-    <div>
-      <Button variant={variant} color={"primary"} className={classes.primary} size={size}>
-        {name}
+      <Button onClick={props.onClick} variant={props.variant} color={"primary"} className={classes.primary} size={props.size}>
+      {props.name}
       </Button>
-    </div>
   );
 }

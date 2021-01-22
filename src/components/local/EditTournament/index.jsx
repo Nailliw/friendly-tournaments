@@ -12,7 +12,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { updateUserThunk } from "../../store/modules/users/thunk";
+import { updateTournamentThunk } from "../../../store/modules/tournaments/thunk";
 import { useState, useEffect } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,7 +20,21 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
+export const EditTournament = ({
+  id,
+  userId,
+  category,
+  gameName,
+  title,
+  info,
+  numberOfTeams,
+  teamsSize,
+  messagesList,
+  teamsData,
+  tournamentWinner,
+  deadline,
+  status,
+}) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -32,13 +46,10 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
   };
 
   const schema = yup.object().shape({
-    firstName: yup
-      .string()
-      .min(3, "Min 3 characters")
-      .required("Required field"),
-    lastName: yup.string().required("Required field"),
-    bio: yup.string().max(280, "Max 280 characters"),
-    email: yup.string().required("Required field"),
+    title: yup.string().required("Required field"),
+    info: yup.string().required("Required field"),
+    status: yup.string().required("Required field"),
+    deadline: yup.string().required("Required field"),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -47,16 +58,16 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
 
   const handleForm = (register) => {
     console.log(register);
-    dispatch(updateUserThunk(register.id, register));
+    dispatch(updateTournamentThunk(id, register));
     setOpen(false);
   };
 
   return (
     <>
       <Card className={classes.userRoot}>
-        <CardHeader title={firstName + " " + lastName} subheader={bio} />
+        <CardHeader title={gameName} subheader={title} />
         <CardContent>
-          <Typography variant="body2">Email: {email}</Typography>
+          <Typography variant="body2"> {info}</Typography>
         </CardContent>
 
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -67,73 +78,68 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Edite seus Dados</DialogTitle>
+          <DialogTitle id="form-dialog-title">
+            Edite os Dados do Torneio
+          </DialogTitle>
           <DialogContent>
-            <form onSubmit={handleSubmit(handleForm)} id={"editUser"}>
+            <form onSubmit={handleSubmit(handleForm)} id={"editTournament"}>
               <FormControl>
                 <div>
                   <TextField
                     autoFocus
-                    name="id"
+                    name="title"
                     margin="dense"
-                    label="ID"
-                    type="number"
-                    defaultValue={id}
+                    label="Title"
+                    type="string"
+                    defaultValue={title}
                     inputRef={register}
+                    error={!!errors.title}
+                    helperText={errors.title?.message}
                     fullWidth
                   />
                 </div>
                 <div>
                   <TextField
                     autoFocus
-                    name="firstName"
+                    name="info"
                     margin="dense"
-                    label="First name"
+                    label="Info"
                     type="string"
-                    defaultValue={firstName}
+                    defaultValue={info}
                     inputRef={register}
-                    error={!!errors.firstName}
-                    helperText={errors.firstName?.message}
+                    error={!!errors.info}
+                    helperText={errors.info?.message}
                     fullWidth
                   />
                 </div>
 
                 <TextField
-                  name="lastName"
+                  name="status"
                   margin="dense"
-                  label="Last name"
+                  label="Status"
                   type="string"
-                  defaultValue={lastName}
+                  defaultValue={status}
                   inputRef={register}
-                  error={!!errors.lastName}
-                  helperText={errors.lastName?.message}
+                  error={!!errors.status}
+                  helperText={errors.status?.message}
                   fullWidth
                 />
                 <TextField
-                  name="bio"
-                  margin="dense"
-                  label="Biography"
-                  type="string"
-                  defaultValue={bio}
+                  name="deadline"
+                  id="datetime-local"
+                  label="Deadline Inscription"
+                  type="datetime-local"
+                  defaultValue={deadline}
                   inputRef={register}
-                  error={!!errors.bio}
-                  helperText={errors.bio?.message}
-                  fullWidth
-                />
-                <TextField
-                  name="email"
-                  margin="dense"
-                  id="email"
-                  label="Email"
-                  type="string"
-                  defaultValue={email}
-                  inputRef={register}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  fullWidth
+                  error={!!errors.deadline}
+                  helperText={errors.deadline?.message}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </FormControl>
-              <p style={{ color: "red" }}>{errors.firstName?.message}</p>
+              <p></p>
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>
@@ -147,14 +153,9 @@ const EditUser = ({ id, firstName, lastName, bio, email, invites }) => {
 
       <Card>
         <CardContent>
-          <Typography variant="body2">
-            Fazer um Card pros times que estão invitando e dar a opção que
-            entrar pro time
-            <div>Id dos times que deram invite = {invites}</div>
-          </Typography>
+          <Typography variant="body2">Dummy</Typography>
         </CardContent>
       </Card>
     </>
   );
 };
-export default EditUser;

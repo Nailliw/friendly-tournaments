@@ -7,25 +7,64 @@ import {
 import { updateCategoriesListThunk } from "../../store/modules/categories/thunk";
 import { IsValidState } from "../../components/global/IsValidState";
 import { CardTournament } from "../../components/global/CardTournament";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import "./style.css";
 
 export const Tournaments = ({ token, setToken }) => {
   const dispatch = useDispatch();
   const tournaments = useSelector((state) => state.TournamentsReducer);
   const categories = useSelector((state) => state.CategoriesReducer);
+  let urlFilter = new URLSearchParams(useLocation().search);
 
   useEffect(() => {
+    console.log(urlFilter.get("category"));
     dispatch(updateTournamentsListThunk());
     dispatch(updateCategoriesListThunk());
   }, []);
 
   useEffect(() => {
     console.log(tournaments);
-    if (!IsValidState(tournaments.filteredTournamentsList)) {
-      dispatch(setFilteredTournamentsListThunk(tournaments.tournamentsList));
+
+    if (IsValidState(tournaments.tournamentsList)) {
+      dispatch(
+        setFilteredTournamentsListThunk(
+          filterTournamentsByUrlParam(
+            (listItem, paramValue) => {
+              return listItem === paramValue;
+            },
+            tournaments.tournamentsList,
+            "category"
+          )
+        )
+      );
     }
-  }, [tournaments]);
+  }, [tournaments.tournamentsList]);
+
+  function filterTournamentsByUrlParam(callback, listToBeFiltered, paramName) {
+    let objParamValue = {};
+    let filteredList = listToBeFiltered;
+
+    if (IsValidState(urlFilter.get(paramName))) {
+      objParamValue[paramName] = urlFilter.get(paramName);
+    }
+
+    if (!isNaN(objParamValue[paramName])) {
+      objParamValue[paramName] = Number(objParamValue[paramName]);
+    }
+
+    console.log(filteredList);
+    if (IsValidState(objParamValue)) {
+      filteredList = filteredList.filter((listItem) => {
+        if (IsValidState(listItem[paramName])) {
+          return callback(listItem[paramName], objParamValue[paramName]);
+        }
+        return true;
+      });
+    }
+
+    console.log(filteredList);
+    return filteredList;
+  }
 
   useEffect(() => {
     console.log(categories);

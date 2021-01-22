@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 // import { IsValidToken } from "../../components/global/IsValidToken";
 
 import { useDispatch, useSelector } from "react-redux";
+
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 import { getTournamentInfoThunk } from "../../store/modules/tournaments/thunk";
 
 import { Box } from "@material-ui/core";
@@ -20,6 +22,7 @@ export const TournamentInfo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(updateIsLoggedThunk());
     dispatch(getTournamentInfoThunk(tournamentID));
   }, []);
 
