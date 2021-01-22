@@ -38,12 +38,12 @@ export const RegisterTournamentPopup = () => {
       .required("Campo obrigatório"),
     info: yup.string().required("Campo obrigatório"),
     numberOfTeams: yup
-      .number("Deve conter um numero")
-      .min(2, "O Campeonato deve conter no minimo 4times")
+      .number("Deve conter um número")
+      .min(2, "O Campeonato deve conter no mínimo 4 times")
       .required("Campo obrigatório"),
     teamSize: yup
       .number()
-      .min(1, "O time deve conter no minimo um integrante")
+      .min(1, "O time deve conter no mínimo um Integrante")
       .required("Campo obrigatório"),
     deadline: yup.string().required("Campo obrigatório"),
   });
@@ -64,8 +64,8 @@ export const RegisterTournamentPopup = () => {
     console.log(formData);
 
     if (IsValidToken()) {
-      const userId = JSON.parse(window.localStorage.getItem("users")).loggedUser
-        .users.id;
+      const userId = JSON.parse(window.localStorage.getItem("users"))
+        ?.loggedUser?.users?.id;
 
       const newTournament = {
         ...formData,
@@ -257,10 +257,11 @@ export const RegisterTournamentPopup = () => {
                   variant="outlined"
                 >
                   <option value=""></option>
-                  <option value="League of Legends">League of Legends</option>
-                  <option value="Dota">Dota</option>
-                  <option value="Fortnite">Fortnite</option>
-                  <option value="Counter Strike">Counter Strike</option>
+                  <option value="1">Xadrez</option>
+                  <option value="2">League of Legends</option>
+                  <option value="3">World of Warcraft</option>
+                  <option value="4">Retro</option>
+                  <option value="5">Outros</option>
                 </Select>
                 <FormHelperText style={{ color: "red" }}>
                   {errors.category?.message}
