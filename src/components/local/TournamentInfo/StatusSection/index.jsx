@@ -1,5 +1,5 @@
 import { useStyles } from "./styles";
-
+import { ConvertDateTime } from "../../../global/ConvertDateTime";
 import { Box, Paper, Typography } from "@material-ui/core";
 
 export const StatusSection = ({
@@ -39,7 +39,7 @@ export const StatusSection = ({
             Prazo Limite de Inscrição
           </Typography>
           <Typography component="p" className={classes.statusText}>
-            {deadline}
+            {ConvertDateTime(deadline)}
           </Typography>
         </Paper>
       </Box>

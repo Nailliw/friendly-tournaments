@@ -6,6 +6,7 @@ import { Message } from "../components/global/CardMessages/Message";
 import { EditTournament } from "../components/local/EditTournament";
 import { SubscribeTeam } from "../components/local/TournamentInfo/SubscribeTeam";
 import { logoutThunk, loginUserThunk } from "../store/modules/users/thunk";
+import { ConvertDateTime } from "../components/global/ConvertDateTime";
 import { useDispatch, useSelector } from "react-redux";
 
 export const TesteApi = () => {
@@ -136,11 +137,12 @@ export const TesteApi = () => {
   //   console.log(users);
   // }, [users]);
 
+  ConvertDateTime("2021-01-22T14:15");
   return (
     <>
       {/* <EditTournament {...tournament} /> */}
       {/* <CardMessages tournamentId={2} /> */}
-      <SubscribeTeam tournamentId={6} />
+      {/* <SubscribeTeam tournamentId={6} /> */}
     </>
   );
 };
