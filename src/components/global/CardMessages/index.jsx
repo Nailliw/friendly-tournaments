@@ -87,8 +87,8 @@ export const CardMessages = ({ tournamentId }) => {
       <div className={classes.cardMessages}>
         {IsValidState(tournament.messagesList) && (
           <div id={"messagesContainer"} className={classes.messagesContainer}>
-            {tournament.messagesList.map((personMessage, i) => {
-              return <Message personMessage={personMessage} />;
+            {tournament.messagesList.map((personMessage, index) => {
+              return <Message key={index} personMessage={personMessage} />;
             })}
           </div>
         )}

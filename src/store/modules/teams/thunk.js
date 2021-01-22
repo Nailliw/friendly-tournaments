@@ -4,11 +4,11 @@ import { api } from "../../../services/api";
 export const registerTeamThunk = (teamData, setOpen) => {
   return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .post("/teams", teamData, authToken)
-      .then((res) => {
+      .then(() => {
         setOpen(false);
       })
       .catch((err) => {
@@ -40,7 +40,7 @@ export const updateTeamThunk = (idTeam, teamData, handleTooltipOpenThunk) => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .patch(`/teams/${idTeam}`, teamData, authToken)
