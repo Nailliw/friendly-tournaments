@@ -8,8 +8,7 @@ export const registerTournamentThunk = (tournamentData, setOpen) => {
 
     api
       .post("/tournaments", tournamentData, authToken)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setOpen(false);
       })
       .catch((err) => {
@@ -27,11 +26,8 @@ export const getTournamentInfoThunk = (tournamentId) => {
     api
       .get(`/tournaments/${tournamentId}`, authToken)
       .then((res) => {
-        console.log(res);
-
         tournaments = { ...tournaments, selectedTournament: res.data };
 
-        console.log(tournaments);
         dispatch(updateTournaments(tournaments));
       })
       .catch((err) => {
@@ -66,7 +62,7 @@ export const updateTournamentsListThunk = () => {
       .get("/tournaments", authToken)
       .then((res) => {
         tournaments = { ...tournaments, tournamentsList: res.data };
-        console.log(tournaments);
+
         dispatch(updateTournaments(tournaments));
       })
       .catch((err) => {

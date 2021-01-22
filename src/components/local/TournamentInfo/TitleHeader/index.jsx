@@ -1,9 +1,8 @@
 import { useStyles } from "./styles";
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 
 import { EditTournament } from "../../EditTournament/index";
-
-// import { IsValidToken } from "../../../global/IsValidToken";
+import { SubscribeTeam } from "../../../local/TournamentInfo/SubscribeTeam/index";
 
 export const TitleHeader = ({ tournamentData, isLogged }) => {
   const classes = useStyles();
@@ -38,22 +37,12 @@ export const TitleHeader = ({ tournamentData, isLogged }) => {
       <Box component="div" className={classes.editButtonContainer}>
         {isTournamentOwner && (
           <Box>
-            {/* <Button
-
-              color="primary"
-              variant="contained"
-              className={classes.editButtonContainer}
-            >
-              Editar
-            </Button> */}
             <EditTournament {...tournamentData} />
           </Box>
         )}
         {isLogged && (
           <Box className={classes.signinButtonContainer}>
-            <Button onClick={(e) => e} color="primary" variant="contained">
-              Inscrever-se
-            </Button>
+            <SubscribeTeam tournamentId={tournamentData.id} />
           </Box>
         )}
       </Box>
