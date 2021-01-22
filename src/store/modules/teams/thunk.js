@@ -46,7 +46,7 @@ export const updateTeamThunk = (idTeam, teamData, handleTooltipOpenThunk) => {
       .patch(`/teams/${idTeam}`, teamData, authToken)
       .then((res) => {
         teams = { ...teams, teamsList: res.data };
-
+        console.log(teams);
         dispatch(updateTeams(teams));
       })
       .catch((err) => {

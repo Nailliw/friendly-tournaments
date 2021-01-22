@@ -10,20 +10,26 @@ import {
   CardContent,
   CardHeader,
   FormControl,
+  Box,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { updateTeamThunk } from "../../../store/modules/teams/thunk";
+import { updateUsersListThunk } from "../../../store/modules/users/thunk";
+
 import { useState, useEffect } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { IsValidState } from "../../global/IsValidState";
 
 export const EditTeam = ({ id, teamName, teamInfo }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.UsersReducer);
   const classes = useStyles();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,8 +38,8 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
   };
 
   const schema = yup.object().shape({
-    title: yup.string().required("Required field"),
-    info: yup.string().required("Required field"),
+    teamName: yup.string().required("Required field"),
+    teamInfo: yup.string().required("Required field"),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -44,7 +50,14 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
     console.log(register);
     dispatch(updateTeamThunk(id, register));
     setOpen(false);
+    setTimeout(() => {
+      document.location.reload();
+    }, 1000);
   };
+
+  useEffect(() => {
+    dispatch(updateUsersListThunk());
+  }, []);
 
   return (
     <>
@@ -61,17 +74,27 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.root,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.editTeam,
+          },
+        }}
       >
         <DialogTitle id="form-dialog-title">Edit Team Data</DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit(handleForm)} id={"editTournament"}>
+          <form onSubmit={handleSubmit(handleForm)}>
             <FormControl>
               <div>
                 <TextField
                   autoFocus
-                  name="title"
+                  name="teamName"
                   margin="dense"
-                  label="Title"
+                  label="Team Name"
                   type="string"
                   defaultValue={teamName}
                   inputRef={register}
@@ -83,7 +106,7 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
               <div>
                 <TextField
                   autoFocus
-                  name="info"
+                  name="teamInfo"
                   margin="dense"
                   label="Info"
                   type="string"
@@ -95,13 +118,19 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
                 />
               </div>
             </FormControl>
-            <p></p>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button type="submit" color="primary">
-              Edit Team
-            </Button>
+            <Box className={classes.buttonsTeamEdit}>
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={handleClose}
+                color="secondary"
+              >
+                Cancelar
+              </Button>
+              <Button type="submit" variant="contained" color="primary">
+                Editar
+              </Button>
+            </Box>
           </form>
         </DialogContent>
       </Dialog>
