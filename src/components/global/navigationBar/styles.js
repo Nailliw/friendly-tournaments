@@ -15,6 +15,12 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     marginLeft: "10%",
   },
+  desktop: {
+    width: "75%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
   navBarLeftSide: {
     width: "50%",
     display: "flex",
@@ -32,30 +38,30 @@ export const useStyles = makeStyles(() => ({
   logo: {
     marginLeft: "10%",
     "&:hover": {
-      cursor:"pointer",
-},
+      cursor: "pointer",
+    },
   },
 
   menu: {
     marginLeft: "5%",
     "&:hover": {
-      cursor:"pointer",
-},
+      cursor: "pointer",
+    },
   },
 
   menuMobile: {
     marginRight: "20%",
     "&:hover": {
-      cursor:"pointer",
-},
+      cursor: "pointer",
+    },
   },
 
   buttons: {
     height: "80%",
     marginRight: "3%",
     "&:hover": {
-      cursor:"pointer",
-},
+      cursor: "pointer",
+    },
   },
   toolbar: {
     paddingTop: "4%",
@@ -69,4 +75,3 @@ export const useStyles = makeStyles(() => ({
     color: "blue[600]",
   },
 }));
-
