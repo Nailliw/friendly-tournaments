@@ -1,12 +1,17 @@
 import React from 'react';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import {Button,Box} from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { purple } from '@material-ui/core/colors';
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import { useSelector, useDispatch } from "react-redux";
+import { LoginPopup } from "../../Login/index";
+import { RegisterUserPopup } from "../../Register/User/index";
+import { RegisterTeamPopup } from "../../Register/Team/index";
+import { RegisterTournamentPopup } from "../../Register/Tournament/index";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,9 +55,10 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 
-export default function CustomizedMenus(props) {
+export default function MenuMobile(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
+  const isLogged = useSelector((state) => state.UsersReducer.isLogged);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,22 +89,38 @@ export default function CustomizedMenus(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick1}>
-          <Typography
-            variant="button"
-            className={classes.text} 
-          >
-            {props.name1}
-          </Typography>
+        <StyledMenuItem>
+        {!isLogged ? (
+            <Box component="div" className={classes.buttons}>
+              <LoginPopup />
+            </Box>
+          ) : (
+            <Box component="div" className={classes.buttons}>
+              <RegisterTeamPopup />
+            </Box>
+          )}
+          {!isLogged ? (
+            <Box component="div" className={classes.buttons}>
+              <RegisterUserPopup />
+            </Box>
+          ) : (
+            <Box component="div" className={classes.buttons}>
+              <RegisterTournamentPopup />
+            </Box>
+          )}
         </StyledMenuItem>
-        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick2}>
-          <Typography
-            variant="button"
-            className={classes.text}            
-          >
-            {props.name2}
-          </Typography>
+        {isLogged && <Box component="div">
+           <StyledMenuItem onClick={props.onClick1}>
+        <Typography variant="button" className={classes.text} >
+          {props.name1}
+        </Typography>
         </StyledMenuItem>
+        <StyledMenuItem onClick={props.onClick2}>
+        <Typography variant="button" className={classes.text} >
+          {props.name2}
+        </Typography> 
+        </StyledMenuItem>
+        </Box>}
       </StyledMenu>
     </div>
   );
