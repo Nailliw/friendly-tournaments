@@ -9,7 +9,7 @@ export const useStyles = makeStyles(() => ({
   dialogConteiner: {
     // backgroundColor: "rgb(25,26,28)",
     backgroundColor: "#ccc",
-    height: "40%",
+    height: "50%",
     width: "1000px",
     padding: "1rem",
     display: "flex",
