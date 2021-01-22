@@ -17,8 +17,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { registerUserThunk } from "../../store/modules/users/thunk";
+import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 
 import { useStyles } from "./style/styles";
+
+import { RegisterUserPopup } from "../../components/global/Register/User/index";
 
 export const RegisterUser = () => {
   const history = useHistory();
@@ -69,16 +72,20 @@ export const RegisterUser = () => {
   };
 
   useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+
     console.log(users);
-  }, [users]);
+  }, []);
+
   return (
     <Box>
-      <form
+      <RegisterUserPopup></RegisterUserPopup>
+      {/* <form
         className={classes.formRegister}
         onSubmit={handleSubmit(handleForm)}
       >
         <Box className={classes.formInfo}>
-          {/* form info */}
+
           <Typography
             className={classes.labelCadastro}
             component="h3"
@@ -98,7 +105,7 @@ export const RegisterUser = () => {
               type="string"
               inputRef={register}
               error={!!errors.email}
-              helperText={errors.name?.message}
+              helperText={errors.email?.message}
             />
           </Box>
           <Box className={classes.inputField}>
@@ -203,7 +210,7 @@ export const RegisterUser = () => {
             )}
           </div>
         </Box>
-      </form>
+      </form> */}
     </Box>
   );
 };

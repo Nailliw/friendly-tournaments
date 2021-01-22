@@ -1,100 +1,54 @@
 import { Link, Redirect, withRouter } from "react-router-dom";
-import "./home.css";
-import NavgationBar from "../../components/global/navigationBar/index";
-import ButtonPrimary from "../../components/global/PrimaryButton/index";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {Button,Box,Paper} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import 'fontsource-roboto';
+import Typography from "@material-ui/core/Typography";
+import { useStyles } from "./Style";
+
+import bannerImage from '../../components/global/assets/img/home-images/banners-design-03.jpg'
+import category1 from '../../components/global/assets/img/category-images/categoryChess.jpg'
+import category2 from '../../components/global/assets/img/category-images/categoryLoL.jpg'
+import category3 from '../../components/global/assets/img/category-images/categoryWoW.jpg'
+import category4 from '../../components/global/assets/img/category-images/categoryRetro.jpg'
+import category5 from '../../components/global/assets/img/category-images/categoryOthers.jpg'
+
 
 export const Home = (props) => {
-  const { history } = props;
+  const history = useHistory();
+  const classes = useStyles();
+
   return (
-    <div id="page">
-      <div id="home">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkzZVq_xElVlJ5mZOBesAccEd0Lvxna6w-Aw&usqp=CAU"
-          alt="fundo da page"
-          className="BackgroundImage"
-          id="imgPage"
-        />
+    <Box component="div" className={classes.page}>
+      <Box component="img" src={bannerImage} alt="fundo da page"  className={classes.BackgroundImage}/>
 
-        <div id="body">
-          <div className="text">
-            <h1>Find your game Tournament here!</h1>
-            <h4>Over 100 tournament & event waiting you to join in</h4>
-          </div>
-          <ButtonPrimary name="Join Tournaments" />
-        </div>
-      </div>
+      <Box component="div" className={classes.body}>       
+        <Box component="div" className={classes.text}>
+        <Typography variant="h1">Find your game Tournament here!</Typography>
+        <Typography variant="h4">Over 100 tournament & event waiting you to join in</Typography> 
+        </Box> 
+        <Box component="div" className={classes.buttonBody}> 
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => history.push("/tournaments")}
+        >
+          Join Tournaments
+        </Button>
+        </Box>  
+        </Box> 
 
-      <div id="footer">
-        <div className="imgGames">
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvWPipVWchgjBtNo1E6GMQ0gWW8AoImSmAYw&usqp=CAU"
-              alt="Dota 2"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcgRI2imlqlIe-mceHRVVuggU61ZFMTHrnqQ&usqp=CAU"
-              alt="APEX"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1kLv8658hvo8XXNaiQyVsO_kejoStYBx4aQ&usqp=CAU"
-              alt="Stret Fiter"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvrYLI88oNB_47TLKI5skTR5DS3ljntc5wPg&usqp=CAU"
-              alt="Fortnite"
-              width="100px"
-              height="50px"
-            />
-          </button>
-        </div>
+      <Box component="div" className={classes.footer}>
+        <Box component="div" className={classes.containerImg}>
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=1")} className={classes.imgGame}><img src={category1} alt="Dota 2" width="100px" height="50px"/></Paper>
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=2")} className={classes.imgGame}><img src={category2} alt="APEX" width="100px" height="50px"/></Paper>
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=3")} className={classes.imgGame}><img src={category3} alt="Stret Fiter" width="100px" height="50px"/></Paper>
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=4")} className={classes.imgGame}><img src={category4} alt="CS.GO" width="100px" height="50px"/></Paper>
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=5")} className={classes.imgGame}><img src={category5} alt="LOL" width="100px" height="50px"/></Paper>
+          
+        </Box>
 
-        <div className="imgGames">
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU7la8rwzzpvZOh_XD3Eac4pRo8QOhSSloKQ&usqp=CAU"
-              alt="CS.GO"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPEIoXpCY9NNQtPXCExjN9E421gJWcv9ps4g&usqp=CAU"
-              alt="LOL"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBYNCa_TgbccbkvEYuiyb9TnAsmts9CH0QMA&usqp=CAU"
-              alt="Free fire"
-              width="100px"
-              height="50px"
-            />
-          </button>
-          <button onClick={() => history.push("/")} className="imgGames">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR1PO0DQ1wPbYf7JCTmmD8wNll4eHT8M1Pow&usqp=CAU"
-              alt="Valorent"
-              width="100px"
-              height="50px"
-            />
-          </button>
-        </div>
-      </div>
-    </div>
+      </Box>
+      </Box>
   );
 };
