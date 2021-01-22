@@ -84,7 +84,13 @@ export const RegisterTournamentPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.createtournament}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Criar Torneio
       </Button>
       <Dialog
@@ -102,8 +108,13 @@ export const RegisterTournamentPopup = () => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">Registrar Torneio</DialogTitle>
+        <Box className={classes.imgLogin}></Box>
+        <Box className={classes.form}>
+          <Box className={classes.formInfo}>
+            <DialogTitle id="form-dialog-title">Registrar Torneio</DialogTitle>
+          </Box>
 
+<<<<<<< HEAD
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)}>
             <Box>
@@ -217,50 +228,197 @@ export const RegisterTournamentPopup = () => {
               margin="dense"
               size="small"
               variant="outlined"
+=======
+          <DialogContent className={classes.FormInput}>
+            <form
+              className={classes.formRegister}
+              onSubmit={handleSubmit(handleForm)}
+>>>>>>> f666e782ad85e87b183d2ad6437ed97df45be4ab
             >
-              <option value=""></option>
-              <option value="1">League of Legends</option>
-              <option value="2">Dota</option>
-              <option value="3">Fortnite</option>
-              <option value="4">Counter Strike</option>
-            </Select>
-            <FormHelperText style={{ color: "red" }}>
-              {errors.category?.message}
-            </FormHelperText>
-            {/* </FormControl> */}
-          </form>
-        </DialogContent>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  variant="outlined"
+                  label="Titulo"
+                  name="title"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />
+              </Box>
+              <Box className={classes.inputFieldRow}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  multiline
+                  rows={2}
+                  rowsMax={20}
+                  variant="outlined"
+                  label="Informações"
+                  name="info"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.info}
+                  helperText={errors.info?.message}
+                />
+              </Box>
+              <Box className={classes.inputFieldRow}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  name="deadline"
+                  id="datetime-local"
+                  label="Deadline Inscription"
+                  type="datetime-local"
+                  variant="outlined"
+                  // defaultValue={}
+                  inputRef={register}
+                  error={!!errors.deadline}
+                  helperText={errors.deadline?.message}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Box>
+              <FormControl className={classes.select}>
+                <InputLabel
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                  error={!!errors.numberOfTeams}
+                  id="numberOfTeams"
+                >
+                  N. maximo de Times
+                </InputLabel>
+                <Select
+                  error={!!errors.numberOfTeams}
+                  native={true}
+                  name="numberOfTeams"
+                  inputRef={register}
+                  labelId="numberOfTeams"
+                  label="N. maximo de Times"
+                  margin="dense"
+                  size="small"
+                  variant="outlined"
+                >
+                  <option value={0}></option>
+                  <option value={2}>2</option>
+                  <option value={4}>4</option>
+                  <option value={8}>8</option>
+                  <option value={16}>16</option>
+                  <option value={32}>32</option>
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {errors.numberOfTeams?.message}
+                </FormHelperText>
+              </FormControl>
+              <FormControl className={classes.select}>
+                <InputLabel
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                  error={!!errors.teamSize}
+                  id="teamSize"
+                >
+                  Jogadores por Equipe (max)
+                </InputLabel>
+                <Select
+                  error={!!errors.teamSize}
+                  native={true}
+                  name="teamSize"
+                  inputRef={register}
+                  labelId="teamSize"
+                  label="Jogadores por Equipe(max)"
+                  margin="dense"
+                  size="small"
+                  variant="outlined"
+                >
+                  <option value={0}></option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={5}>5</option>
+                  <option value={7}>7</option>
+                  <option value={10}>10</option>
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {errors.teamSize?.message}
+                </FormHelperText>
+              </FormControl>
+              <FormControl className={classes.select}>
+                <InputLabel
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                  error={!!errors.category}
+                  id="category"
+                >
+                  Categoria
+                </InputLabel>
+                <Select
+                  error={!!errors.category}
+                  native={true}
+                  name="category"
+                  inputRef={register}
+                  labelId="category"
+                  label="Categoria"
+                  margin="dense"
+                  size="small"
+                  variant="outlined"
+                >
+                  <option value=""></option>
+                  <option value="1">League of Legends</option>
+                  <option value="2">Dota</option>
+                  <option value="3">Fortnite</option>
+                  <option value="4">Counter Strike</option>
+                </Select>
+                <FormHelperText style={{ color: "red" }}>
+                  {errors.category?.message}
+                </FormHelperText>
+              </FormControl>
 
-        <DialogActions>
-          <Button
-            // className={classes.loginButton}
-            variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={handleClose}
-          >
-            Fechar
-          </Button>
-          <Button
-            // className={classes.loginButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-          >
-            Criar
-          </Button>
-          <div className={classes.feedbackMessage}>
-            {registerSuccess ? (
-              <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
-                Registro Concluído
-              </h2>
-            ) : (
-              <h2 style={{ color: "red", textAlign: "center" }}>
-                {errors.registerError?.message}
-              </h2>
-            )}
-          </div>
-        </DialogActions>
+              <DialogActions className={classes.formBottom}>
+                <Box className={classes.boxButton}>
+                  <Button
+                    // className={classes.loginButton}
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                    onClick={handleClose}
+                  >
+                    Fechar
+                  </Button>
+                  <Button
+                    // className={classes.loginButton}
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Criar
+                  </Button>
+                </Box>
+                <div className={classes.feedbackMessage}>
+                  {registerSuccess ? (
+                    <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
+                      Registro Concluído
+                    </h2>
+                  ) : (
+                    <h2 style={{ color: "red", textAlign: "center" }}>
+                      {errors.registerError?.message}
+                    </h2>
+                  )}
+                </div>
+              </DialogActions>
+            </form>
+          </DialogContent>
+        </Box>
       </Dialog>
     </Box>
   );

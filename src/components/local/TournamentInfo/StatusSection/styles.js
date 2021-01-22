@@ -40,7 +40,7 @@ export const useStyles = makeStyles(() => ({
     borderRadius: "1.5rem",
 
     // backgroundColor: "#2D325A",
-    backgroundColor: "#7033FF",
+    backgroundColor: "#3f51b5",
   },
   statusTitle: {
     fontSize: "1rem",
@@ -63,7 +63,7 @@ export const useStyles = makeStyles(() => ({
 
   teamsInfoText: {
     color: "#FF7843",
-    textAlign: "right",
+    textAlign: "center",
 
     padding: "0 2rem",
     fontSize: "2rem",

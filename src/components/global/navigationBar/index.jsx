@@ -18,7 +18,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
-import Typography from "@material-ui/core/Typography";
+import { Typography, AppBar } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import { useStyles } from "./styles";
 import CustonMenu from "./Menu/index";
@@ -112,31 +112,36 @@ export default function NavigationBar() {
   };
 
   return (
-    <Box component="div" className={classes.navBarContainer}>
-      <Box component="div" className={classes.navBarLeft}>
-        <Box component="div" className={classes.logo}>
-          <div onClick={() => history.push("/")}>Logo</div>
-        </Box>
-        <Box component="div" className={classes.buttonsLeft}>
-          <Typography
-            variant="button"
-            onClick={() => history.push("/tournaments")}
-            className={classes.buttons}
+    <AppBar style={{ height: "6vh", width: "100%" }}>
+      <Box component="div" className={classes.navBarContainer}>
+        <div className={classes.navBarLeftSide}>
+          <Box component="div" className={classes.logo}>
+            <div onClick={() => history.push("/")}>Logo</div>
+          </Box>
+          <Box
+            style={{ height: "100%" }}
+            component="div"
+            className={`${classes.buttonsLeft} `}
           >
-            Tournaments
-          </Typography>
-          <Typography
-            variant="button"
-            onClick={() => history.push("/teams")}
-            className={classes.buttons}
-          >
-            Times
-          </Typography>
-        </Box>
-      </Box>
+            <Typography
+              variant="subtitle1"
+              onClick={() => history.push("/tournaments")}
+              className={`${classes.buttons} ${classes.toolbar}`}
+            >
+              Tournaments
+            </Typography>
 
-      <Box component="div" className={classes.navBarRight}>
-        <Box component="div" className={classes.buttonsRight}>
+            <Typography
+              variant="subtitle1"
+              onClick={() => history.push("/teams")}
+              className={`${classes.buttons} ${classes.toolbar}`}
+            >
+              Times
+            </Typography>
+          </Box>
+        </div>
+
+        <div className={classes.navBarRightSide}>
           {!isLogged ? (
             <Box component="div" className={classes.buttons}>
               <LoginPopup />
@@ -155,18 +160,19 @@ export default function NavigationBar() {
               <RegisterTournamentPopup />
             </Box>
           )}
-        </Box>
-        <Box component="div" className={classes.menu}>
-          {isLogged && (
-            <CustonMenu
-              name1="Perfil"
-              onClick1={() => history.push(`/users/${loggedUserId}`)}
-              name2="Deslogar"
-              onClick2={handleLoggout}
-            />
-          )}
-        </Box>
+
+          <Box component="div" className={classes.menu}>
+            {isLogged && (
+              <CustonMenu
+                name1="Perfil"
+                onClick1={() => history.push(`/users/${loggedUserId}`)}
+                name2="Deslogar"
+                onClick2={handleLoggout}
+              />
+            )}
+          </Box>
+        </div>
       </Box>
-    </Box>
+    </AppBar>
   );
 }

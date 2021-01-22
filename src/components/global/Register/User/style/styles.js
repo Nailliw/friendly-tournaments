@@ -1,41 +1,71 @@
 import { makeStyles } from "@material-ui/core";
+import imgRegisterUser from "./img/registerUser.png";
 
 export const useStyles = makeStyles(() => ({
   dialogRoot: {
-    // backgroundColor: "#000",
+    width: "100vw",
+    height: "100vh",
   },
 
   dialogConteiner: {
     // backgroundColor: "#000",
-    width: "28%",
-    padding: "2rem",
-    borderRadius: "10%",
+    backgroundColor: "#ccc",
+    height: "80%",
+    width: "1000px",
+    padding: "1rem",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #ccc",
   },
 
-  formRegister: {
-    backgroundColor: "#225B81",
-    maxWidth: "500px",
-    maxHeight: "950px",
-    width: "80vw",
-    height: "80vh",
+  imgLogin: {
+    backgroundImage: `url(${imgRegisterUser})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    overflow: "hidden",
+    width: "50%",
+    height: "100%",
+  },
 
+  form: {
+    width: "50%",
+    height: "100%",
+  },
+
+  FormInput: {
+    height: "90%",
+    width: "100%",
     display: "flex",
+    alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
 
-    borderRadius: "2rem",
-    boxShadow: "0.1em 0.1em 0.2em black",
+    // "@media (min-width: 500px)": {
+    //   height: "40%",
+    // },
   },
 
   formInfo: {
-    height: "10%",
+    height: "8%",
     width: "100%",
-
+    margin: "0px;",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+  },
+
+  formRegister: {
+    width: "100%",
+    height: "90%",
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "baseline",
+    alignItems: "center",
   },
 
   labelCadastro: {
@@ -102,11 +132,20 @@ export const useStyles = makeStyles(() => ({
 
   formBottom: {
     width: "100%",
-    height: "14%",
+    height: "18%",
     color: "red",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+
+  boxButton: {
+    width: "100%",
+    height: "55%",
+    color: "red",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 
   registerButton: {
@@ -120,6 +159,12 @@ export const useStyles = makeStyles(() => ({
     "&:hover": {
       backgroundColor: "rgba(28,73,128)",
       boxShadow: "0.1em 0.1em 0.2em black",
+    },
+  },
+  createUserPop: {
+    backgroundColor: "#FF7843",
+    "&:hover": {
+      backgroundColor: "#AF5735",
     },
   },
 }));

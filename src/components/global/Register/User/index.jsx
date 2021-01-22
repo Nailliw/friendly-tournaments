@@ -39,22 +39,22 @@ export const RegisterUserPopup = () => {
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup
       .string()
-      .min(6, "Senha deve conter no mínimo 6 dígitos")
+      .min(6, "Mínimo 6 dígitos")
       .required("Campo obrigatório"),
     password_confirmation: yup
       .string()
       .oneOf([yup.ref("password")], "Senhas não conferem"),
     firstName: yup
       .string()
-      .min(3, "Nome deve conter no mínimo 3 letras")
+      .min(3, "Mínimo 3 letras")
       .required("Campo obrigatório"),
     lastName: yup
       .string()
-      .min(3, "Sobrenome deve conter no mínimo 3 letras")
+      .min(3, "Mínimo 3 letras")
       .required("Campo obrigatório"),
     nickName: yup
       .string()
-      .min(3, "Apelido deve conter no mínimo 3 letras")
+      .min(3, "Mínimo 3 letras")
       .required("Campo obrigatório"),
     bio: yup.string().required("Campo obrigatório"),
   });
@@ -88,7 +88,13 @@ export const RegisterUserPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.createUserPop}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Cadastro de Usuario
       </Button>
       <Dialog
@@ -106,130 +112,163 @@ export const RegisterUserPopup = () => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">Cadastrar-se</DialogTitle>
+        <Box className={classes.imgLogin}></Box>
+        <Box className={classes.form}>
+          <Box className={classes.formInfo}>
+            <DialogTitle id="form-dialog-title">Cadastrar-se</DialogTitle>
+          </Box>
 
-        <DialogContent>
-          <form onSubmit={handleSubmit(handleForm)}>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Email"
-                name="email"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Senha"
-                name="password"
-                margin="dense"
-                type="password"
-                inputRef={register}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Repita a senha"
-                name="password_confirmation"
-                margin="dense"
-                type="password"
-                inputRef={register}
-                error={!!errors.password}
-                helperText={errors.password_confirmation?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Nome"
-                name="firstName"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Sobrenome"
-                name="lastName"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                variant="outlined"
-                label="Apelido"
-                name="nickName"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.nickName}
-                helperText={errors.nickName?.message}
-              />
-            </Box>
-            <Box>
-              <TextField
-                multiline
-                rowsMax={4}
-                variant="outlined"
-                label="
+          <DialogContent className={classes.FormInput}>
+            <form
+              className={classes.formRegister}
+              onSubmit={handleSubmit(handleForm)}
+            >
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Email"
+                  name="email"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Senha"
+                  name="password"
+                  margin="dense"
+                  type="password"
+                  inputRef={register}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Repita a senha"
+                  name="password_confirmation"
+                  margin="dense"
+                  type="password"
+                  inputRef={register}
+                  error={!!errors.password}
+                  helperText={errors.password_confirmation?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Nome"
+                  name="firstName"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Sobrenome"
+                  name="lastName"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  variant="outlined"
+                  label="Apelido"
+                  name="nickName"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.nickName}
+                  helperText={errors.nickName?.message}
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  autoFocus
+                  fullWidth
+                  className={classes.input}
+                  multiline
+                  rowsMax={4}
+                  variant="outlined"
+                  label="
         Biografia"
-                name="bio"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.bio}
-                helperText={errors.bio?.message}
-              />
-            </Box>
+                  name="bio"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.bio}
+                  helperText={errors.bio?.message}
+                />
+              </Box>
 
-            <Box className={classes.formBottom}>
-              <Button
-                // className={classes.loginButton}
-                variant="outlined"
-                color="secondary"
-                size="small"
-                onClick={handleClose}
-              >
-                Fechar
-              </Button>
-              <Button
-                className={classes.registerButton}
-                type="submit"
-                color="primary"
-                variant="contained"
-              >
-                Cadastrar
-              </Button>
-              <div className={classes.feedbackMessage}>
-                {registerSuccess ? (
-                  <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
-                    Registro Concluído
-                  </h2>
-                ) : (
-                  <h2 style={{ color: "red", textAlign: "center" }}>
-                    {errors.registerError?.message}
-                  </h2>
-                )}
-              </div>
-            </Box>
-          </form>
-        </DialogContent>
+              <DialogActions className={classes.formBottom}>
+                <Box className={classes.boxButton}>
+                  <Button
+                    // className={classes.loginButton}
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                    onClick={handleClose}
+                  >
+                    Fechar
+                  </Button>
+                  <Button type="submit" color="primary" variant="contained">
+                    Cadastrar
+                  </Button>
+                </Box>
+                <div className={classes.feedbackMessage}>
+                  {registerSuccess ? (
+                    <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
+                      Registro Concluído
+                    </h2>
+                  ) : (
+                    <h2 style={{ color: "red", textAlign: "center" }}>
+                      {errors.registerError?.message}
+                    </h2>
+                  )}
+                </div>
+              </DialogActions>
+            </form>
+          </DialogContent>
+        </Box>
       </Dialog>
     </Box>
   );

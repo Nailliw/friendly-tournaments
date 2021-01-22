@@ -16,12 +16,26 @@ export const useStyles = makeStyles(() => ({
   titleContainer: {
     // width: "40%",
   },
+
+  editButtonContainer: {
+    // textAlign: "right",
+    display: "flex",
+    alignSelf: "center",
+
+    "& > div": {
+      margin: "0 2rem",
+    },
+  },
+
   signinButtonContainer: {
     // width: "40%",
     textAlign: "right",
 
     "& button": {
       backgroundColor: "#FF7843",
+    },
+    "& :hover": {
+      backgroundColor: "#af5735",
     },
   },
 }));
