@@ -3,7 +3,6 @@ import { api } from "../../../services/api";
 
 export const registerCategoryThunk = (categoryData) => {
   return (_dispatch, _getState) => {
-    //const categories = getState().CategoriesReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
@@ -28,7 +27,7 @@ export const selectCategoryThunk = (categoryId) => {
       .get(`/categories/${categoryId}`, authToken)
       .then((res) => {
         categories = { ...categories, selectedCategory: res.data };
-        console.log(categories);
+
         dispatch(updateCategories(categories));
       })
       .catch((err) => {
@@ -39,7 +38,6 @@ export const selectCategoryThunk = (categoryId) => {
 
 export const updateCategoriesThunk = (categoryId, categoryData) => {
   return (_dispatch, _getState) => {
-    //const categories = getState().CategoriesReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       .authToken;
 
@@ -64,7 +62,6 @@ export const updateCategoriesListThunk = () => {
       .get(`/categories`, authToken)
       .then((res) => {
         categories = { ...categories, categoriesList: res.data };
-        console.log(categories);
 
         dispatch(updateCategories(categories));
       })

@@ -36,7 +36,7 @@ export const getTeamInfoThunk = (teamId) => {
   };
 };
 
-export const updateTeamThunk = (idTeam, teamData) => {
+export const updateTeamThunk = (idTeam, teamData, handleTooltipOpenThunk) => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
@@ -50,6 +50,7 @@ export const updateTeamThunk = (idTeam, teamData) => {
         dispatch(updateTeams(teams));
       })
       .catch((err) => {
+        handleTooltipOpenThunk();
         console.log(err.response);
       });
   };
@@ -59,7 +60,7 @@ export const updateTeamListThunk = () => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .get(`/teams`, authToken)
@@ -78,7 +79,7 @@ export const getFilteredTeamListThunk = (idTeam) => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .get(`/teams?${idTeam}`, authToken)
