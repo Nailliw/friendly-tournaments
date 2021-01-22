@@ -1,38 +1,44 @@
-import React from 'react';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { purple } from '@material-ui/core/colors';
-
+import React from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { purple } from "@material-ui/core/colors";
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   naviBarMenuButon: {
     color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],   
+    backgroundColor: purple[500],
   },
   text: {
-    color:" white",
-    border: "1px solid white"
-  }
+    color: " white",
+  },
+  StyledMenuitem: {
+    "&:hover": {
+      backgroundColor: "#AF5735",
+    },
+  },
 }));
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
-    backgroundColor: '#2B2C31', 
+    backgroundColor: "#2B2C31",
   },
 })((props) => (
   <Menu
+    keepMounted
     elevation={0}
     getContentAnchorEl={null}
     anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
+      vertical: "bottom",
+      horizontal: "center",
     }}
     transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
+      vertical: "top",
+      horizontal: "right",
     }}
     {...props}
   />
@@ -40,15 +46,13 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+    "&:focus": {
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
         color: theme.palette.common.white,
       },
     },
   },
 }))(MenuItem);
-
 
 export default function CustomizedMenus(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,19 +66,19 @@ export default function CustomizedMenus(props) {
     setAnchorEl(null);
   };
 
-
   return (
     <div>
-      <Button
-      className={classes.naviBarMenuButon}
-        aria-controls="customized-menu"
+      <IconButton
+        aria-controls="fade-menu"
         aria-haspopup="true"
-        variant="contained"
-        color="primary"
         onClick={handleClick}
+        edge="start"
+        className={classes.menuButton}
+        color="primary"
+        aria-label="menu"
       >
-        Menu
-      </Button>
+        <MenuIcon style={{ color: "#fff" }} />
+      </IconButton>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -82,15 +86,23 @@ export default function CustomizedMenus(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-        <Button variant="outlined" className={classes.text} onClick={props.onClick1}>
-          {props.name1}
-        </Button>
+        <StyledMenuItem className={classes.StyledMenuitem}>
+          <Typography
+            variant="button"
+            className={classes.text}
+            onClick={props.onClick1}
+          >
+            {props.name1}
+          </Typography>
         </StyledMenuItem>
-        <StyledMenuItem>
-        <Button variant="outlined" className={classes.text} onClick={props.onClick2}>
-          {props.name2}
-        </Button> 
+        <StyledMenuItem className={classes.StyledMenuitem}>
+          <Typography
+            variant="button"
+            className={classes.text}
+            onClick={props.onClick2}
+          >
+            {props.name2}
+          </Typography>
         </StyledMenuItem>
       </StyledMenu>
     </div>

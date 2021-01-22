@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
-import axios from "axios";
 import EditUser from "../../components/local/EditUser/index";
 import MemberOfTeams from "../../components/local/EditUser/MemberOfTeams";
+import { useParams } from "react-router-dom";
+import { IsValidToken } from "../../components/global/IsValidToken";
+import { IsValidState } from "../../components/global/IsValidState";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserThunk } from "../../store/modules/users/thunk";
+import { useStyles } from "./styles";
+import { updateUsersListThunk } from "../../store/modules/users/thunk";
+import TeamsOwner from "../../components/local/EditUser/TeamsOwner";
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -31,40 +36,52 @@ function TabPanel(props) {
   );
 }
 
-const URL_BASE = JSON.parse(window.localStorage.getItem("users"));
-
 export const UserProfile = () => {
-  const [personalinfo, setPersonalinfo] = useState(URL_BASE.loggedUser.users);
-  const userData = useSelector((state) => state.loginUserThunk);
-  console.log("userData", userData);
+  const [personalinfo, setPersonalinfo] = useState([]);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.UsersReducer);
+  const { userID } = useParams();
   const [value, setValue] = useState(0);
 
+  const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const getPersonalInfo = () => {
-    axios.get(URL_BASE).then((body) => {
-      setPersonalinfo(body.data);
-    });
-  };
 
-  useEffect(getPersonalInfo, []);
-
+  useEffect(() => {
+    dispatch(updateUsersListThunk());
+  }, []);
+  useEffect(() => {
+    if (IsValidState(users.usersList)) {
+      setPersonalinfo(
+        users.usersList.filter((item) => {
+          return item.id === Number(userID);
+        })[0]
+      );
+    }
+  }, [users]);
   return (
-    <div>
+    <Box style={{ width: "100%" }}>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
         Welcome, {personalinfo.nickName}
       </div>
       <div>
-        <AppBar position="static">
+        <AppBar color="transparent" position="static">
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
+            className={classes.indicator}
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "#F3A712",
+              },
+            }}
           >
             <Tab label="Perfil" {...a11yProps(0)} />
-            <Tab label="Teams" {...a11yProps(1)} />
-            <Tab label="Tournaments" {...a11yProps(2)} />
+            <Tab label="Times" {...a11yProps(1)} />
+            <Tab label="Gerenciar Times" {...a11yProps(2)} />
+            {/* <Tab label="Tournaments" {...a11yProps(2)} /> */}
           </Tabs>
         </AppBar>
 
@@ -84,11 +101,9 @@ export const UserProfile = () => {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          {/* Aqui é o mesmo, uma função que faça um map no personalInfo.invites e pegue os Ids
-          dos invites, com os ids consigo dar get nas infos */}
-          Aqui são os campeonatos que ele participa
+          <TeamsOwner data={personalinfo} />
         </TabPanel>
       </div>
-    </div>
+    </Box>
   );
 };

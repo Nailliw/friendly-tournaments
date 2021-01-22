@@ -1,55 +1,55 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
-navBarContainer: {
-  width: "100%",
-  height: "3rem",
-  display: "flex",
-},
+  navBarContainer: {
+    width: "100%",
+    height: "6vh",
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#24262D",
+  },
 
-navBarLeft: {
-  position: "relative",
-  display: "flex",
-},
+  buttonsLeft: {
+    display: "flex",
+    width: "30%",
+    justifyContent: "space-between",
+    marginLeft: "10%",
+  },
+  navBarLeftSide: {
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  navBarRightSide: {
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginRight: "5%",
+  },
 
-navBarRight: {
-  position: "relative",
-  left: "55%",
-  display: "flex",
-  flexDirection: "row",
-},
+  logo: {
+    marginLeft: "10%",
+  },
 
-buttonsLeft: {
-  position: "relative",
-  top: "20%",
-  margin: "3%",
-},
+  menu: {
+    marginLeft: "5%",
+  },
 
-buttonsRight: {
-  display: "flex",
-  position: "relative",
-  top: "15%",
-  marginRight: "5px",
-},
+  buttons: {
+    height: "80%",
+    marginRight: "3%",
+  },
+  toolbar: {
+    paddingTop: "4%",
+    "&:hover": {
+      borderBottom: "1px solid #AF5735",
+    },
+  },
 
-logo: {
-  position: "relative",
-  top: "35%",
-},
-
-menu: {
-  position: "relative",
-  top: "15%",
-},
-
-buttons: {
-  marginRight: "3px",
-  marginLeft: "3px",
-},
-
-avatar: {
-  backgroundColor: "blue[100]",
-  color: "blue[600]",
-},
-
+  avatar: {
+    backgroundColor: "blue[100]",
+    color: "blue[600]",
+  },
 }));

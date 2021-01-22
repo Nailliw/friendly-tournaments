@@ -27,6 +27,7 @@ import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 
 import { useStyles } from "./style/styles";
+import { IsValidState } from "../../global/IsValidState";
 
 export const LoginPopup = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,13 @@ export const LoginPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.loginbuttonstyle}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Login
       </Button>
       <Dialog

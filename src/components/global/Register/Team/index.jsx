@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core/";
 
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,7 +26,6 @@ import { useStyles } from "./style/styles";
 
 export const RegisterTeamPopup = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.UsersReducer);
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const classes = useStyles();
 
@@ -70,8 +69,14 @@ export const RegisterTeamPopup = () => {
   }, []);
 
   return (
-    <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Box style={{ height: "100%" }}>
+      <Button
+        className={classes.createTeam}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Criar Time
       </Button>
       <Dialog

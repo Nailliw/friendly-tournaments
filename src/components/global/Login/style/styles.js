@@ -154,4 +154,10 @@ export const useStyles = makeStyles(() => ({
       boxShadow: "0.1em 0.1em 0.2em black",
     },
   },
+  loginbuttonstyle: {
+    backgroundColor: "#FF7843",
+    "&:hover": {
+      backgroundColor: "#AF5735",
+    },
+  },
 }));

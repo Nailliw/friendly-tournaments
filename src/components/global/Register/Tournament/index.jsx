@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core/";
 
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,9 +26,7 @@ import { IsValidToken } from "../../../global/IsValidToken";
 
 export const RegisterTournamentPopup = () => {
   const dispatch = useDispatch();
-  const tournaments = useSelector((state) => state.TournamentsReducer);
   const classes = useStyles();
-  const users = useSelector((state) => state.UsersReducer);
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -86,7 +84,13 @@ export const RegisterTournamentPopup = () => {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        className={classes.createtournament}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        size="small"
+      >
         Criar Torneio
       </Button>
       <Dialog
