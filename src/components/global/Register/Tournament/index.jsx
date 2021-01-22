@@ -45,6 +45,7 @@ export const RegisterTournamentPopup = () => {
       .number()
       .min(1, "O time deve conter no minimo um integrante")
       .required("Campo obrigatório"),
+    deadline: yup.string().required("Campo obrigatório"),
   });
 
   const { register, handleSubmit, errors, setError } = useForm({
@@ -69,16 +70,15 @@ export const RegisterTournamentPopup = () => {
       const newTournament = {
         ...formData,
         teamsData: [],
-        // gameName:
+        gameName: formData.category,
         remainingTeams: [],
         matches: [],
         status: "Esperando Times",
         tournamentWinner: [],
-        // deadline:
         userId: Number(userId),
       };
 
-      dispatch(registerTournamentThunk(newTournament));
+      dispatch(registerTournamentThunk(newTournament, setOpen));
     }
   };
 
@@ -140,8 +140,8 @@ export const RegisterTournamentPopup = () => {
                   className={classes.input}
                   autoFocus
                   multiline
-                  rows={2}
-                  rowsMax={20}
+                  rows={20}
+                  rowsMax={2}
                   variant="outlined"
                   label="Informações"
                   name="info"
@@ -162,7 +162,6 @@ export const RegisterTournamentPopup = () => {
                   label="Deadline Inscription"
                   type="datetime-local"
                   variant="outlined"
-                  // defaultValue={}
                   inputRef={register}
                   error={!!errors.deadline}
                   helperText={errors.deadline?.message}
@@ -258,10 +257,10 @@ export const RegisterTournamentPopup = () => {
                   variant="outlined"
                 >
                   <option value=""></option>
-                  <option value="1">League of Legends</option>
-                  <option value="2">Dota</option>
-                  <option value="3">Fortnite</option>
-                  <option value="4">Counter Strike</option>
+                  <option value="League of Legends">League of Legends</option>
+                  <option value="Dota">Dota</option>
+                  <option value="Fortnite">Fortnite</option>
+                  <option value="Counter Strike">Counter Strike</option>
                 </Select>
                 <FormHelperText style={{ color: "red" }}>
                   {errors.category?.message}

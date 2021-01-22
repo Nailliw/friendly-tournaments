@@ -26,14 +26,12 @@ export const InfoSection = ({ info, gameName, teamsSize, tournamentId }) => {
           <Box component="div" className={classes.tournamentGameInfo}>
             <Chip
               label={gameName}
-              clickable
               color="default"
               variant="default"
               // size="small"
             />
             <Chip
               label={`${teamsSize} v ${teamsSize}`}
-              clickable
               color="default"
               variant="default"
             />

@@ -1,7 +1,7 @@
 import { updateTeams } from "./actions";
 import { api } from "../../../services/api";
 
-export const registerTeamThunk = (teamData) => {
+export const registerTeamThunk = (teamData, setOpen) => {
   return (dispatch, getState) => {
     const teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
@@ -11,6 +11,7 @@ export const registerTeamThunk = (teamData) => {
       .post("/teams", teamData, authToken)
       .then((res) => {
         console.log(res);
+        setOpen(false);
       })
       .catch((err) => {
         console.log(err.response);
@@ -22,7 +23,8 @@ export const getTeamInfoThunk = (teamId) => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
+    console.log(teams);
 
     api
       .get(`/teams/${teamId}`, authToken)
