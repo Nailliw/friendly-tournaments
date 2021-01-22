@@ -28,6 +28,7 @@ import { useHistory } from "react-router-dom";
 
 import { useStyles } from "./style/styles";
 import { IsValidState } from "../../global/IsValidState";
+import { IsValidToken } from "../IsValidToken";
 
 export const LoginPopup = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const LoginPopup = () => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const users = useSelector((state) => state.UsersReducer);
 
@@ -57,7 +59,13 @@ export const LoginPopup = () => {
 
   const handleForm = (loginData) => {
     console.log(loginData);
-    dispatch(loginUserThunk(loginData, setError));
+    dispatch(loginUserThunk(loginData, setErrorMessage));
+
+    setTimeout(() => {
+      if (!IsValidToken()) {
+        setErrorMessage("Email/Senha invalidos");
+      }
+    }, 1000);
   };
 
   return (
@@ -86,64 +94,86 @@ export const LoginPopup = () => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">Entrar</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit(handleForm)}>
-            <Box>
-              <TextField
-                autoFocus
-                variant="outlined"
-                label="Email"
-                name="email"
-                margin="dense"
-                type="string"
-                inputRef={register}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                fullWidth
-              />
-            </Box>
-            <Box>
-              <TextField
-                autoFocus
-                variant="outlined"
-                label="Senha"
-                name="password"
-                margin="dense"
-                inputRef={register}
-                type="password"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                fullWidth
-              />
-            </Box>
+        <Box className={classes.imgLogin}></Box>
+        <Box className={classes.form}>
+          <Box className={classes.formInfo}>
+            <DialogTitle id="form-dialog-title">Entrar</DialogTitle>
+          </Box>
+          <DialogContent className={classes.FormInput}>
+            <form
+              className={classes.formLogin}
+              onSubmit={handleSubmit(handleForm)}
+            >
+              <Box className={classes.inputField}>
+                <TextField
+                  autoComplete="off"
+                  className={classes.input}
+                  autoFocus
+                  variant="outlined"
+                  label="Email"
+                  name="email"
+                  margin="dense"
+                  type="string"
+                  inputRef={register}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  fullWidth
+                />
+              </Box>
+              <Box className={classes.inputField}>
+                <TextField
+                  className={classes.input}
+                  autoComplete="off"
+                  autoFocus
+                  variant="outlined"
+                  label="Senha"
+                  name="password"
+                  margin="dense"
+                  inputRef={register}
+                  type="password"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  fullWidth
+                />
+              </Box>
 
-            <DialogActions>
-              <Button
-                // className={classes.loginButton}
-                variant="outlined"
-                color="secondary"
-                size="small"
-                onClick={handleClose}
-              >
-                Fechar
-              </Button>
-              <Button
-                // className={classes.loginButton}
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Logar
-              </Button>
-              <div className={classes.feedbackMessage}>
-                <h2 style={{ color: "red", textAlign: "center" }}>
-                  {errors.userLogin?.message}
-                </h2>
-              </div>
-            </DialogActions>
-          </form>
-        </DialogContent>
+              <DialogActions className={classes.formBottom}>
+                <Box className={classes.boxButton}>
+                  <Button
+                    // className={classes.loginButton}
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                    onClick={handleClose}
+                  >
+                    Fechar
+                  </Button>
+                  <Button
+                    // className={classes.loginButton}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Logar
+                  </Button>
+                </Box>
+                <div className={classes.feedbackMessage}>
+                  <p
+                    style={{
+                      color: "red",
+                      textAlign: "center",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      margin: "0px",
+                    }}
+                  >
+                    {errorMessage}
+                  </p>
+                </div>
+              </DialogActions>
+            </form>
+          </DialogContent>
+        </Box>
       </Dialog>
     </Box>
   );
