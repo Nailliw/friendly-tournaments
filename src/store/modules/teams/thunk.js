@@ -23,7 +23,8 @@ export const getTeamInfoThunk = (teamId) => {
   return (dispatch, getState) => {
     let teams = getState().TeamsReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
+    console.log(teams);
 
     api
       .get(`/teams/${teamId}`, authToken)
