@@ -112,7 +112,10 @@ export default function NavigationBar() {
     localStorage.clear();
     dispatch(updateIsLoggedThunk());
     dispatch(logoutThunk());
-    history.push("/");
+
+    setTimeout(() => {
+      document.location.reload();
+    }, 2000);
   };
 
   return (
