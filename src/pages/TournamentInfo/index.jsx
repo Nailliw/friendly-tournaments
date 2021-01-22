@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-// import { IsValidToken } from "../../components/global/IsValidToken";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
@@ -30,6 +28,8 @@ export const TournamentInfo = () => {
     ({ TournamentsReducer: { selectedTournament } }) => selectedTournament
   );
 
+  useEffect(() => {}, [tournamentData]);
+
   const {
     gameName,
     info,
@@ -40,7 +40,7 @@ export const TournamentInfo = () => {
     deadline,
     id,
   } = tournamentData;
-  console.log(tournamentData);
+
   const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (

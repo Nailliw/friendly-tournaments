@@ -1,5 +1,5 @@
 import { useStyles } from "./styles";
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 
 import { EditTournament } from "../../EditTournament/index";
 import { SubscribeTeam } from "../../../local/TournamentInfo/SubscribeTeam/index";
@@ -43,9 +43,6 @@ export const TitleHeader = ({ tournamentData, isLogged }) => {
         {isLogged && (
           <Box className={classes.signinButtonContainer}>
             <SubscribeTeam tournamentId={tournamentData.id} />
-            {/* <Button onClick={(e) => e} color="primary" variant="contained">
-              Inscrever-se
-            </Button> */}
           </Box>
         )}
       </Box>

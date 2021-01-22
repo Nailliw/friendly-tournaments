@@ -4,40 +4,25 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
-import {
-  Card,
-  Typography,
-  CardContent,
-  CardHeader,
-  FormControl,
-} from "@material-ui/core";
+import { Box, FormControl } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { updateTournamentThunk } from "../../../store/modules/tournaments/thunk";
-import { useState, useEffect } from "react";
 
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { updateTournamentThunk } from "../../../store/modules/tournaments/thunk";
+
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 
-export const EditTournament = ({
-  id,
-  userId,
-  category,
-  gameName,
-  title,
-  info,
-  numberOfTeams,
-  teamsSize,
-  messagesList,
-  teamsData,
-  tournamentWinner,
-  deadline,
-  status,
-}) => {
-  const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
+export const EditTournament = ({ id, title, info, deadline, status }) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -57,13 +42,16 @@ export const EditTournament = ({
   });
 
   const handleForm = (register) => {
-    console.log(register);
     dispatch(updateTournamentThunk(id, register));
     setOpen(false);
+
+    setTimeout(() => {
+      document.location.reload();
+    }, 1000);
   };
 
   return (
-    <>
+    <Box>
       <Button
         color="primary"
         variant="contained"
@@ -77,6 +65,16 @@ export const EditTournament = ({
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        BackdropProps={{
+          classes: {
+            root: classes.root,
+          },
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.editTournament,
+          },
+        }}
       >
         <DialogTitle id="form-dialog-title">
           Edite os Dados do Torneio
@@ -105,6 +103,9 @@ export const EditTournament = ({
                   margin="dense"
                   label="Info"
                   type="string"
+                  multiline
+                  rows={2}
+                  rowsMax={4}
                   defaultValue={info}
                   inputRef={register}
                   error={!!errors.info}
@@ -139,16 +140,22 @@ export const EditTournament = ({
                 }}
               />
             </FormControl>
-            <p></p>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button type="submit" color="primary">
-              Edit
-            </Button>
+            <Box className={classes.buttonsTourneyEdit}>
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={handleClose}
+                color="secondary"
+              >
+                Cancelar
+              </Button>
+              <Button type="submit" variant="contained" color="primary">
+                Editar
+              </Button>
+            </Box>
           </form>
         </DialogContent>
       </Dialog>
-    </>
+    </Box>
   );
 };
