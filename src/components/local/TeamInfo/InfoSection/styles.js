@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
-  tournamentInfoContainer: {
+  teamInfoContainer: {
     width: "100%",
     // minHeight: "50vh",
     // height: "80%",
@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
     },
   },
 
-  tournamentInfoDetails: {
+  teamInfoDetails: {
     width: "40%",
     height: "100% !important",
 
@@ -26,15 +26,15 @@ export const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
 
-  tournamentInfoDetailsTitle: {
+  teamInfoDetailsTitle: {
     marginBottom: "2rem",
   },
 
-  tournamentInfoDetailsText: {
+  teamInfoDetailsText: {
     margin: "1rem",
   },
 
-  tournamentGameDetails: {
+  teamGameDetails: {
     width: "100%",
     // margin: "1rem",
     // padding: " 1rem",
@@ -60,7 +60,7 @@ export const useStyles = makeStyles(() => ({
     // },
   },
 
-  tournamentGameInfo: {
+  teamGameInfo: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -70,7 +70,7 @@ export const useStyles = makeStyles(() => ({
     // padding: "0.5rem 1rem",
   },
 
-  tournamentInfoBox: {
+  teamInfoBox: {
     width: "60%",
     height: "100%",
     padding: "2rem",
@@ -78,7 +78,7 @@ export const useStyles = makeStyles(() => ({
     // maxHeight: "30vh",
   },
 
-  tournamentInfoContent: {
+  teamInfoContent: {
     margin: "0 auto",
     height: "100%",
     // margin: "2rem",

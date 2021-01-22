@@ -64,98 +64,91 @@ export const EditTournament = ({
 
   return (
     <>
-      <Card className={classes.userRoot}>
-        <CardHeader title={gameName} subheader={title} />
-        <CardContent>
-          <Typography variant="body2"> {info}</Typography>
-        </CardContent>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={handleClickOpen}
+        startIcon={<EditIcon />}
+      >
+        Editar
+      </Button>
 
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          <EditIcon />
-        </Button>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">
-            Edite os Dados do Torneio
-          </DialogTitle>
-          <DialogContent>
-            <form onSubmit={handleSubmit(handleForm)} id={"editTournament"}>
-              <FormControl>
-                <div>
-                  <TextField
-                    autoFocus
-                    name="title"
-                    margin="dense"
-                    label="Title"
-                    type="string"
-                    defaultValue={title}
-                    inputRef={register}
-                    error={!!errors.title}
-                    helperText={errors.title?.message}
-                    fullWidth
-                  />
-                </div>
-                <div>
-                  <TextField
-                    autoFocus
-                    name="info"
-                    margin="dense"
-                    label="Info"
-                    type="string"
-                    defaultValue={info}
-                    inputRef={register}
-                    error={!!errors.info}
-                    helperText={errors.info?.message}
-                    fullWidth
-                  />
-                </div>
-
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">
+          Edite os Dados do Torneio
+        </DialogTitle>
+        <DialogContent>
+          <form onSubmit={handleSubmit(handleForm)} id={"editTournament"}>
+            <FormControl>
+              <div>
                 <TextField
-                  name="status"
+                  autoFocus
+                  name="title"
                   margin="dense"
-                  label="Status"
+                  label="Title"
                   type="string"
-                  defaultValue={status}
+                  defaultValue={title}
                   inputRef={register}
-                  error={!!errors.status}
-                  helperText={errors.status?.message}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
                   fullWidth
                 />
+              </div>
+              <div>
                 <TextField
-                  name="deadline"
-                  id="datetime-local"
-                  label="Deadline Inscription"
-                  type="datetime-local"
-                  defaultValue={deadline}
+                  autoFocus
+                  name="info"
+                  margin="dense"
+                  label="Info"
+                  type="string"
+                  defaultValue={info}
                   inputRef={register}
-                  error={!!errors.deadline}
-                  helperText={errors.deadline?.message}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                  error={!!errors.info}
+                  helperText={errors.info?.message}
+                  fullWidth
                 />
-              </FormControl>
-              <p></p>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button type="submit" color="primary">
-                Edit
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </Card>
+              </div>
 
-      <Card>
-        <CardContent>
-          <Typography variant="body2">Dummy</Typography>
-        </CardContent>
-      </Card>
+              <TextField
+                name="status"
+                margin="dense"
+                label="Status"
+                type="string"
+                defaultValue={status}
+                inputRef={register}
+                error={!!errors.status}
+                helperText={errors.status?.message}
+                fullWidth
+              />
+              <TextField
+                name="deadline"
+                id="datetime-local"
+                label="Deadline Inscription"
+                type="datetime-local"
+                defaultValue={deadline}
+                inputRef={register}
+                error={!!errors.deadline}
+                helperText={errors.deadline?.message}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </FormControl>
+            <p></p>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button type="submit" color="primary">
+              Edit
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

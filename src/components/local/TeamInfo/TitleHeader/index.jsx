@@ -1,25 +1,25 @@
 import { useStyles } from "./styles";
 import { Box, Button, Typography } from "@material-ui/core";
 
-import { EditTournament } from "../../EditTournament/index";
+// import { EditTournament } from "../../EditTournament/index";
 
 // import { IsValidToken } from "../../../global/IsValidToken";
 
-export const TitleHeader = ({ tournamentData, isLogged }) => {
+export const TitleHeader = ({ teamData, isLogged }) => {
   const classes = useStyles();
 
-  let isTournamentOwner = false;
+  let isTeamOwner = false;
 
-  const { title } = tournamentData;
-  const tournamentOwnerId = tournamentData.userId;
+  const { teamName } = teamData;
+  const isTeamOwnerId = teamData.userId;
 
   const loggedUserId = JSON.parse(window.localStorage.getItem("users"))
     ?.loggedUser?.users?.id;
 
   // Verificação se o usuario logado é o dono do Torneio
   if (isLogged) {
-    if (tournamentOwnerId === loggedUserId) {
-      isTournamentOwner = true;
+    if (isTeamOwnerId === loggedUserId) {
+      isTeamOwner = true;
     }
   }
 
@@ -32,11 +32,11 @@ export const TitleHeader = ({ tournamentData, isLogged }) => {
           align="left"
           className={classes.mainTitle}
         >
-          {title}
+          {teamName}
         </Typography>
       </Box>
       <Box component="div" className={classes.editButtonContainer}>
-        {isTournamentOwner && (
+        {isTeamOwner && (
           <Box>
             {/* <Button
 
@@ -46,7 +46,7 @@ export const TitleHeader = ({ tournamentData, isLogged }) => {
             >
               Editar
             </Button> */}
-            <EditTournament {...tournamentData} />
+            {/* <EditTournament {...teamData} /> */}
           </Box>
         )}
         {isLogged && (
