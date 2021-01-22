@@ -89,6 +89,11 @@ export default function MenuMobile(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <StyledMenuItem onClick={props.onClick1}>
+        <Typography variant="button" className={classes.text} >
+          {props.name1}
+        </Typography>
+        </StyledMenuItem>
         <StyledMenuItem>
         {!isLogged ? (
             <Box component="div" className={classes.buttons}>
@@ -99,6 +104,8 @@ export default function MenuMobile(props) {
               <RegisterTeamPopup />
             </Box>
           )}
+          </StyledMenuItem>
+          <StyledMenuItem>
           {!isLogged ? (
             <Box component="div" className={classes.buttons}>
               <RegisterUserPopup />
@@ -109,12 +116,7 @@ export default function MenuMobile(props) {
             </Box>
           )}
         </StyledMenuItem>
-        {isLogged && <Box component="div">
-           <StyledMenuItem onClick={props.onClick1}>
-        <Typography variant="button" className={classes.text} >
-          {props.name1}
-        </Typography>
-        </StyledMenuItem>
+        {isLogged && <Box component="div">           
         <StyledMenuItem onClick={props.onClick2}>
         <Typography variant="button" className={classes.text} >
           {props.name2}

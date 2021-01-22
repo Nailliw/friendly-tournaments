@@ -37,6 +37,10 @@ export const useStyles = makeStyles(() => ({
     marginLeft: "5%",
   },
 
+  menuMobile: {
+    marginRight: "30%",
+  },
+
   buttons: {
     height: "80%",
     marginRight: "3%",
