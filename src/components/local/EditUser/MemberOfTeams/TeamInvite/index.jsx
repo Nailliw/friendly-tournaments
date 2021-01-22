@@ -14,15 +14,16 @@ import { IsValidToken } from "../../../../global/IsValidToken";
 
 import { useStyles } from "./styles";
 
-const TeamInvite = ({ teamId, memberOfTeams }) => {
-  const { teamsList } = useSelector((state) => state.TeamsReducer);
-
-  const { playersId } = useSelector((state) => state.TeamsReducer.selectedTeam);
+const TeamInvite = ({ teamId }) => {
+  const { selectedTeam, teamsList } = useSelector(
+    (state) => state.TeamsReducer
+  );
+  const { loggedUser } = useSelector((state) => state.UsersReducer);
 
   const [team, setTeam] = useState([]);
-  const { loggedUser } = JSON.parse(window.localStorage.getItem("users"));
+  //const { loggedUser } = JSON.parse(window.localStorage.getItem("users"));
   const dispatch = useDispatch();
-
+  const memberOfTeams = loggedUser.users.memberOfTeams;
   const classes = useStyles();
 
   const handleAcept = () => {
@@ -32,12 +33,13 @@ const TeamInvite = ({ teamId, memberOfTeams }) => {
       );
 
       dispatch(updateUserThunk(loggedUser.users.id, { invites }));
-      dispatch(updateUsersListThunk());
+      memberOfTeams.push(teamId);
+      dispatch(updateUserThunk(loggedUser.users.id, { memberOfTeams }));
     }
-
-    dispatch(updateUserThunk(loggedUser.users.id, { memberOfTeams }));
+    const playersId = team.playersId.concat([loggedUser.users.id]);
 
     // // mandar um dispatch pra edição do time
+    dispatch(updateTeamThunk(teamId, { playersId }));
   };
   const handleRefuse = () => {
     if (IsValidToken(loggedUser.authToken.headers.Authorization)) {
@@ -46,11 +48,7 @@ const TeamInvite = ({ teamId, memberOfTeams }) => {
       );
 
       dispatch(updateUserThunk(loggedUser.users.id, { invites }));
-      dispatch(updateUsersListThunk());
     }
-
-    dispatch(getTeamInfoThunk(teamId));
-    // dispatch(updateTeamThunk(teamId, { playersId }));
   };
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import { IsValidToken } from "../../../components/global/IsValidToken";
 export const loginUserThunk = (userData, setErrorMessage) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
-    console.log(users);
+
     api
       .post("/login", userData)
       .then((res) => {
@@ -41,7 +41,6 @@ export const loginUserThunk = (userData, setErrorMessage) => {
 
             window.localStorage.setItem("users", JSON.stringify(users));
 
-            console.log(users);
             dispatch(updateUsers(users));
           })
           .catch((err) => {
@@ -58,13 +57,11 @@ export const getUserInfoThunk = (userId) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
-      .authToken;
+      ?.authToken;
 
     api
       .get(`/users/${userId}`, authToken)
       .then((res) => {
-        console.log(res);
-
         users = { ...users, selectedUser: res.data };
 
         window.localStorage.setItem("users", JSON.stringify(users));
@@ -109,8 +106,6 @@ export const updateUserThunk = (userId, userData) => {
     api
       .patch(`/users/${userId}`, userData, authToken)
       .then((res) => {
-        console.log(res);
-
         users = { ...users, loggedUser: { ...loggedUser, users: res.data } };
 
         window.localStorage.setItem("users", JSON.stringify(users));
@@ -167,10 +162,8 @@ export const updateIsLoggedThunk = () => {
     let users =
       JSON.parse(window.localStorage.getItem("users")) ||
       getState().UsersReducer;
-    console.log(users);
 
     users = { ...users, isLogged: IsValidToken() };
-    console.log(users);
 
     window.localStorage.setItem("users", JSON.stringify(users));
 
@@ -183,7 +176,6 @@ export const logoutThunk = () => {
     let users = getState().UsersReducer;
 
     let newUsers = { ...users, loggedUser: {} };
-    console.log(newUsers);
 
     window.localStorage.setItem("users", JSON.stringify(newUsers));
     dispatch(updateUsers(newUsers));

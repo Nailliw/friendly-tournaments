@@ -12,28 +12,33 @@ import category2 from '../../components/global/assets/img/category-images/catego
 import category3 from '../../components/global/assets/img/category-images/categoryWoW.jpg'
 import category4 from '../../components/global/assets/img/category-images/categoryRetro.jpg'
 import category5 from '../../components/global/assets/img/category-images/categoryOthers.jpg'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
-export const Home = (props) => {
+export const Home = () => {
   const history = useHistory();
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:768px)');
 
   return (
     <Box component="div" className={classes.page}>
       <Box component="img" src={bannerImage} alt="fundo da page"  className={classes.BackgroundImage}/>
 
       <Box component="div" className={classes.body}>       
-        <Box component="div" className={classes.text}>
-        <Typography variant="h1">Find your game Tournament here!</Typography>
-        <Typography variant="h4">Over 100 tournament & event waiting you to join in</Typography> 
-        </Box> 
+      {!mobile ? <Box component="div" className={classes.text}>
+        <Typography variant="h1">Encontre seu torneio de jogo aqui!</Typography>
+        <Typography variant="h4">Mais de 100 torneios e eventos esperando por você para participar</Typography> 
+        </Box> : <Box component="div" className={classes.text}>
+        <Typography variant="h4">Encontre seu torneio de jogo aqui!</Typography>
+        <Typography variant="h6">Mais de 100 torneios e eventos esperando por você para participar</Typography> 
+        </Box> }
         <Box component="div" className={classes.buttonBody}> 
         <Button
           variant="contained"
           color="primary"
           onClick={() => history.push("/tournaments")}
         >
-          Join Tournaments
+          Junte-se a torneios!
         </Button>
         </Box>  
         </Box> 
@@ -44,8 +49,7 @@ export const Home = (props) => {
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=2")} className={classes.imgGame}><img src={category2} alt="APEX" width="100px" height="50px"/></Paper>
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=3")} className={classes.imgGame}><img src={category3} alt="Stret Fiter" width="100px" height="50px"/></Paper>
           <Paper elevation={24}  onClick={() => history.push("/tournaments?category=4")} className={classes.imgGame}><img src={category4} alt="CS.GO" width="100px" height="50px"/></Paper>
-          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=5")} className={classes.imgGame}><img src={category5} alt="LOL" width="100px" height="50px"/></Paper>
-          
+          <Paper elevation={24}  onClick={() => history.push("/tournaments?category=5")} className={classes.imgGame}><img src={category5} alt="LOL" width="100px" height="50px"/></Paper>          
         </Box>
 
       </Box>

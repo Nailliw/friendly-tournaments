@@ -12,7 +12,7 @@ BackgroundImage: {
   position: "absolute",
   zIndex: "-1",
   width: "100%",
-  height: "73%",
+  height: "80%",
 },
 
 body: {
@@ -32,7 +32,7 @@ text: {
 
 buttonBody: {
   position:"relative",
-  top: "10%"
+  top: "10%",
 },
 
 footer: {
@@ -53,7 +53,12 @@ imgGame: {
   display: 'flex',
   flexWrap: 'wrap',
   "&:hover": {
-    cursor:"pointer",
+    cursor:"pointer",    
+  },
+  "@media (max-width: 768px)": {
+    width: "10px",
+    height: "5px",  
+    flexDirection: "row",
   },
 },
 
@@ -65,6 +70,13 @@ containerImg: {
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "#2b2c31",
+  "@media (max-width: 768px)": { 
+    flexDirection: "row",
+    marginRight: "7px",
+  },
 },
 
 }));
+
+
+
