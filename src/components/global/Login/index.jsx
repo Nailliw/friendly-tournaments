@@ -28,6 +28,7 @@ import { useHistory } from "react-router-dom";
 
 import { useStyles } from "./style/styles";
 import { IsValidState } from "../../global/IsValidState";
+import { IsValidToken } from "../IsValidToken";
 
 export const LoginPopup = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const LoginPopup = () => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const users = useSelector((state) => state.UsersReducer);
 
@@ -57,7 +59,13 @@ export const LoginPopup = () => {
 
   const handleForm = (loginData) => {
     console.log(loginData);
-    dispatch(loginUserThunk(loginData, setError));
+    dispatch(loginUserThunk(loginData, setErrorMessage));
+
+    setTimeout(() => {
+      if (!IsValidToken()) {
+        setErrorMessage("Email/Senha invalidos");
+      }
+    }, 1000);
   };
 
   return (
@@ -159,7 +167,7 @@ export const LoginPopup = () => {
                       margin: "0px",
                     }}
                   >
-                    {errors.userLogin?.message}
+                    {errorMessage}
                   </p>
                 </div>
               </DialogActions>
