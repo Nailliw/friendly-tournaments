@@ -114,6 +114,7 @@ export const useStyles = makeStyles(() => ({
     width: "80%",
     height: "18%",
     // paddingBottom: "2rem",
+    // overflow: "hidden",
     display: "flex",
     alignItems: "baseline",
     justifyContent: "center",
