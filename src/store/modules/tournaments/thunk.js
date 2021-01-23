@@ -1,7 +1,11 @@
 import { updateTournaments } from "./actions";
 import { api } from "../../../services/api";
 
-export const registerTournamentThunk = (tournamentData, setOpen) => {
+export const registerTournamentThunk = (
+  tournamentData,
+  setOpen,
+  setRegisterSuccess
+) => {
   return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       ?.authToken;
@@ -9,10 +13,12 @@ export const registerTournamentThunk = (tournamentData, setOpen) => {
     api
       .post("/tournaments", tournamentData, authToken)
       .then(() => {
-        setOpen(false);
+        setRegisterSuccess(true);
       })
       .catch((err) => {
         console.log(err.response);
+
+        setRegisterSuccess(false);
       });
   };
 };
