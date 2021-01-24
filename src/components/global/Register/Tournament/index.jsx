@@ -331,7 +331,6 @@ export const RegisterTournamentPopup = () => {
               <DialogActions className={classes.formBottom}>
                 <Box className={classes.boxButton}>
                   <Button
-                    className={classes.loginButton}
                     variant="outlined"
                     color="secondary"
                     size="small"
@@ -339,12 +338,8 @@ export const RegisterTournamentPopup = () => {
                   >
                     Fechar
                   </Button>
-                  <Button
-                    className={classes.loginButton}
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                  >
+
+                  <Button type="submit" color="primary" variant="contained">
                     Criar
                   </Button>
                 </Box>
