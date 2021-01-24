@@ -2,21 +2,46 @@ import { makeStyles } from "@material-ui/core";
 import imgTournament from "../style/img/tournament.png";
 
 export const useStyles = makeStyles(() => ({
-  dialogRoot: {
-    // backgroundColor: "#000",
+  ".MuiDialog-paper": {
+    margin: "0",
+  },
+
+  ".MuiDialog-container": {
+    width: "100%",
+    height: "100%",
   },
 
   dialogConteiner: {
-    // backgroundColor: "#000",
+    minWidth: "250px",
+    maxHeight: "850px",
+
+    height: "90%",
+    width: "90vw",
+
+    margin: "0 4vw",
+    padding: "0.2rem 0.5rem",
+    border: "2px solid #ccc",
+
     backgroundColor: "#ccc",
-    height: "80%",
-    width: "30%",
-    padding: "1rem",
+
     display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "baseline",
-    border: "1px solid #ccc",
+    alignSelf: "center",
+
+    "@media (max-width: 768px)": {
+      // Aumenta o Tamanho do Container principal apenas para Mobile, para Desktop Retorna para o Padrao do Material UI.
+      maxWidth: "90vw", // NECESSARIO PARA ALTERAR A LARGURA ALEM DO PREDEFINIDO PELO MATERIAL UI
+    },
+
+    "@media (min-width: 500px)": {
+      width: "80%",
+    },
+    "@media (min-width: 700px)": {
+      width: "70%",
+      height: "80%",
+    },
   },
 
   imgLogin: {
@@ -25,124 +50,117 @@ export const useStyles = makeStyles(() => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     overflow: "hidden",
-    backgroundColor: "red",
+
+    boxShadow: "7px 4px 5px 1px",
+
     width: "100%",
     height: "15%",
   },
 
   form: {
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
-    flexDirection: "column",
     width: "100%",
-    height: "85%",
-  },
-
-  formInfo: {
-    height: "8%",
-    width: "100%",
-    margin: "0px;",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    height: "90%",
   },
 
   FormInput: {
-    height: "92%",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "center",
-
-    // "@media (min-width: 500px)": {
-    //   height: "40%",
-    // },
-  },
-
-  formRegister: {
-    width: "100%",
     height: "100%",
+    width: "100%",
 
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "baseline",
-    alignItems: "center",
+    padding: "0.5rem",
 
-    // borderRadius: "2rem",
-    // boxShadow: "0.1em 0.1em 0.2em black",
-  },
+    overflow: "hidden",
 
-  labelCadastro: {
-    fontSize: "1.8rem",
-    fontWeight: "500",
-    paddingBottom: "0.5rem",
-    textAlign: "center",
-    color: "rgb(8,53,108)",
-    textShadow: "0.02em 0.05em 0.02em rgb(0,0,0)",
-
-    "@media (min-width: 1100px)": {
-      fontSize: "2.5rem",
-      paddingBottom: "1.5rem",
+    "@media (min-width: 768px)": {
+      padding: "2rem",
     },
   },
 
-  inputArea: {
-    height: "70%",
-    width: "100%",
+  formSection: {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    justifyContent: "center",
 
-    "@media (max-width: 500px)": {
-      height: "40%",
+    "@media (min-width: 700px)": {
+      width: "80%",
+    },
+  },
+
+  formInfo: {
+    height: "15%",
+    width: "100%",
+
+    "& #form-dialog-title": {
+      padding: "0.5rem",
+    },
+  },
+
+  labelCadastro: {
+    margin: "0.5rem",
+    padding: "0",
+    textAlign: "center",
+
+    fontWeight: "500",
+    color: "rgb(8,53,108)",
+    textShadow: "0.02em 0.05em 0.02em rgb(0,0,0)",
+
+    "@media (min-width: 500px)": {
+      fontSize: "2rem",
+    },
+  },
+
+  formRegister: {
+    backgroundColor: "rgba(255, 255, 255, 0.883)",
+    boxShadow: "0.1em 0.1em 0.2em black",
+
+    minWidth: "250px",
+    height: "100%",
+    maxHeight: "100%",
+
+    overflow: "auto",
+    borderRadius: "1rem",
+
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "space-between",
+
+    fontStyle: "italic",
+
+    "@media (min-width: 700px)": {
+      height: "96%",
+      margin: "1rem",
     },
   },
 
   inputField: {
-    width: "80%",
-    height: "14%",
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
-  },
-
-  inputFieldRow: {
-    width: "80%",
-    height: "18%",
-    // paddingBottom: "2rem",
-    // overflow: "hidden",
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
-  },
-
-  input: {
+    textAlign: "center",
     width: "100%",
-    height: "13%",
-    margin: "0",
+    "& > div": {
+      width: "83%",
 
-    "& label.Mui-focused": {
-      color: "rgb(8,53,108)",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "rgb(8,53,108)",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "rgb(8,53,108)",
+      marginBottom: "1rem",
+
+      "@media (min-width: 768px)": {
+        marginBottom: "2rem",
       },
     },
   },
 
-  select: {
-    height: "14%",
-    // margin: "0.5rem",
+  inputFieldDate: {
+    width: "83%",
+    marginBottom: "1rem",
+    textAlign: "center",
+  },
+
+  InputSelect: {
     minWidth: "80%",
-    maxWidth: "80%",
+    width: "100%",
+
+    maxWidth: "83%",
+
+    textAlign: "center",
+
+    marginBottom: "1rem",
 
     "& label.Mui-focused": {
       color: "rgb(8,53,108)",
@@ -158,48 +176,40 @@ export const useStyles = makeStyles(() => ({
     "& option": {
       width: "10px",
     },
+
+    "@media (min-width: 500px)": {
+      width: "100%",
+    },
   },
 
   formBottom: {
     width: "100%",
-    height: "18%",
-    color: "red",
+
+    minHeight: "15%",
+    maxHeight: "70%",
+
+    margin: "0.5rem",
+
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
+    "& > *": {
+      margin: "0.5rem",
+    },
   },
 
   boxButton: {
-    width: "100%",
-    height: "55%",
-    color: "red",
+    width: "80%",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
   },
 
   feedbackMessage: {
-    width: "100%",
-    height: "45%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: "80%",
   },
 
-  registerButton: {
-    alignItems: "center",
-    width: "40%",
-    height: "25%",
-    color: "white",
-    backgroundColor: "rgba(8,53,108)",
-    border: "1px solid black",
-    marginTop: "10px",
-    "&:hover": {
-      backgroundColor: "rgba(28,73,128)",
-      boxShadow: "0.1em 0.1em 0.2em black",
-    },
-  },
-  createtournament: {
+  createTournament: {
     backgroundColor: "#FF7843",
     height: "100%",
 

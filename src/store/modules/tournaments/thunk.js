@@ -3,8 +3,8 @@ import { api } from "../../../services/api";
 
 export const registerTournamentThunk = (
   tournamentData,
-  setOpen,
-  setRegisterSuccess
+  setRegisterSuccess,
+  setRegisterFailed
 ) => {
   return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
@@ -18,7 +18,7 @@ export const registerTournamentThunk = (
       .catch((err) => {
         console.log(err.response);
 
-        setRegisterSuccess(false);
+        setRegisterFailed(true);
       });
   };
 };
