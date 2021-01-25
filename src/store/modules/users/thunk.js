@@ -4,15 +4,16 @@ import { decode } from "jsonwebtoken";
 import { updateUsers } from "./actions";
 import { IsValidToken } from "../../../components/global/IsValidToken";
 
-export const loginUserThunk = (userData, setErrorMessage) => {
+export const loginUserThunk = (userData, setLoginSuccess, setLoginFailed) => {
   return (dispatch, getState) => {
     let users = getState().UsersReducer;
 
     api
       .post("/login", userData)
       .then((res) => {
+        setLoginSuccess(true);
+
         const token = res.data.accessToken;
-        setErrorMessage("");
 
         const authToken = {
           headers: {
@@ -49,6 +50,8 @@ export const loginUserThunk = (userData, setErrorMessage) => {
       })
       .catch((err) => {
         console.log(err.response);
+
+        setLoginFailed(true);
       });
   };
 };
@@ -74,23 +77,21 @@ export const getUserInfoThunk = (userId) => {
   };
 };
 
-export const registerUserThunk = (userData, setError, setRegisterSucess) => {
+export const registerUserThunk = (
+  userData,
+  setRegisterSuccess,
+  setRegisterFailed
+) => {
   return (_dispatch, _getState) => {
     api
       .post("/users", userData)
       .then((_res) => {
-        setRegisterSucess(true);
-        setError("registerError", {
-          message: "Cadastro realizado com Sucesso!",
-        });
+        setRegisterSuccess(true);
       })
       .catch((err) => {
         console.log(err.response);
 
-        setRegisterSucess(false);
-        setError("registerError", {
-          message: "Email já Cadastrado",
-        });
+        setRegisterFailed(true);
       });
   };
 };

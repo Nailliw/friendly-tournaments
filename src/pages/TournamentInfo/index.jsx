@@ -40,7 +40,7 @@ export const TournamentInfo = () => {
     deadline,
     id,
   } = tournamentData;
-
+  console.log(tournamentData);
   const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (
