@@ -15,7 +15,10 @@ import { useStyles } from "./style/styles";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { loginUserThunk } from "../../../store/modules/users/thunk";
+import {
+  loginUserThunk,
+  updateIsLoggedThunk,
+} from "../../../store/modules/users/thunk";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -40,7 +43,7 @@ export const LoginPopup = () => {
 
   const handleClose = () => {
     setOpenDialog(false);
-    if (setLoginSuccess || setLoginFailed) window.location.reload();
+    if (setLoginSuccess || setLoginFailed) dispatch(updateIsLoggedThunk());
   };
 
   const schema = yup.object().shape({

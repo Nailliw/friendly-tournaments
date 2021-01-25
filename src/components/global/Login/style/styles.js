@@ -228,14 +228,45 @@ export const useStyles = makeStyles(() => ({
   },
 
   loginButton: {
-    backgroundColor: "#FF7843",
-    height: "100%",
+    "@media (max-width: 768px)": {
+      width: "150px",
+      height: "30px",
 
-    "&:hover": {
-      backgroundColor: "#AF5735",
+      margin: "0 0.5rem",
+      padding: "0 1rem",
+
+      borderRadius: "0.3rem",
+
+      color: "#ccc",
+      backgroundColor: "#454D60",
+      boxShadow: "4px 4px 4px 2px black",
+      borderBottom: "2px solid #AF5735",
+
+      textAlign: "center",
+
+      "&:hover": {
+        cursor: "pointer",
+
+        backgroundColor: "#303542",
+        borderBottom: "1px solid #AF5735",
+
+        boxShadow: "0.1em 0.1em 0.2em black",
+      },
     },
-    "@media(min-width: 780px)": {
+
+    "@media (min-width: 768px)": {
       height: "80%",
+
+      backgroundColor: "#FF7843",
+      boxShadow: "4px 4px 4px 2px black",
+
+      "&:hover": {
+        backgroundColor: "#AF5735",
+      },
+
+      "@media (min-width: 780px)": {
+        height: "80%",
+      },
     },
   },
 }));

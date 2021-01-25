@@ -42,7 +42,9 @@ export const loginUserThunk = (userData, setLoginSuccess, setLoginFailed) => {
 
             window.localStorage.setItem("users", JSON.stringify(users));
 
-            dispatch(updateUsers(users));
+            setTimeout(() => {
+              dispatch(updateUsers(users));
+            }, 3000);
           })
           .catch((err) => {
             console.log(err.response);

@@ -32,7 +32,7 @@ const TeamsOwner = ({ data }) => {
   const open = Boolean(anchorEl);
 
   let reduced = teamsList.filter((el) => {
-    return el.userId === loggedUser?.loggedUser.users.id;
+    return el?.userId === loggedUser?.loggedUser?.users?.id;
   });
 
   const handleSubmit = (evt) => {
@@ -47,7 +47,7 @@ const TeamsOwner = ({ data }) => {
 
   useEffect(() => {
     if (IsValidToken()) {
-      if (loggedUser?.loggedUser.users.id === Number(userID)) {
+      if (loggedUser?.loggedUser?.users?.id === Number(userID)) {
         setValidOwner(true);
       }
     }
@@ -59,7 +59,7 @@ const TeamsOwner = ({ data }) => {
 
   return (
     <div>
-      {loggedUser?.loggedUser.users.id === Number(userID) ? (
+      {loggedUser?.loggedUser?.users?.id === Number(userID) ? (
         <div>
           {reduced.map(({ id, teamName, playersId }, index) => {
             return (
