@@ -35,7 +35,7 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
 
   const dispatch = useDispatch();
   const classes = useStyles();
-  const invites = users.loggedUser.users.invites;
+  const invites = users?.loggedUser?.users?.invites;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,11 +47,27 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
   const schema = yup.object().shape({
     firstName: yup
       .string()
-      .min(3, "Min 3 characters")
-      .required("Required field"),
-    lastName: yup.string().required("Required field"),
-    bio: yup.string().max(280, "Max 280 characters"),
-    email: yup.string().required("Required field"),
+      .min(3, "Mínimo 3 caracteres")
+      .max(10, "Seu primeiro Nome deve conter no máximo 10 caracteres")
+      .required(
+        "Seu primeiro Nome com no Mínimo 3 caracteres deve ser Fornecido"
+      ),
+    lastName: yup
+      .string()
+      .min(3, "Mínimo 3 caracteres")
+      .max(10, "Seu Sobrenome deve conter no máximo 10 caracteres")
+      .required("Seu Sobrenome com no Mínimo 3 caracteres deve ser Fornecido"),
+    bio: yup
+      .string()
+      .min(5, "Sua Biografia deve conter no mínimo 5 caracteres")
+      .max(200, "Sua Biografia deve conter no máximo 200 caracteres")
+      .required(
+        "Uma Biografia de no Mínimo 5 e Máximo de 200 caracteres deve ser Fornecida"
+      ),
+    email: yup
+      .string()
+      .email("Email inválido")
+      .required("Um Email válido deve ser fornecido"),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -64,8 +80,8 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
   };
 
   useEffect(() => {
-    if (IsValidToken(loggedUser?.loggedUser.token)) {
-      if (loggedUser?.loggedUser.users.id === Number(userID)) {
+    if (IsValidToken(loggedUser?.loggedUser?.token)) {
+      if (loggedUser?.loggedUser?.users?.id === Number(userID)) {
         setValidOwner(true);
       }
     }
@@ -121,7 +137,7 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
                     autoFocus
                     name="firstName"
                     margin="dense"
-                    label="First name"
+                    label="Nome"
                     type="string"
                     defaultValue={firstName}
                     inputRef={register}
@@ -134,7 +150,7 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
                 <TextField
                   name="lastName"
                   margin="dense"
-                  label="Last name"
+                  label="Sobrenome"
                   type="string"
                   defaultValue={lastName}
                   inputRef={register}
@@ -145,7 +161,7 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
                 <TextField
                   name="bio"
                   margin="dense"
-                  label="Biography"
+                  label="Biografia"
                   type="string"
                   defaultValue={bio}
                   inputRef={register}
@@ -168,15 +184,16 @@ const EditUser = ({ id, firstName, lastName, bio, email }) => {
               </FormControl>
               <p style={{ color: "red" }}>{errors.firstName?.message}</p>
               <Button
-                style={{ marginRight: "2rem", backgroundColor: "#C15FFF" }}
+                style={{ marginRight: "2rem" }}
                 onClick={handleClose}
-                variant="contained"
+                variant="outlined"
                 color="secondary"
+                size="small"
               >
-                Cancel
+                Cancelar
               </Button>
               <Button type="submit" variant="contained" color="primary">
-                Edit
+                Editar
               </Button>
             </form>
           </DialogContent>

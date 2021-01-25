@@ -18,7 +18,7 @@ const MemberOfTeams = ({ data }) => {
     dispatch(getFilteredTeamListThunk(teamList));
   }, []);
 
-  return <TeamCard userId={data.id} memberOfTeams={data.memberOfTeams} />;
+  return <TeamCard userId={data?.id} memberOfTeams={data?.memberOfTeams} />;
 };
 
 export default MemberOfTeams;

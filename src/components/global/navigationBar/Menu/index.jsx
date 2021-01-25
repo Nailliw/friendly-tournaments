@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { purple } from "@material-ui/core/colors";
@@ -30,7 +29,7 @@ const StyledMenu = withStyles({
 })((props) => (
   <Menu
     keepMounted
-    elevation={0}
+    elevation={12}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: "bottom",
@@ -86,19 +85,19 @@ export default function CustomizedMenus(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick1}>
-          <Typography
-            variant="button"
-            className={classes.text} 
-          >
+        <StyledMenuItem
+          className={classes.StyledMenuitem}
+          onClick={props.onClick1}
+        >
+          <Typography variant="button" className={classes.text}>
             {props.name1}
           </Typography>
         </StyledMenuItem>
-        <StyledMenuItem className={classes.StyledMenuitem} onClick={props.onClick2}>
-          <Typography
-            variant="button"
-            className={classes.text}            
-          >
+        <StyledMenuItem
+          className={classes.StyledMenuitem}
+          onClick={props.onClick2}
+        >
+          <Typography variant="button" className={classes.text}>
             {props.name2}
           </Typography>
         </StyledMenuItem>
