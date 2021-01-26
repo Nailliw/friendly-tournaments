@@ -128,7 +128,7 @@ export const TitleHeader = ({ teamData, isLogged }) => {
                 variant="contained"
                 disabled
               >
-                Entrar no Time
+                Já é Membro
               </Button>
             </Box>
           </Tooltip>

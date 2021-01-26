@@ -51,6 +51,7 @@ export const UserProfile = () => {
   useEffect(() => {
     dispatch(updateUsersListThunk());
   }, []);
+
   useEffect(() => {
     if (IsValidState(users.usersList)) {
       setPersonalinfo(
@@ -59,11 +60,11 @@ export const UserProfile = () => {
         })[0]
       );
     }
-  }, [users]);
+  }, [users, userID]);
   return (
     <Box style={{ width: "100%" }}>
       <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
-        Welcome, {personalinfo.nickName}
+        Welcome, {personalinfo?.nickName}
       </div>
       <div>
         <AppBar color="transparent" position="static">
@@ -87,12 +88,12 @@ export const UserProfile = () => {
 
         <TabPanel value={value} index={0}>
           <EditUser
-            id={personalinfo.id}
-            firstName={personalinfo.firstName}
-            lastName={personalinfo.lastName}
-            bio={personalinfo.bio}
-            email={personalinfo.email}
-            invites={personalinfo.invites}
+            id={personalinfo?.id}
+            firstName={personalinfo?.firstName}
+            lastName={personalinfo?.lastName}
+            bio={personalinfo?.bio}
+            email={personalinfo?.email}
+            invites={personalinfo?.invites}
           />
         </TabPanel>
 
