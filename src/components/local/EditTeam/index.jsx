@@ -65,9 +65,9 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
         color="primary"
         variant="contained"
         onClick={handleClickOpen}
-        startIcon={<EditIcon />}
+        endIcon={<EditIcon />}
       >
-        Edit Team
+        Editar
       </Button>
 
       <Dialog
