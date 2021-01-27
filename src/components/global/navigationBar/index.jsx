@@ -33,7 +33,7 @@ export default function NavigationBar() {
   const isLogged = useSelector((state) => state.UsersReducer.isLogged);
   const [loggedUserId, setLoggedUserId] = useState("");
 
-  const IsDesktop = useMediaQuery("(min-width:768px)");
+  const IsDesktop = useMediaQuery("(min-width:900px)");
 
   useEffect(() => {
     dispatch(updateIsLoggedThunk());
