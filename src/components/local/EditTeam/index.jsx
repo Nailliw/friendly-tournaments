@@ -85,7 +85,7 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">Edit Team Data</DialogTitle>
+        <DialogTitle id="form-dialog-title">Editar Time</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)}>
             <FormControl>
@@ -94,7 +94,7 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
                   autoFocus
                   name="teamName"
                   margin="dense"
-                  label="Team Name"
+                  label="Nome do Time"
                   type="string"
                   defaultValue={teamName}
                   inputRef={register}
@@ -108,7 +108,7 @@ export const EditTeam = ({ id, teamName, teamInfo }) => {
                   autoFocus
                   name="teamInfo"
                   margin="dense"
-                  label="Info"
+                  label="Info do Time"
                   type="string"
                   defaultValue={teamInfo}
                   inputRef={register}

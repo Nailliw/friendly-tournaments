@@ -76,9 +76,7 @@ export const EditTournament = ({ id, title, info, deadline, status }) => {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title">
-          Edite os Dados do Torneio
-        </DialogTitle>
+        <DialogTitle id="form-dialog-title">Editar Torneio</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(handleForm)} id={"editTournament"}>
             <FormControl>
@@ -87,7 +85,7 @@ export const EditTournament = ({ id, title, info, deadline, status }) => {
                   autoFocus
                   name="title"
                   margin="dense"
-                  label="Title"
+                  label="Título"
                   type="string"
                   defaultValue={title}
                   inputRef={register}
@@ -101,7 +99,7 @@ export const EditTournament = ({ id, title, info, deadline, status }) => {
                   autoFocus
                   name="info"
                   margin="dense"
-                  label="Info"
+                  label="Info do Torneio"
                   type="string"
                   multiline
                   rows={2}
@@ -128,7 +126,7 @@ export const EditTournament = ({ id, title, info, deadline, status }) => {
               <TextField
                 name="deadline"
                 id="datetime-local"
-                label="Deadline Inscription"
+                label="Data Limite de Inscrição"
                 type="datetime-local"
                 defaultValue={deadline}
                 inputRef={register}

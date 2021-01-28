@@ -9,18 +9,19 @@ export const useStyles = makeStyles(() => ({
     color: "white",
   },
   editTournament: {
-    width: "30%",
-    height: "45%",
-
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "normal",
     backgroundColor: "#ccc",
   },
+
   buttonsTourneyEdit: {
     textAlign: "center",
+    display: "flex",
+
     "& button": {
       margin: "1rem ",
+      alignSelf: "center",
     },
   },
 }));
