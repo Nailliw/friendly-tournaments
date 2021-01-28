@@ -10,6 +10,7 @@ export const StatusSection = ({
   deadline,
 }) => {
   const classes = useStyles();
+  console.log(teamsSize);
 
   return (
     <Box component="section" className={classes.statusContainer}>

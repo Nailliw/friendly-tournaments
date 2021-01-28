@@ -1,158 +1,190 @@
 import {
-  Box,
   Typography,
-  InputLabel,
-  FormControl,
   Dialog,
   DialogTitle,
   DialogActions,
   DialogContent,
-  FormHelperText,
   TextField,
-  Select,
   Button,
+  Box,
 } from "@material-ui/core/";
+import { Alert, AlertTitle } from "@material-ui/lab";
+
+import { useStyles } from "./style/styles";
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+import { updateIsLoggedThunk } from "../../../../store/modules/users/thunk";
+import { registerTeamThunk } from "../../../../store/modules/teams/thunk";
+
+import { IsValidToken } from "../../../../components/global/IsValidToken";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { registerTeamThunk } from "../../../../store/modules/teams/thunk";
-import { updateUsersListThunk } from "../../../../store/modules/users/thunk";
-import { IsValidToken } from "../../../../components/global/IsValidToken";
-import { useStyles } from "./style/styles";
-
 export const RegisterTeamPopup = () => {
-  const dispatch = useDispatch();
-  const [registerSuccess, setRegisterSuccess] = useState(false);
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    dispatch(updateIsLoggedThunk());
+  }, [dispatch]);
+
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [registerFailed, setRegisterFailed] = useState(false);
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleDialogOpen = () => {
+    if (registerSuccess) setRegisterSuccess(false);
+
+    if (registerFailed) setRegisterFailed(false);
+
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+    if (registerSuccess || registerFailed) window.location.reload();
+  };
 
   const schema = yup.object().shape({
-    teamName: yup.string().required("Campo obrigatório"),
-    teamInfo: yup.string().required("Campo obrigatório"),
+    teamName: yup
+      .string()
+      .min(3, "Nome do Time deve conter no mínimo 3 caracteres")
+      .max(30, "Nome do Time deve conter no máximo 30 caracteres")
+      .required("Nome do Time deve ser Especificado"),
+    teamInfo: yup
+      .string()
+      .min(5, "As Informações do Time devem conter no mínimo 5 caracteres")
+      .max(200, "As Informações do Time devem conter no máximo 200 caracteres")
+      .required("Campo obrigatório"),
   });
 
-  const { register, handleSubmit, errors, setError } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleForm = (formData) => {
     if (IsValidToken()) {
-      const userId = JSON.parse(window.localStorage.getItem("users"))
-        ?.loggedUser?.users?.id;
+      let userId = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
+        ?.users?.id;
 
-      const teamData = {
+      userId = Number(userId);
+      const teamName = formData.teamName.trim();
+      const teamInfo = formData.teamInfo.trim();
+
+      const newTeamData = {
         ...formData,
+        teamName,
+        teamInfo,
+        userId,
         playersId: [],
         tournamentsWon: [],
         tournamentsDisputed: [],
-        userId: Number(userId),
       };
 
-      dispatch(registerTeamThunk(teamData, setOpen));
+      dispatch(
+        registerTeamThunk(newTeamData, setRegisterSuccess, setRegisterFailed)
+      );
+    } else {
+      setRegisterFailed(true);
+
+      setTimeout(() => {
+        dispatch(updateIsLoggedThunk());
+      }, 10000);
     }
   };
 
-  useEffect(() => {
-    dispatch(updateUsersListThunk());
-  }, []);
-
   return (
-    <Box style={{ height: "100%" }}>
+    <Box>
       <Button
         className={classes.createTeam}
         variant="contained"
         color="primary"
-        onClick={handleClickOpen}
+        onClick={handleDialogOpen}
         size="small"
       >
         Criar Time
       </Button>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openDialog}
+        onClose={handleDialogClose}
         aria-labelledby="form-dialog-title"
-        BackdropProps={{
-          classes: {
-            root: classes.dialogRoot,
-          },
-        }}
         PaperProps={{
           classes: {
             root: classes.dialogConteiner,
           },
         }}
       >
-        <Box className={classes.imgLogin}></Box>
-        <Box className={classes.form}>
-          <Box className={classes.formInfo}>
-            <DialogTitle id="form-dialog-title">Registrar Equipe</DialogTitle>
-          </Box>
+        <Box className={classes.imgLogin} />
 
+        <Box className={classes.form}>
           <DialogContent className={classes.FormInput}>
             <form
               className={classes.formRegister}
               onSubmit={handleSubmit(handleForm)}
             >
-              <Box className={classes.inputField}>
-                <TextField
-                  autoComplete="off"
-                  className={classes.input}
-                  autoFocus
-                  variant="outlined"
-                  label="Nome da Equipe"
-                  name="teamName"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.teamName}
-                  helperText={errors.teamName?.message}
-                />
+              <Box className={classes.formInfo}>
+                <DialogTitle id="form-dialog-title">
+                  <Typography
+                    variant="h5"
+                    component="p"
+                    className={classes.labelCadastro}
+                  >
+                    Registrar Equipe
+                  </Typography>
+                </DialogTitle>
               </Box>
-              <Box className={classes.inputFieldRow}>
-                <TextField
-                  autoComplete="off"
-                  className={classes.input}
-                  autoFocus
-                  multiline
-                  rows={20}
-                  rowsMax={3}
-                  variant="outlined"
-                  label="Informações"
-                  name="teamInfo"
-                  margin="dense"
-                  type="string"
-                  inputRef={register}
-                  error={!!errors.teamInfo}
-                  helperText={errors.teamInfo?.message}
-                />
+
+              <Box component="div" className={classes.formSection}>
+                <Box className={classes.inputField}>
+                  <TextField
+                    autoComplete="off"
+                    variant="outlined"
+                    label="Nome da Equipe"
+                    name="teamName"
+                    margin="dense"
+                    type="string"
+                    inputRef={register}
+                    error={!!errors.teamName}
+                    helperText={errors.teamName?.message}
+                  />
+                </Box>
+
+                <Box className={classes.inputField}>
+                  <TextField
+                    autoComplete="off"
+                    multiline
+                    rows={2}
+                    rowsMax={4}
+                    variant="outlined"
+                    label="Informações"
+                    name="teamInfo"
+                    margin="dense"
+                    type="string"
+                    inputRef={register}
+                    error={!!errors.teamInfo}
+                    helperText={errors.teamInfo?.message}
+                  />
+                </Box>
               </Box>
 
               <DialogActions className={classes.formBottom}>
                 <Box className={classes.boxButton}>
                   <Button
-                    // className={classes.loginButton}
+                    className={classes.loginButton}
                     variant="outlined"
                     color="secondary"
                     size="small"
-                    onClick={handleClose}
+                    onClick={handleDialogClose}
                   >
                     Fechar
                   </Button>
                   <Button
-                    // className={classes.loginButton}
+                    className={classes.loginButton}
                     type="submit"
                     color="primary"
                     variant="contained"
@@ -160,17 +192,25 @@ export const RegisterTeamPopup = () => {
                     Criar
                   </Button>
                 </Box>
-                <div className={classes.feedbackMessage}>
-                  {registerSuccess ? (
-                    <h2 style={{ color: "rgb(8,53,108)", textAlign: "center" }}>
-                      Equipe Criada
-                    </h2>
-                  ) : (
-                    <h2 style={{ color: "red", textAlign: "center" }}>
-                      {errors.registerError?.message}
-                    </h2>
+
+                <Box component="div" className={classes.feedbackMessage}>
+                  {registerSuccess && (
+                    <Alert severity="success">
+                      <AlertTitle>Equipe cadastrada com Sucesso!</AlertTitle>
+                      Você pode ver o Status e Editá-la na Página da Equipe que
+                      pode ser acessada a partir do seu Perfil.
+                    </Alert>
                   )}
-                </div>
+
+                  {registerFailed && (
+                    <Alert severity="error">
+                      <AlertTitle>
+                        Não foi possível cadastrar sua Equipe!
+                      </AlertTitle>
+                      Verifique se está logado e tente novamente mais tarde.
+                    </Alert>
+                  )}
+                </Box>
               </DialogActions>
             </form>
           </DialogContent>

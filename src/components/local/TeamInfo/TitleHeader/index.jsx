@@ -3,8 +3,10 @@ import { Box, Button, Typography, Tooltip } from "@material-ui/core";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { updateTeamThunk } from "../../../../store/modules/teams/thunk";
 
+import { EditTeam } from "../../EditTeam/index";
 import { IsValidState } from "../../../global/IsValidState/index";
 
 export const TitleHeader = ({ teamData, isLogged }) => {
@@ -92,13 +94,7 @@ export const TitleHeader = ({ teamData, isLogged }) => {
       <Box component="div" className={classes.editButtonContainer}>
         {isLogged && isTeamOwner && (
           <Box>
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.editButtonContainer}
-            >
-              Editar
-            </Button>
+            <EditTeam {...teamData} />
           </Box>
         )}
         {isLogged && !userIsAlreadyInTeam && (
@@ -128,7 +124,7 @@ export const TitleHeader = ({ teamData, isLogged }) => {
                 variant="contained"
                 disabled
               >
-                Entrar no Time
+                Já é Membro
               </Button>
             </Box>
           </Tooltip>

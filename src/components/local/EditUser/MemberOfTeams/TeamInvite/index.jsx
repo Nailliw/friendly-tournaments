@@ -23,31 +23,31 @@ const TeamInvite = ({ teamId }) => {
   const [team, setTeam] = useState([]);
   //const { loggedUser } = JSON.parse(window.localStorage.getItem("users"));
   const dispatch = useDispatch();
-  const memberOfTeams = loggedUser.users.memberOfTeams;
+  const memberOfTeams = loggedUser?.users?.memberOfTeams;
   const classes = useStyles();
 
   const handleAcept = () => {
     if (IsValidToken()) {
-      const invites = loggedUser.users.invites.filter(
+      const invites = loggedUser?.users?.invites.filter(
         (item) => item !== teamId
       );
 
-      dispatch(updateUserThunk(loggedUser.users.id, { invites }));
+      dispatch(updateUserThunk(loggedUser?.users?.id, { invites }));
       memberOfTeams.push(teamId);
-      dispatch(updateUserThunk(loggedUser.users.id, { memberOfTeams }));
+      dispatch(updateUserThunk(loggedUser?.users?.id, { memberOfTeams }));
     }
-    const playersId = team.playersId.concat([loggedUser.users.id]);
+    const playersId = team?.playersId.concat([loggedUser.users.id]);
 
     // // mandar um dispatch pra edição do time
     dispatch(updateTeamThunk(teamId, { playersId }));
   };
   const handleRefuse = () => {
-    if (IsValidToken(loggedUser.authToken.headers.Authorization)) {
-      const invites = loggedUser.users.invites.filter(
+    if (IsValidToken(loggedUser?.authToken?.headers?.Authorization)) {
+      const invites = loggedUser?.users?.invites.filter(
         (item) => item !== teamId
       );
 
-      dispatch(updateUserThunk(loggedUser.users.id, { invites }));
+      dispatch(updateUserThunk(loggedUser?.users?.id, { invites }));
     }
   };
 
@@ -57,9 +57,10 @@ const TeamInvite = ({ teamId }) => {
 
   useEffect(() => {
     if (IsValidState(teamsList)) {
+      console.log(teamsList);
       setTeam(
         teamsList.filter((item) => {
-          return item.id === teamId;
+          return item?.id === teamId;
         })[0]
       );
     }
@@ -67,7 +68,7 @@ const TeamInvite = ({ teamId }) => {
 
   return (
     <>
-      {loggedUser.users.invites.length !== 0 ? (
+      {loggedUser?.users?.invites?.length !== 0 ? (
         <>
           {IsValidState(team) && (
             <Card className={classes.inviteCard}>

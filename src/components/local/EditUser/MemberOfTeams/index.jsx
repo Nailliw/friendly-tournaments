@@ -13,12 +13,12 @@ const MemberOfTeams = ({ data }) => {
     function getQuery(item) {
       teamList = teamList + `&id=${item}`;
     }
-    data.memberOfTeams.forEach(getQuery);
+    data?.memberOfTeams.forEach(getQuery);
 
     dispatch(getFilteredTeamListThunk(teamList));
   }, []);
 
-  return <TeamCard userId={data.id} memberOfTeams={data.memberOfTeams} />;
+  return <TeamCard userId={data?.id} memberOfTeams={data?.memberOfTeams} />;
 };
 
 export default MemberOfTeams;

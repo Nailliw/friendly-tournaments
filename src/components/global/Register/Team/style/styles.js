@@ -2,21 +2,47 @@ import { makeStyles } from "@material-ui/core";
 import imgTeam from "./img/esports-2.jpg";
 
 export const useStyles = makeStyles(() => ({
-  dialogRoot: {
-    // backgroundColor: "#000",
+  ".MuiDialog-paper": {
+    margin: "0",
+  },
+
+  ".MuiDialog-container": {
+    width: "100%",
+    height: "100%",
   },
 
   dialogConteiner: {
-    // backgroundColor: "#000",
+    minWidth: "250px",
+    maxHeight: "850px",
+
+    height: "80%",
+    width: "90vw",
+
+    margin: "0 4vw",
+    padding: "0.2rem 0.5rem",
+    border: "2px solid #ccc",
+
     backgroundColor: "#ccc",
-    height: "60%",
-    width: "30%",
-    padding: "1rem",
+
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
-    border: "1px solid #ccc",
+    alignItems: "center",
+    alignSelf: "center",
+
+    "@media (max-width: 768px)": {
+      // Aumenta o Tamanho do Container principal apenas para Mobile, para Desktop Retorna para o Padrao do Material UI.
+      maxWidth: "90vw", // NECESSARIO PARA ALTERAR A LARGURA ALEM DO PREDEFINIDO PELO MATERIAL UI
+    },
+
+    "@media (min-width: 500px)": {
+      width: "80%",
+    },
+    "@media (min-width: 700px)": {
+      width: "70%",
+      height: "70%",
+      padding: "0.5rem 1rem",
+    },
   },
 
   imgLogin: {
@@ -25,117 +51,116 @@ export const useStyles = makeStyles(() => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     overflow: "hidden",
+
+    boxShadow: "7px 4px 5px 1px",
+
     width: "100%",
-    height: "35%",
+    height: "15%",
   },
 
   form: {
     width: "100%",
-    height: "65%",
-  },
-
-  formInfo: {
-    height: "12%",
-    width: "100%",
-    margin: "0px;",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-
-  formRegister: {
-    width: "100%",
-    height: "100%",
-
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "baseline",
-    alignItems: "center",
-
-    // borderRadius: "2rem",
-    // boxShadow: "0.1em 0.1em 0.2em black",
+    height: "90%",
   },
 
   FormInput: {
-    height: "83%",
     width: "100%",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "center",
 
-    // "@media (min-width: 500px)": {
-    //   height: "40%",
-    // },
-  },
+    overflow: "hidden",
 
-  labelCadastro: {
-    fontSize: "1.8rem",
-    fontWeight: "500",
-    paddingBottom: "0.5rem",
-    textAlign: "center",
-    color: "rgb(8,53,108)",
-    textShadow: "0.02em 0.05em 0.02em rgb(0,0,0)",
+    padding: "0.5rem",
 
-    "@media (min-width: 1100px)": {
-      fontSize: "2.5rem",
-      paddingBottom: "1.5rem",
+    "@media (min-width: 768px)": {
+      padding: "4rem",
     },
   },
 
-  inputArea: {
-    height: "70%",
-    width: "100%",
+  formSection: {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    justifyContent: "center",
 
-    "@media (max-width: 500px)": {
-      height: "40%",
+    "@media (min-width: 700px)": {
+      width: "80%",
+    },
+  },
+
+  formInfo: {
+    height: "15%",
+    width: "100%",
+
+    "& #form-dialog-title": {
+      padding: "0.5rem",
+    },
+  },
+
+  labelCadastro: {
+    margin: "0.5rem",
+    padding: "0",
+    textAlign: "center",
+
+    fontWeight: "500",
+    color: "rgb(8,53,108)",
+    textShadow: "0.02em 0.05em 0.02em rgb(0,0,0)",
+
+    "@media (min-width: 500px)": {
+      fontSize: "2rem",
+    },
+  },
+
+  formRegister: {
+    backgroundColor: "rgba(255, 255, 255, 0.883)",
+    boxShadow: "0.1em 0.1em 0.2em black",
+
+    minWidth: "250px",
+    height: "100%",
+    maxHeight: "100%",
+
+    overflow: "auto",
+    borderRadius: "1rem",
+
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "space-around",
+
+    fontStyle: "italic",
+
+    "@media (min-width: 700px)": {
+      height: "96%",
+      marginTop: "5vh",
     },
   },
 
   inputField: {
-    width: "80%",
-    height: "29%",
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
-  },
-
-  inputFieldRow: {
-    width: "80%",
-    height: "45%",
-    // paddingBottom: "2rem",
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
-  },
-
-  input: {
+    textAlign: "center",
     width: "100%",
-    height: "13%",
-    margin: "0",
+    "& > div": {
+      width: "83%",
 
-    "& label.Mui-focused": {
-      color: "rgb(8,53,108)",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "rgb(8,53,108)",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "rgb(8,53,108)",
+      marginBottom: "1rem",
+
+      "@media (min-width: 768px)": {
+        marginBottom: "2rem",
       },
     },
   },
 
-  select: {
-    margin: "0.5rem",
+  inputFieldDate: {
+    width: "83%",
+    marginBottom: "1rem",
+    textAlign: "center",
+  },
+
+  InputSelect: {
     minWidth: "80%",
-    maxWidth: "80%",
+    width: "100%",
+
+    maxWidth: "83%",
+
+    textAlign: "center",
+
+    marginBottom: "1rem",
 
     "& label.Mui-focused": {
       color: "rgb(8,53,108)",
@@ -151,56 +176,80 @@ export const useStyles = makeStyles(() => ({
     "& option": {
       width: "10px",
     },
+
+    "@media (min-width: 500px)": {
+      width: "100%",
+    },
   },
 
   formBottom: {
     width: "100%",
-    height: "35%",
-    color: "red",
+    height: "15%",
+
+    minHeight: "15%",
+    maxHeight: "70%",
+
+    margin: "0.5rem",
+
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
+    "& > *": {
+      margin: "0.5rem",
+    },
   },
 
   boxButton: {
-    width: "100%",
-    height: "55%",
-    color: "red",
+    width: "80%",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
   },
 
   feedbackMessage: {
-    width: "100%",
-    height: "45%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    width: "80%",
   },
 
-  registerButton: {
-    alignItems: "center",
-    width: "40%",
-    height: "25%",
-    color: "white",
-    backgroundColor: "rgba(8,53,108)",
-    border: "1px solid black",
-    marginTop: "10px",
-    "&:hover": {
-      backgroundColor: "rgba(28,73,128)",
-      boxShadow: "0.1em 0.1em 0.2em black",
-    },
-  },
   createTeam: {
-    backgroundColor: "#FF7843",
-    height: "100%",
+    "@media (max-width: 900px)": {
+      width: "150px",
+      height: "30px",
 
-    "&:hover": {
-      backgroundColor: "#AF5735",
+      margin: "0 0.5rem",
+      padding: "0 1rem",
+
+      borderRadius: "0.3rem",
+
+      color: "#ccc",
+      backgroundColor: "#454D60",
+      boxShadow: "4px 4px 4px 2px black",
+      borderBottom: "2px solid #AF5735",
+
+      textAlign: "center",
+
+      "&:hover": {
+        cursor: "pointer",
+
+        backgroundColor: "#303542",
+        borderBottom: "1px solid #AF5735",
+
+        boxShadow: "0.1em 0.1em 0.2em black",
+      },
     },
-    "@media(minWidth: 780px)": {
+
+    "@media (min-width: 900px)": {
       height: "80%",
+
+      backgroundColor: "#FF7843",
+      boxShadow: "4px 4px 4px 2px black",
+
+      "&:hover": {
+        backgroundColor: "#AF5735",
+      },
+
+      "@media (min-width: 900px)": {
+        height: "80%",
+      },
     },
   },
 }));

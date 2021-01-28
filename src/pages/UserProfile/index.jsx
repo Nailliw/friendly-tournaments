@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Box, Typography, AppBar, Tabs, Tab } from "@material-ui/core/";
+import {
+  LinearProgress,
+  Box,
+  Typography,
+  AppBar,
+  Tabs,
+  Tab,
+} from "@material-ui/core/";
 import EditUser from "../../components/local/EditUser/index";
 import MemberOfTeams from "../../components/local/EditUser/MemberOfTeams";
 import { useParams } from "react-router-dom";
@@ -51,6 +58,7 @@ export const UserProfile = () => {
   useEffect(() => {
     dispatch(updateUsersListThunk());
   }, []);
+
   useEffect(() => {
     if (IsValidState(users.usersList)) {
       setPersonalinfo(
@@ -59,51 +67,59 @@ export const UserProfile = () => {
         })[0]
       );
     }
-  }, [users]);
+  }, [users, userID]);
   return (
-    <Box style={{ width: "100%" }}>
-      <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
-        Welcome, {personalinfo.nickName}
-      </div>
-      <div>
-        <AppBar color="transparent" position="static">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-            className={classes.indicator}
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: "#F3A712",
-              },
-            }}
-          >
-            <Tab label="Perfil" {...a11yProps(0)} />
-            <Tab label="Times" {...a11yProps(1)} />
-            <Tab label="Gerenciar Times" {...a11yProps(2)} />
-            {/* <Tab label="Tournaments" {...a11yProps(2)} /> */}
-          </Tabs>
-        </AppBar>
+    <>
+      {IsValidState(personalinfo) ? (
+        <Box style={{ width: "100%" }}>
+          <div style={{ backgroundColor: "rgba(37,50,90,1)", height: "20vh" }}>
+            Welcome, {personalinfo?.nickName}
+          </div>
+          <div>
+            <AppBar color="transparent" position="static">
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="simple tabs example"
+                className={classes.indicator}
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: "#F3A712",
+                  },
+                }}
+              >
+                <Tab label="Perfil" {...a11yProps(0)} />
+                <Tab label="Times" {...a11yProps(1)} />
+                <Tab label="Gerenciar Times" {...a11yProps(2)} />
+                {/* <Tab label="Tournaments" {...a11yProps(2)} /> */}
+              </Tabs>
+            </AppBar>
 
-        <TabPanel value={value} index={0}>
-          <EditUser
-            id={personalinfo.id}
-            firstName={personalinfo.firstName}
-            lastName={personalinfo.lastName}
-            bio={personalinfo.bio}
-            email={personalinfo.email}
-            invites={personalinfo.invites}
-          />
-        </TabPanel>
+            <TabPanel value={value} index={0}>
+              <EditUser
+                id={personalinfo?.id}
+                firstName={personalinfo?.firstName}
+                lastName={personalinfo?.lastName}
+                bio={personalinfo?.bio}
+                email={personalinfo?.email}
+                invites={personalinfo?.invites}
+              />
+            </TabPanel>
 
-        <TabPanel value={value} index={1}>
-          <MemberOfTeams data={personalinfo} />
-        </TabPanel>
+            <TabPanel value={value} index={1}>
+              <MemberOfTeams data={personalinfo} />
+            </TabPanel>
 
-        <TabPanel value={value} index={2}>
-          <TeamsOwner data={personalinfo} />
-        </TabPanel>
-      </div>
-    </Box>
+            <TabPanel value={value} index={2}>
+              <TeamsOwner data={personalinfo} />
+            </TabPanel>
+          </div>
+        </Box>
+      ) : (
+        <Box component="div" className={classes.tournamentInfoRoot}>
+          <LinearProgress />
+        </Box>
+      )}
+    </>
   );
 };
