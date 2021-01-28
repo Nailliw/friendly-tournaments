@@ -5,25 +5,64 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    flexDirection: "column",
 
-    margin: "1rem",
-    padding: "1rem",
+    margin: "2rem",
+
+    "@media (min-width: 1200px)": {
+      flexDirection: "row",
+
+      margin: "1rem",
+      padding: "1rem",
+    },
   },
+
   mainTitle: {
     fontWeight: "bold",
-    fontSize: "4rem",
+    fontSize: "2.5rem",
+
+    paddingBottom: "1rem",
+
+    "@media (min-width: 768px)": {
+      fontSize: "3rem",
+    },
+
+    "@media (min-width: 1000px)": {
+      fontSize: "3.5rem",
+    },
+
+    "@media (min-width: 1200px)": {
+      fontSize: "4rem",
+    },
   },
+
   titleContainer: {
-    // width: "40%",
+    width: "100%",
+    textAlign: "center",
   },
 
   editButtonContainer: {
     // textAlign: "right",
     display: "flex",
     alignSelf: "center",
+    alignItems: "center",
+    // flexDirection: "column",
 
     "& > div": {
-      margin: "0 2rem",
+      margin: "0.5rem 2rem 0",
+    },
+
+    "& button": {
+      fontSize: "0.6rem",
+      heigth: "40px",
+
+      "@media (min-width: 1200px)": {
+        fontSize: "1rem",
+      },
+    },
+
+    "@media (min-width: 1200px)": {
+      // flexDirection: "row",
     },
   },
 
@@ -33,7 +72,18 @@ export const useStyles = makeStyles(() => ({
 
     "& button": {
       backgroundColor: "#FF7843",
+      fontSize: "0.6rem",
+      heigth: "40px",
+
+      "@media (min-width: 1000px)": {
+        fontSize: "0.8rem",
+      },
+
+      "@media (min-width: 1200px)": {
+        fontSize: "1rem",
+      },
     },
+
     "& :hover": {
       backgroundColor: "#af5735",
     },
