@@ -1,6 +1,8 @@
 .tournamentsContainer {
   display: flex;
   flex-direction: column;
+  margin-top: 4vh;
+
   /* background-color: #15384f; */
 }
 
@@ -36,5 +38,8 @@
   .tournamentsList {
     width: 90vw;
     justify-content: center;
+  }
+  .tournamentsContainer {
+    margin-top: 10vh;
   }
 }

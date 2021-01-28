@@ -11,8 +11,6 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
 
-    // backgroundColor: "#24262D",
-
     "@media (min-width: 780px)": {
       height: "7vh",
     },
