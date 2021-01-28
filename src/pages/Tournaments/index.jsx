@@ -1,16 +1,26 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+
 import {
   updateTournamentsListThunk,
   setFilteredTournamentsListThunk,
 } from "../../store/modules/tournaments/thunk";
+
 import { updateCategoriesListThunk } from "../../store/modules/categories/thunk";
+
 import { IsValidState } from "../../components/global/IsValidState";
+
 import { CardTournament } from "../../components/global/CardTournament";
-import { useParams, Link, useLocation } from "react-router-dom";
 import "./style.css";
 
+import { useStyles } from "./styles";
+
+import { LinearProgress, Box } from "@material-ui/core";
+
 export const Tournaments = ({ token, setToken }) => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const tournaments = useSelector((state) => state.TournamentsReducer);
   const categories = useSelector((state) => state.CategoriesReducer);
@@ -23,8 +33,6 @@ export const Tournaments = ({ token, setToken }) => {
   }, []);
 
   useEffect(() => {
-    console.log(tournaments);
-
     if (IsValidState(tournaments.tournamentsList)) {
       dispatch(
         setFilteredTournamentsListThunk(
@@ -72,15 +80,21 @@ export const Tournaments = ({ token, setToken }) => {
 
   return (
     <>
-      <div className="tournamentsContainer">
-        {IsValidState(tournaments.filteredTournamentsList) && (
-          <div className="tournamentsList">
-            {tournaments.filteredTournamentsList.map((tournament, index) => {
-              return <CardTournament key={index} tournament={tournament} />;
-            })}
-          </div>
-        )}
-      </div>
+      {IsValidState(tournaments) ? (
+        <div className="tournamentsContainer">
+          {IsValidState(tournaments.filteredTournamentsList) && (
+            <div className="tournamentsList">
+              {tournaments.filteredTournamentsList.map((tournament, index) => {
+                return <CardTournament key={index} tournament={tournament} />;
+              })}
+            </div>
+          )}
+        </div>
+      ) : (
+        <Box component="div" className={classes.tournamentInfoRoot}>
+          <LinearProgress />
+        </Box>
+      )}
     </>
   );
 };

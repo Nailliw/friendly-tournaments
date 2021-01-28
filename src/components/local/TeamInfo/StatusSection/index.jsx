@@ -14,7 +14,7 @@ export const StatusSection = ({ teamData }) => {
         {/*   Container that holds Components with Info of the Team  */}
         <Box component="div" className={classes.teamsInfoSize}>
           <Typography variant="h6" className={classes.teamsInfoTitle}>
-            Número de Jogadores
+            Jogadores
           </Typography>
 
           <Typography component="p" className={classes.teamsInfoText}>
@@ -24,7 +24,7 @@ export const StatusSection = ({ teamData }) => {
 
         <Box component="div" className={classes.teamsInfoTitle}>
           <Typography variant="h6" className={classes.teamsInfoTitle}>
-            Número de Torneios Ganhos{" "}
+            Torneios Ganhos
           </Typography>
 
           <Typography component="p" className={classes.teamsInfoText}>
@@ -33,7 +33,7 @@ export const StatusSection = ({ teamData }) => {
         </Box>
         <Box component="div" className={classes.teamsInfoTitle}>
           <Typography variant="h6" className={classes.teamsInfoTitle}>
-            Número de Torneios que Participou{" "}
+            Torneios que Participou
           </Typography>
 
           <Typography component="p" className={classes.teamsInfoText}>

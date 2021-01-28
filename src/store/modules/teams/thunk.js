@@ -1,7 +1,11 @@
 import { updateTeams } from "./actions";
 import { api } from "../../../services/api";
 
-export const registerTeamThunk = (teamData, setOpen) => {
+export const registerTeamThunk = (
+  teamData,
+  setRegisterSuccess,
+  setRegisterFailed
+) => {
   return (_dispatch, _getState) => {
     let authToken = JSON.parse(window.localStorage.getItem("users"))?.loggedUser
       ?.authToken;
@@ -9,10 +13,12 @@ export const registerTeamThunk = (teamData, setOpen) => {
     api
       .post("/teams", teamData, authToken)
       .then(() => {
-        setOpen(false);
+        setRegisterSuccess(true);
       })
       .catch((err) => {
         console.log(err.response);
+
+        setRegisterFailed(true);
       });
   };
 };
@@ -46,7 +52,7 @@ export const updateTeamThunk = (idTeam, teamData, handleTooltipOpenThunk) => {
       .patch(`/teams/${idTeam}`, teamData, authToken)
       .then((res) => {
         teams = { ...teams, teamsList: res.data };
-
+        console.log(teams);
         dispatch(updateTeams(teams));
       })
       .catch((err) => {

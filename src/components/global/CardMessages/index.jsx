@@ -85,7 +85,7 @@ export const CardMessages = ({ tournamentId }) => {
   return (
     <>
       <div className={classes.cardMessages}>
-        {IsValidState(tournament.messagesList) && (
+        {IsValidState(tournament?.messagesList) && (
           <div id={"messagesContainer"} className={classes.messagesContainer}>
             {tournament.messagesList.map((personMessage, index) => {
               return <Message key={index} personMessage={personMessage} />;
@@ -93,7 +93,7 @@ export const CardMessages = ({ tournamentId }) => {
           </div>
         )}
 
-        {IsValidState(personName) && IsValidState(tournament?.messagesList) && (
+        {IsValidState(personName) && (
           <div className={classes.sendMessageContainer}>
             <TextField
               className={classes.sendMessageTextField}

@@ -4,6 +4,7 @@ import { TeamIsEligible } from "../components/local/TournamentInfo/TeamIsEligibl
 import { CardMessages } from "../components/global/CardMessages";
 import { Message } from "../components/global/CardMessages/Message";
 import { EditTournament } from "../components/local/EditTournament";
+import { EditTeam } from "../components/local/EditTeam";
 import { SubscribeTeam } from "../components/local/TournamentInfo/SubscribeTeam";
 import { logoutThunk, loginUserThunk } from "../store/modules/users/thunk";
 import { ConvertDateTime } from "../components/global/ConvertDateTime";
@@ -143,6 +144,7 @@ export const TesteApi = () => {
       {/* <EditTournament {...tournament} /> */}
       {/* <CardMessages tournamentId={2} /> */}
       {/* <SubscribeTeam tournamentId={6} /> */}
+      <EditTeam {...team} />
     </>
   );
 };

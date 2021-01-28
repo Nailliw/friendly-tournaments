@@ -5,15 +5,33 @@ export const useStyles = makeStyles(() => ({
     width: "100%",
     // minHeight: "50vh",
     // height: "80%",
-    padding: "2rem",
+    padding: "0",
 
     display: "flex",
     justifyContent: "space-between",
+    flexDirection: "column",
 
     "& > div:first-child": {
-      borderRight: "2px rgb(255 255 255 / 20%) dotted",
-      padding: "5rem",
+      borderBottom: "2px rgb(255 255 255 / 20%) dotted",
+      padding: "1rem",
+
       height: "100%",
+      width: "80%",
+
+      "@media (min-width: 1200px)": {
+        width: "40%",
+      },
+    },
+
+    "@media (min-width: 1200px)": {
+      padding: "2rem",
+      flexDirection: "row",
+
+      "& > div:first-child": {
+        borderRight: "2px rgb(255 255 255 / 20%) dotted",
+        padding: "5rem",
+        height: "100%",
+      },
     },
   },
 
@@ -36,28 +54,18 @@ export const useStyles = makeStyles(() => ({
 
   tournamentGameDetails: {
     width: "100%",
-    // margin: "1rem",
-    // padding: " 1rem",
 
-    display: "flex",
+    display: "block",
     flexDirection: "column",
     alignItems: "start",
-
-    // justifyContent: "space-evenly",
 
     "&  div": {
       margin: "1rem",
     },
 
-    // "& > div:first-child": {
-    //   borderTop: "2px rgb(255 255 255 / 20%) dotted",
-    //   borderBottom: "2px rgb(255 255 255 / 20%) dotted",
-    // },
-
-    // "& > div:last-child": {
-    //   // borderTop: "2px rgb(255 255 255 / 20%) dotted",
-    //   borderBottom: "2px rgb(255 255 255 / 20%) dotted",
-    // },
+    "@media (min-width: 1200px)": {
+      display: "flex",
+    },
   },
 
   tournamentGameInfo: {
@@ -71,11 +79,17 @@ export const useStyles = makeStyles(() => ({
   },
 
   tournamentInfoBox: {
-    width: "60%",
+    width: "100%",
     height: "100%",
-    padding: "2rem",
+
+    padding: "2rem 0",
     // minHeight: "40vh",
     // maxHeight: "30vh",
+
+    "@media (min-width: 1200px)": {
+      width: "60%",
+      padding: "0rem",
+    },
   },
 
   tournamentInfoContent: {
@@ -89,5 +103,13 @@ export const useStyles = makeStyles(() => ({
     // backgroundColor: "#564787",
     backgroundColor: "#ffffff0d",
     borderRadius: "1%",
+
+    "@media (min-width: 1000px)": {
+      width: "80%",
+    },
+
+    "@media (min-width: 1200px)": {
+      width: "90%",
+    },
   },
 }));

@@ -8,14 +8,13 @@ export const useStyles = makeStyles(() => ({
     backgroundColor: "#353a46",
     color: "white",
   },
-  editTournament: {
+  editTeam: {
     display: "flex",
     flexDirection: "column",
     alignItems: "normal",
     backgroundColor: "#ccc",
   },
-
-  buttonsTourneyEdit: {
+  buttonsTeamEdit: {
     textAlign: "center",
     display: "flex",
 

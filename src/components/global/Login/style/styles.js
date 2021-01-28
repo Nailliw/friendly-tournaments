@@ -2,27 +2,46 @@ import { makeStyles } from "@material-ui/core";
 import imgLogin from "./img/logo-design-04.png";
 
 export const useStyles = makeStyles(() => ({
-  dialogRoot: {
-    // backgroundColor: "#000",
+  ".MuiDialog-paper": {
+    margin: "0",
+  },
+
+  ".MuiDialog-container": {
+    width: "100%",
+    height: "100%",
   },
 
   dialogConteiner: {
-    // backgroundColor: "rgb(25,26,28)",
-    backgroundColor: "#ccc",
-    height: "50%",
-    width: "1000px",
-    padding: "1rem",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid #ccc",
-  },
+    minWidth: "250px",
+    maxHeight: "850px",
 
-  dialogStyle: {
-    backgroundColor: "red",
-    borderRadius: "2rem",
-    boxShadow: "0.1em 0.1em 0.2em black",
+    height: "90%",
+    width: "90vw",
+
+    margin: "0 4vw",
+    padding: "0.2rem 0.5rem",
+    border: "2px solid #ccc",
+
+    backgroundColor: "#ccc",
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+
+    "@media (max-width: 768px)": {
+      // Aumenta o Tamanho do Container principal apenas para Mobile, para Desktop Retorna para o Padrao do Material UI.
+      maxWidth: "90vw", // NECESSARIO PARA ALTERAR A LARGURA ALEM DO PREDEFINIDO PELO MATERIAL UI
+    },
+
+    "@media (min-width: 500px)": {
+      width: "80%",
+    },
+    "@media (min-width: 700px)": {
+      width: "60%",
+      height: "80%",
+    },
   },
 
   imgLogin: {
@@ -31,76 +50,126 @@ export const useStyles = makeStyles(() => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     overflow: "hidden",
+
+    boxShadow: "7px 4px 5px 1px",
+    borderRadius: "10%",
+
     width: "50%",
-    height: "100%",
+    height: "20%",
   },
 
   form: {
-    width: "50%",
-    height: "100%",
+    width: "100%",
+    height: "80%",
   },
 
   FormInput: {
-    height: "70%",
+    height: "90%",
     width: "100%",
+
+    margin: "4vh 0",
+    padding: "0.5rem",
+
+    overflow: "hidden",
+
+    "@media (min-width: 768px)": {
+      padding: "2rem",
+    },
+  },
+
+  formSection: {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    justifyContent: "center",
 
-    // "@media (min-width: 500px)": {
-    //   height: "40%",
-    // },
+    "@media (min-width: 700px)": {
+      width: "80%",
+      margin: "0",
+    },
   },
 
   formInfo: {
-    height: "20%",
+    height: "15%",
     width: "100%",
-    margin: "0px;",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+
+    "& #form-dialog-title": {
+      padding: "0.5rem",
+    },
+  },
+
+  labelLogin: {
+    margin: "0.5rem",
+    padding: "0",
+    textAlign: "center",
+
+    fontWeight: "500",
+    color: "rgb(8,53,108)",
+    textShadow: "0.02em 0.05em 0.02em rgb(0,0,0)",
+
+    "@media (min-width: 500px)": {
+      fontSize: "2rem",
+    },
   },
 
   formLogin: {
-    width: "100%",
-    height: "90%",
+    backgroundColor: "rgba(255, 255, 255, 0.883)",
+    boxShadow: "0.1em 0.1em 0.2em black",
 
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "baseline",
-    alignItems: "center",
+    minWidth: "250px",
+    height: "100%",
+    maxHeight: "100%",
 
-    // borderRadius: "2rem",
-    // boxShadow: "0.1em 0.1em 0.2em black",
-  },
+    overflow: "auto",
+    borderRadius: "1rem",
 
-  inputArea: {
-    height: "70%",
-    width: "15vw",
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "space-between",
 
-    // "@media (min-width: 500px)": {
-    //   height: "40%",
-    // },
+    fontStyle: "italic",
+
+    "@media (min-width: 500px)": {
+      height: "80%",
+      margin: "1rem",
+    },
+
+    "@media (min-width: 700px)": {
+      width: "90%",
+      height: "95%",
+      margin: "0 auto",
+    },
   },
 
   inputField: {
-    width: "80%",
-    height: "30%",
-    display: "flex",
-    alignItems: "baseline",
-    justifyContent: "center",
+    textAlign: "center",
+    width: "100%",
+    "& > div": {
+      width: "83%",
+
+      marginBottom: "1rem",
+
+      "@media (min-width: 768px)": {
+        marginBottom: "2rem",
+      },
+    },
   },
 
-  input: {
+  inputFieldDate: {
+    width: "83%",
+    marginBottom: "1rem",
+    textAlign: "center",
+  },
+
+  InputSelect: {
+    minWidth: "80%",
     width: "100%",
-    height: "13%",
-    margin: "0",
+
+    maxWidth: "83%",
+
+    textAlign: "center",
+
+    marginBottom: "1rem",
 
     "& label.Mui-focused": {
       color: "rgb(8,53,108)",
@@ -113,51 +182,91 @@ export const useStyles = makeStyles(() => ({
         borderColor: "rgb(8,53,108)",
       },
     },
-  },
+    "& option": {
+      width: "10px",
+    },
 
-  feedbackMessage: {
-    width: "100%",
-    height: "40%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    "@media (min-width: 500px)": {
+      width: "100%",
+    },
   },
 
   formBottom: {
     width: "100%",
-    height: "40%",
-    color: "red",
+
+    minHeight: "15%",
+    maxHeight: "100%",
+
+    margin: "0.5rem",
+
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
+    "& > *": {
+      margin: "0.5rem",
+    },
   },
 
   boxButton: {
-    width: "100%",
-    height: "55%",
-    color: "red",
+    width: "80%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+
+    "@media (min-width: 500px)": {
+      width: "60%",
+    },
+
+    "@media (min-width: 700px)": {
+      width: "50%",
+    },
+  },
+
+  feedbackMessage: {
+    width: "80%",
   },
 
   loginButton: {
-    alignItems: "center",
-    width: "50%",
-    height: "60%",
-    color: "white",
-    backgroundColor: "rgba(8,53,108)",
-    border: "1px solid black",
-    marginTop: "10px",
-    "&:hover": {
-      backgroundColor: "rgba(28,73,128)",
-      boxShadow: "0.1em 0.1em 0.2em black",
+    "@media (max-width: 900px)": {
+      width: "150px",
+      height: "30px",
+
+      margin: "0 0.5rem",
+      padding: "0 1rem",
+
+      borderRadius: "0.3rem",
+
+      color: "#ccc",
+      backgroundColor: "#454D60",
+      boxShadow: "4px 4px 4px 2px black",
+      borderBottom: "2px solid #AF5735",
+
+      textAlign: "center",
+
+      "&:hover": {
+        cursor: "pointer",
+
+        backgroundColor: "#303542",
+        borderBottom: "1px solid #AF5735",
+
+        boxShadow: "0.1em 0.1em 0.2em black",
+      },
     },
-  },
-  loginbuttonstyle: {
-    backgroundColor: "#FF7843",
-    "&:hover": {
-      backgroundColor: "#AF5735",
+
+    "@media (min-width: 900px)": {
+      height: "80%",
+
+      backgroundColor: "#FF7843",
+      boxShadow: "4px 4px 4px 2px black",
+
+      "&:hover": {
+        backgroundColor: "#AF5735",
+      },
+
+      "@media (min-width: 780px)": {
+        height: "80%",
+      },
     },
   },
 }));
