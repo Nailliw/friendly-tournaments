@@ -9,18 +9,18 @@ export const useStyles = makeStyles(() => ({
     color: "white",
   },
   editTeam: {
-    width: "30%",
-    height: "45%",
-
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "normal",
     backgroundColor: "#ccc",
   },
   buttonsTeamEdit: {
     textAlign: "center",
+    display: "flex",
+
     "& button": {
       margin: "1rem ",
+      alignSelf: "center",
     },
   },
 }));

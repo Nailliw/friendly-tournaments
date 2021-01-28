@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
   teamInfoContainer: {
     width: "100%",
-    // minHeight: "50vh",
-    // height: "80%",
+
     padding: "0",
 
     display: "flex",
@@ -46,16 +45,25 @@ export const useStyles = makeStyles(() => ({
 
   teamInfoDetailsTitle: {
     marginBottom: "2rem",
+    fontSize: "1.5rem",
+
+    "@media (min-width: 1000px)": {
+      fontSize: "2rem",
+    },
   },
 
   teamInfoDetailsText: {
     margin: "1rem",
+
+    fontSize: "1rem",
+
+    "@media (min-width: 1000px)": {
+      fontSize: "1.5rem",
+    },
   },
 
   teamGameDetails: {
     width: "100%",
-    // margin: "1rem",
-    // padding: " 1rem",
 
     display: "block",
     flexDirection: "column",
@@ -75,9 +83,6 @@ export const useStyles = makeStyles(() => ({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-
-    // margin: "0.4rem",
-    // padding: "0.5rem 1rem",
   },
 
   teamInfoBox: {

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
   titleHeader: {
     display: "flex",
+
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "column",
@@ -42,11 +43,9 @@ export const useStyles = makeStyles(() => ({
   },
 
   editButtonContainer: {
-    // textAlign: "right",
     display: "flex",
     alignSelf: "center",
     alignItems: "center",
-    // flexDirection: "column",
 
     "& > div": {
       margin: "0.5rem 2rem 0",
@@ -54,10 +53,16 @@ export const useStyles = makeStyles(() => ({
 
     "& button": {
       fontSize: "0.6rem",
-      heigth: "40px",
+      padding: "0.4rem",
+
+      heigth: "30px",
+      width: "80px",
 
       "@media (min-width: 1200px)": {
-        fontSize: "1rem",
+        fontSize: "0.8rem",
+
+        heigth: "30px",
+        width: "100px",
       },
     },
 
@@ -67,20 +72,20 @@ export const useStyles = makeStyles(() => ({
   },
 
   signinButtonContainer: {
-    // width: "40%",
     textAlign: "right",
 
     "& button": {
       backgroundColor: "#FF7843",
       fontSize: "0.6rem",
-      heigth: "40px",
+      heigth: "80px",
+      width: "120px",
 
       "@media (min-width: 1000px)": {
-        fontSize: "0.8rem",
+        fontSize: "0.7rem",
       },
 
       "@media (min-width: 1200px)": {
-        fontSize: "1rem",
+        fontSize: "0.7rem",
       },
     },
 

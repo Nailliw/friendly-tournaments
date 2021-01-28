@@ -32,7 +32,7 @@ export const TeamInfo = () => {
   const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (
-    <Box component="div" className={classes.tournamentInfoRoot}>
+    <Box component="div" className={classes.teamInfoRoot}>
       <TitleHeader isLogged={isLogged} teamData={teamData} />
       <StatusSection teamData={teamData} />
       <InfoSection teamData={teamData} />

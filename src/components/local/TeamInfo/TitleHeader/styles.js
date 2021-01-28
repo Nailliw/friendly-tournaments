@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles(() => ({
   titleHeader: {
     display: "flex",
+    height: "100%",
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "column",
@@ -42,7 +43,6 @@ export const useStyles = makeStyles(() => ({
   },
 
   editButtonContainer: {
-    // textAlign: "right",
     display: "flex",
     alignSelf: "center",
     alignItems: "center",
@@ -53,38 +53,38 @@ export const useStyles = makeStyles(() => ({
 
     "& button": {
       fontSize: "0.6rem",
+      padding: "0.4rem",
 
-      heigth: "50px",
+      heigth: "30px",
       width: "80px",
 
       "@media (min-width: 1200px)": {
-        fontSize: "1rem",
-      },
-    },
+        fontSize: "0.8rem",
 
-    "@media (min-width: 1200px)": {
-      // flexDirection: "row",
+        heigth: "30px",
+        width: "100px",
+      },
     },
   },
 
   signinButtonContainer: {
-    // width: "40%",
     textAlign: "right",
 
     "& button": {
       backgroundColor: "#FF7843",
       fontSize: "0.6rem",
-      heigth: "50px",
+      heigth: "80px",
       width: "120px",
 
       "@media (min-width: 1000px)": {
-        fontSize: "0.8rem",
+        fontSize: "0.7rem",
       },
 
       "@media (min-width: 1200px)": {
-        fontSize: "1rem",
+        fontSize: "0.7rem",
       },
     },
+
     "& :hover": {
       backgroundColor: "#af5735",
     },
