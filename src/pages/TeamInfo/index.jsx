@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateIsLoggedThunk } from "../../store/modules/users/thunk";
 import { getTeamInfoThunk } from "../../store/modules/teams/thunk";
 
-import { Box } from "@material-ui/core";
+import { IsValidState } from "../../components/global/IsValidState/index";
+
+import { LinearProgress, Box } from "@material-ui/core";
 import { useStyles } from "./styles";
 
 import { TitleHeader } from "../../components/local/TeamInfo/TitleHeader";
@@ -22,20 +24,27 @@ export const TeamInfo = () => {
   useEffect(() => {
     dispatch(updateIsLoggedThunk());
     dispatch(getTeamInfoThunk(teamID));
-  }, []);
+  }, [teamID, dispatch]);
 
   const teamData = useSelector(
     ({ TeamsReducer: { selectedTeam } }) => selectedTeam
   );
-  console.log(teamData);
 
   const isLogged = useSelector(({ UsersReducer: { isLogged } }) => isLogged);
 
   return (
-    <Box component="div" className={classes.teamInfoRoot}>
-      <TitleHeader isLogged={isLogged} teamData={teamData} />
-      <StatusSection teamData={teamData} />
-      <InfoSection teamData={teamData} />
-    </Box>
+    <>
+      {IsValidState(teamData) ? (
+        <Box component="div" className={classes.teamInfoRoot}>
+          <TitleHeader isLogged={isLogged} teamData={teamData} />
+          <StatusSection teamData={teamData} />
+          <InfoSection teamData={teamData} />
+        </Box>
+      ) : (
+        <Box component="div" className={classes.tournamentInfoRoot}>
+          <LinearProgress />
+        </Box>
+      )}
+    </>
   );
 };

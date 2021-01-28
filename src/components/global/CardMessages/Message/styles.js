@@ -12,7 +12,8 @@ export const useStyles = makeStyles((theme) => ({
   message: {
     fontSize: "16px",
     border: "0.5px solid black",
-    borderRadius: "10px",
+    // borderRadius: "10px",
+
     marginTop: "1%",
     padding: "1%",
   },

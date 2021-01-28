@@ -210,7 +210,7 @@ export const useStyles = makeStyles(() => ({
   },
 
   createTournament: {
-    "@media (max-width: 768px)": {
+    "@media (max-width: 900px)": {
       width: "150px",
       height: "30px",
 
@@ -236,7 +236,7 @@ export const useStyles = makeStyles(() => ({
       },
     },
 
-    "@media (min-width: 768px)": {
+    "@media (min-width: 900px)": {
       height: "80%",
 
       backgroundColor: "#FF7843",
@@ -246,7 +246,7 @@ export const useStyles = makeStyles(() => ({
         backgroundColor: "#AF5735",
       },
 
-      "@media (min-width: 780px)": {
+      "@media (min-width: 900px)": {
         height: "80%",
       },
     },

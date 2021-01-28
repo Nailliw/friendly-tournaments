@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   navigationButtons: {
-    "@media (max-width: 768px)": {
+    "@media (max-width: 900px)": {
       width: "150px",
       height: "30px",
 
