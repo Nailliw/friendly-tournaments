@@ -93,15 +93,13 @@ export const RegisterUserPopup = () => {
   const handleForm = (formData) => {
     delete formData.password_confirmation;
 
-    // const password = formData.email.trim();
-    const firstName = formData.email.trim();
-    const lastName = formData.email.trim();
-    const nickName = formData.email.trim();
-    const bio = formData.email.trim();
+    const firstName = formData.firstName.trim();
+    const lastName = formData.lastName.trim();
+    const nickName = formData.nickName.trim();
+    const bio = formData.bio.trim();
 
     const newUser = {
       ...formData,
-      // password,
       firstName,
       lastName,
       nickName,
