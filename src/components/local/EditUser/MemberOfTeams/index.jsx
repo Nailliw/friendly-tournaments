@@ -13,7 +13,7 @@ const MemberOfTeams = ({ data }) => {
     function getQuery(item) {
       teamList = teamList + `&id=${item}`;
     }
-    data.memberOfTeams.forEach(getQuery);
+    data?.memberOfTeams.forEach(getQuery);
 
     dispatch(getFilteredTeamListThunk(teamList));
   }, []);
